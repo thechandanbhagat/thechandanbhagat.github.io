@@ -1029,7 +1029,10 @@ section {
 .contact .info .email, .contact .info .phone {
   margin-top: 40px;
 }
-
+.center{
+  display: table;
+  margin: auto;
+}
 .contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
   background: #0563bb;
   color: #fff;
@@ -1159,21 +1162,22 @@ section {
 }
 
 #footer .social-links {
-  margin: 0 0 40px 0;
+  margin: 0 0 50px 0;
+  font-size: 30px;
 }
 
 #footer .social-links a {
-  font-size: 18px;
+  font-size: 44px;
   display: inline-block;
   background: #0563bb;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
-  margin-right: 4px;
+  margin-right: 50px;
   border-radius: 50%;
   text-align: center;
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   transition: 0.3s;
 }
 
