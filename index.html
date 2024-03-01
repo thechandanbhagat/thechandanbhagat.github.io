@@ -37,6 +37,14 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- Prepare a container for your calendar. -->
+
+<!-- Optionally, include the theme (if you don't want to struggle to write the CSS) -->
+<link
+rel="stylesheet"
+href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"
+/>
+
   </head>
 
   <body>
@@ -410,6 +418,13 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <!-- Prepare a container for your calendar. -->
+        <div class="container-fluid">
+          <div class="calendar">
+            <!-- Loading stuff -->
+            Loading the data just for you.
           </div>
         </div>
       </section>
@@ -1054,7 +1069,13 @@
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/typed.js/typed.min.js"></script>
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-
+    <script
+    src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"
+    >
+    </script>
+    <script>
+      new GitHubCalendar(".calendar", "thechandanbhagat");
+    </script>
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
   </body>
