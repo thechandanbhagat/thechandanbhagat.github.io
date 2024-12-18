@@ -1,0 +1,150 @@
+{
+    "portfolioItems": [
+      {
+        "program": "Reactor Meetup, London, UK",
+        "date": "May 7, 2024",
+        "title": "Accelerating Development: Harnessing Service Bus and Azure Functions for Event-Driven Development",
+        "category": "cloud",
+        "description": "Event-driven architectures using Azure Service Bus and Azure Functions",
+        "resources": [
+          {
+            "type": "github",
+            "url": "https://github.com/thechandanbhagat",
+            "title": "Demo Code"
+          },
+          {
+            "type": "presentation",
+            "url": "https://github.com/thechandanbhagat",
+            "title": "Presentation Slides"
+          }
+        ],
+        "images": [
+          "assets/img/portfolio/LondonReactorMeetup (1).JPG",
+          "assets/img/portfolio/LondonReactorMeetup (2).JPG",
+          "assets/img/portfolio/LondonReactorMeetup (3).jpg"
+        ]
+      },
+      {
+        "program": "Nepal Cloud Summit",
+        "date": "April 23, 2022",
+        "title": "Creating and Managing gRPC Apps in Azure",
+        "category": "cloud",
+        "description": "Building and deploying gRPC applications in Azure",
+        "resources": [
+          {
+            "type": "github",
+            "url": "https://github.com/thechandanbhagat",
+            "title": "Source Code"
+          }
+        ],
+        "images": [
+          "assets/img/portfolio/NCS2022.jpg",
+          "assets/img/portfolio/NCS2022_1.jpg",
+          "assets/img/portfolio/NCS2022_2.jpg"
+        ]
+      },
+      {
+        "program": "Global Azure Bootcamp 2021",
+        "date": "April 17, 2021",
+        "title": "Azure and Github Combo",
+        "category": "cloud",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/GBAC2021.jpg",
+          "assets/img/portfolio/GBAC2021_1.png",
+          "assets/img/portfolio/GBAC2021_2.png"
+        ]
+      },
+      {
+        "program": "Global AI Bootcamp 2021",
+        "date": "Jan 16, 2021",
+        "title": "Power your .NET App with ML.NET",
+        "category": "apps",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/GAIBC2021.jpg",
+          "assets/img/portfolio/GAIBC2021_1.jpg"
+        ]
+      },
+      {
+        "program": "Dynamics 365 & Power Platform",
+        "date": "Jun 27, 2021",
+        "title": "Power your ASP.NET Apps with Power Automate",
+        "category": "web",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/PowerAutomate.jpg",
+          "assets/img/portfolio/PowerAutomate_1.jpg"
+        ]
+      },
+      {
+        "program": "Global Azure Virtual 2020",
+        "date": "April 25, 2020",
+        "title": "Azure and Github Combo",
+        "category": "cloud",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/GABC2020.jpg",
+          "assets/img/portfolio/GABC2020_1.jpg"
+        ]
+      },
+      {
+        "program": "Azure Saturday",
+        "date": "Dec 14, 2019",
+        "title": "Azure Container Instances and Azure Kubernetes Services",
+        "category": "cloud",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/AzureSaturday2019.jpg",
+          "assets/img/portfolio/AzureSaturday2019_1.jpg",
+          "assets/img/portfolio/AzureSaturday2019_2.jpg"
+        ]
+      },
+      {
+        "program": "Mentoring",
+        "date": "Dec 31, 2021",
+        "title": "Ideathon 2021",
+        "category": "mentoring",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/Ideathon2021.jpg",
+          "assets/img/portfolio/Ideathon2021_1.jpg",
+          "assets/img/portfolio/Ideathon2021_2.jpg"
+        ]
+      },
+      {
+        "program": "Quantum Hack 2020",
+        "date": "",
+        "title": "Azure Container Instances and Azure Kubernetes Services",
+        "category": "cloud",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/QuantumHack.jpg",
+          "assets/img/portfolio/QuantumHack_1.jpg",
+          "assets/img/portfolio/QuantumHack_2.jpg",
+          "assets/img/portfolio/QuantumHack_3.jpg"
+        ]
+      },
+      {
+        "program": "Kubernetes Discovery Day",
+        "date": "Feb 29, 2020",
+        "title": "Azure Container Instances and Azure Kubernetes Services",
+        "category": "cloud",
+        "description": "",
+        "resources": [],
+        "images": [
+          "assets/img/portfolio/Kubernetes.jpg",
+          "assets/img/portfolio/Kubernetes_1.jpg",
+          "assets/img/portfolio/Kubernetes_2.jpg",
+          "assets/img/portfolio/Kubernetes_3.jpg"
+        ]
+      }
+    ]
+  }
