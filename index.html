@@ -5,8 +5,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Chandan Bhagat - Index</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
+    <meta content="Chandan Bhagat's Portfolio Website" name="description" />
+    <meta content="portfolio, web developer, software engineer" name="keywords" />
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon" />
@@ -14,10 +14,11 @@
 
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
-
+    <!-- Add to <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
     <link
@@ -37,28 +38,15 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
-    <style>
-      p.header{
-        font-size: 30px; 
-        text-align: justify;
-      }
-      p.header1{
-        font-size: 25px; 
-        text-align: justify;
-      }
-      p.header2{
-        font-size: 20px; 
-        text-align: justify;
-      }
-    </style>
-    <!-- Prepare a container for your calendar. -->
-
   </head>
 
   <body>
     <!-- ======= Mobile nav toggle button ======= -->
-    <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+    <button type="button" class="mobile-nav-toggle d-xl-none">
+        <i class="bi bi-list"></i>
+    </button>
+    <!-- Remove the standalone icon -->
+    <!-- <i class="bi bi-list mobile-nav-toggle d-xl-none"></i> -->
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex flex-column justify-content-center">
       <nav id="navbar" class="navbar nav-menu">
@@ -162,107 +150,129 @@
       <!-- ======= About Section ======= -->
       <section id="about" class="about">
         <div class="container-fluid" data-aos="fade-up">
-          <div class="section-title">
-            <h2>About</h2>
-            <p class="header">
-              With over 10 years of experience in the IT industry, I have honed my skills predominantly in Microsoft technologies. My expertise primarily revolves around C#, Node.js, Azure, and GitHub, among others. However, I maintain a flexible approach to technology, embracing the philosophy that the best tool for the job is the one that gets the job done efficiently and effectively.
-             <br />
-             
-             <ul style="text-align: left;">
-              <li style="font-size: 25px;">Core Competencies</li>
-              <ul>
-                <li style="font-size: 20px;">
-                  C#: I have a deep understanding of C#, enabling me to develop a wide array of applications, from desktop solutions to web-based services. My work emphasizes creating robust, scalable, and maintainable code tailored to meet specific client requirements.
-                </li>
-                <li style="font-size: 22px;">
-                  Node.js: Utilizing the power of JavaScript on the server side, I have built high-performance, real-time applications with Node.js. My projects range from developing simple APIs to architecting complex, data-driven platforms.
-                </li>
-                <li style="font-size: 22px;">
-                  Azure: My proficiency with Microsoft Azure includes deploying, managing, and optimizing cloud-based solutions. I leverage Azure's extensive services for hosting, storage, networking, and security, ensuring high availability and reliability.
-                </li>
-                <li style="font-size: 22px;">
-                  GitHub: As an active user of GitHub, I manage code repositories, collaborate with other developers, and implement version control strategies. This helps streamline the development process, facilitating continuous integration and delivery.
-                </li>
-              </ul>
-              <li style="font-size: 25px;">Additional Technical skills</li>
-              <ul>
-                <li style="font-size: 22px;">
-                  DevOps: I am well-versed in DevOps practices, particularly with Azure DevOps and GitHub Actions. I implement continuous integration/continuous deployment (CI/CD) pipelines to automate the development lifecycle, improving efficiency and reducing errors.
-                </li>
-                <li style="font-size: 22px;">
-                  Mobile Development: I am experienced in building mobile applications using Xamarin and Unity. This includes developing cross-platform solutions and creating interactive, user-friendly mobile experiences.
-                </li>
-                <li style="font-size: 22px;">
-                  IoT and Machine Learning: In my free time, I delve into research and development in IoT and machine learning, exploring new technologies and their applications. This ongoing exploration helps me stay at the forefront of technological advancements and innovate in my projects.
-                </li>
-              </ul>
-              <li style="font-size: 25px;">Community Involvement and Training</li>
-              <ul>
-                <li style="font-size: 22px;">
-                  Community Engagement: As an active member of the "Nepal Cloud Professionals" community, I regularly share my knowledge and insights. I participate in discussions, present at meetups, and contribute to collaborative learning within the community.
-                </li>
-                <li style="font-size: 22px;">
-                  Teaching and Mentorship: I am also a part-time lecturer at several colleges, teaching various subjects related to my expertise. I find great satisfaction in mentoring students and guiding them through their academic projects, helping to shape the next generation of IT professionals.
-                </li>
-              </ul>
-             </ul>
-             <p class="header1"> 
-               By combining my technical skills with a passion for teaching and community involvement, I strive to make a meaningful impact in the IT industry. Whether working on cutting-edge projects, sharing knowledge, or mentoring aspiring developers, I am dedicated to continuous learning and professional growth.
+          <div class="about-wrapper">
+            <!-- Introduction -->
+            <div class="about-intro" data-aos="fade-up">
+              <h2 class="section-title">About Me</h2>
+              <p class="lead-text">
+                With over 10 years of experience in the IT industry, I have honed my skills predominantly in Microsoft technologies. My expertise primarily revolves around C#, Node.js, Azure, and GitHub, among others.
               </p>
-
-            </p>
-          
-            <br />
-            <br />
-          </div>
-
-          <div class="row">
-            <div class="col-lg-4">
-              <img src="assets/img/profile-img.jpg" class="img-fluid" alt="" />
             </div>
-            <div class="col-lg-8 pt-4 pt-lg-0 content">
-              <h3>Software Engineer, Trainer &amp; Cloud Consultant.</h3>
-              <br />
-              <div class="row">
-                <div class="col-lg-6">
-                  <ul>
-                    <li>
-                      <i class="bi bi-chevron-right"></i>
-                      <strong>Website:</strong>
-                      <span>https://chandanbhagat.com.np</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-chevron-right"></i>
-                      <strong>Phone:</strong> <span>+44 7818620731</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-chevron-right"></i>
-                      <strong>City:</strong> <span>London, UK</span>
-                    </li>
-                  </ul>
+
+            <div class="skills-section">
+              <div class="skills-container" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="skills-title"><i class="fas fa-star"></i> Core Competencies</h3>
+              <div class="skills-grid">
+                <div class="skill-card"> 
+                  <h4>C#</h4>
+                  <p>I have a deep understanding of C#, enabling me to develop a wide array of applications, from desktop solutions to web-based services. My work emphasizes creating robust, scalable, and maintainable code tailored to meet specific client requirements.</p>
                 </div>
-                <div class="col-lg-6">
-                  <ul>
-                    <li>
-                      <i class="bi bi-chevron-right"></i>
-                      <strong>Degree:</strong>
-                      <span>Bachelors in Computer Engineering</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-chevron-right"></i>
-                      <strong>Email:</strong>
-                      <span>chandan.bhagat@outlook.com</span>
-                    </li>
-                    <li>
-                      <i class="bi bi-chevron-right"></i>
-                      <strong>Technical Consultancy:</strong> <span>Available</span>
-                    </li>
-                  </ul>
+                <div class="skill-card">
+                  <h4>Node.js</h4>
+                  <p>Utilizing the power of JavaScript on the server side, I have built high-performance, real-time applications with Node.js. My projects range from developing simple APIs to architecting complex, data-driven platforms.</p>
+                </div>
+                <div class="skill-card">
+                  <h4>Azure</h4>
+                  <p>My proficiency with Microsoft Azure includes deploying, managing, and optimizing cloud-based solutions. I leverage Azure's extensive services for hosting, storage, networking, and security, ensuring high availability and reliability.</p>
+                </div>
+                <div class="skill-card">
+                  <h4>GitHub</h4>
+                  <p>As an active user of GitHub, I manage code repositories, collaborate with other developers, and implement version control strategies. This helps streamline the development process, facilitating continuous integration and delivery.</p>
                 </div>
               </div>
-              <p>
-                <!-- write something someday  -->
-              </p>
+              </div>
+          
+              <div class="skills-container" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="skills-title"><i class="fas fa-plus-circle"></i> Additional Technical Skills</h3>
+                <div class="skills-grid">
+                  <div class="skill-card">
+                    <h4><i class="fas fa-infinity"></i> Devops</h4>
+                    <p>I am well-versed in DevOps practices, particularly with Azure DevOps and GitHub Actions. I implement continuous integration/continuous deployment (CI/CD) pipelines to automate the development lifecycle, improving efficiency and reducing errors.</p>
+                  </div>
+               
+                <div class="skill-card">
+                  <h4>Mobile Development</h4>
+                  <p>I am experienced in building mobile applications using Xamarin and Unity. This includes developing cross-platform solutions and creating interactive, user-friendly mobile experiences.</p>
+                </div>
+                <div class="skill-card">
+                  <h4>IoT and Machine Learning</h4>
+                  <p>In my free time, I delve into research and development in IoT and machine learning, exploring new technologies and their applications. This ongoing exploration helps me stay at the forefront of technological advancements and innovate in my projects.</p>
+                </div>
+              </div>
+              </div>
+              <div class="skills-container" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="skills-title"><i class="fas fa-users"></i> Community Involvement</h3>
+              <div class="skills-grid">
+                <div class="skill-card">
+                  <h4>Community Engagement</h4>
+                  <p>As an active member of the "Nepal Cloud Professionals" community, I regularly share my knowledge and insights. I participate in discussions, present at meetups, and contribute to collaborative learning within the community.</p>
+                </div>
+                <div class="skill-card">
+                  <h4>Teaching and Mentorship</h4>
+                  <p>I am also a part-time lecturer at several colleges, teaching various subjects related to my expertise. I find great satisfaction in mentoring students and guiding them through their academic projects, helping to shape the next generation of IT professionals.</p>
+                </div>
+              </div>
+              </div>
+            </div>
+          
+            <p class="lead-text">
+              By combining my technical skills with a passion for teaching and community involvement, I strive to make a meaningful impact in the IT industry. Whether working on cutting-edge projects, sharing knowledge, or mentoring aspiring developers, I am dedicated to continuous learning and professional growth.
+            </p>
+          </div>
+          </div>
+
+          <div class="profile-container" data-aos="fade-up">
+            <div class="profile-card">
+              <div class="profile-image">
+                <img src="assets/img/profile-img.jpg" class="img-fluid" alt="Profile Photo" />
+                <div class="profile-overlay"></div>
+              </div>
+              
+              <div class="profile-content">
+                <h3 class="profile-title">Software Engineer, Trainer & Cloud Consultant</h3>
+                
+                <div class="profile-info">
+                  <div class="info-group">
+                    <div class="info-item">
+                      <i class="fas fa-globe"></i>
+                      <strong>Website</strong>
+                      <a href="https://chandanbhagat.com.np" target="_blank">chandanbhagat.com.np</a>
+                    </div>
+                    
+                    <div class="info-item">
+                      <i class="fas fa-phone"></i>
+                      <strong>Phone</strong>
+                      <a href="tel:+447818620731">+44 7818620731</a>
+                    </div>
+                    
+                    <div class="info-item">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <strong>Location</strong>
+                      <span>London, UK</span>
+                    </div>
+                  </div>
+                  
+                  <div class="info-group">
+                    <div class="info-item">
+                      <i class="fas fa-graduation-cap"></i>
+                      <strong>Education</strong>
+                      <span>Bachelors in Computer Engineering</span>
+                    </div>
+                    
+                    <div class="info-item">
+                      <i class="fas fa-envelope"></i>
+                      <strong>Email</strong>
+                      <a href="mailto:chandan.bhagat@outlook.com">chandan.bhagat@outlook.com</a>
+                    </div>
+                    
+                    <div class="info-item">
+                      <i class="fas fa-briefcase"></i>
+                      <strong>Consultancy</strong>
+                      <span class="status available">Available</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -270,511 +280,402 @@
       <!-- End About Section -->
 
       <!-- ======= Facts Section ======= -->
-      <section id="facts" class="facts">
-        <div class="container-fluid" data-aos="fade-up">
-          
-          <div class="section-title">
-            <h2>Services</h2>
-            <div class="row">
-              <div class="col-lg-3 col-md-6">
-                <div class="count-box">
-                  <i class="bx bxs-battery"></i>
-                  <p>Full Time</p>
-                </div>
-              </div>
-  
-              <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
-                <div class="count-box">
-                  <i class="bx bxs-battery-low"></i>
-                  <p>Part Time</p>
-                </div>
-              </div>
-  
-              <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                <div class="count-box">
-                  <i class="bx bxs-user-voice"></i>
-                  <p>Consultant</p>
-                </div>
-              </div>
-  
-              <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-                <div class="count-box">
-                  <i class="bx bx-chalkboard"></i>
-                  <p>Trainer</p>
-                </div>
-              </div>
-            </div>
-            <p  class="header">
-              <p class="header1">
-                I am a versatile professional with experience in a wide range of technologies and services. My expertise spans across multiple programming languages and platforms, allowing me to tackle diverse projects efficiently and effectively. Here are some key areas of my proficiency:
-              </p>
-              <ul style="text-align: left; ">
-                <li style="font-size: 25px;">Technologies</li>
-                <ul>
-                  <li style="font-size: 22px;">
-                    C#: With a strong command of C#, I have developed numerous applications, ranging from desktop software to web services. My work often involves creating robust, scalable, and maintainable code that meets the specific needs of clients.
-                  </li>
-                  <li style="font-size: 22px;">
+     <!-- Replace the existing facts section content with: -->
 
-                    Node.js: Leveraging the power of JavaScript on the server side, I have built high-performance, real-time applications using Node.js. My projects include everything from simple APIs to complex, data-driven platforms.
-                  </li>
-                  <li style="font-size: 22px;">
-                    Azure: My experience with Microsoft Azure includes deploying and managing cloud-based solutions. I am adept at utilizing Azure’s vast array of services for hosting, storage, and networking, ensuring high availability and security.
-                  </li>
-                  <li style="font-size: 22px;">
-                    GitHub: As a frequent user of GitHub, I manage code repositories, collaborate with other developers, and maintain version control for various projects. This helps streamline the development process and facilitates continuous integration and delivery.
-                  </li>
-                </ul>
-                <li style="font-size: 25px;">Services Offered</li>
-                <ul>
-                  <li style="font-size: 22px;">
-                    Full-Time: For clients needing extensive support and development, I offer full-time services, dedicating my efforts entirely to their projects to ensure comprehensive and timely completion.
-                  </li>
-                  <li style="font-size: 22px;">
-                    Part-Time: I provide part-time services for clients who require ongoing assistance but on a less intensive basis, allowing for flexibility in managing multiple projects concurrently.
-                  </li>
-                  <li style="font-size: 22px;">
-                    Hourly: For shorter, more focused tasks, I offer hourly services. This is ideal for troubleshooting, consulting, or specific development work that doesn’t necessitate long-term commitment.
-                  </li>
-                  <li style="font-size: 22px;">
-                    On-Site: Understanding that some projects benefit from close collaboration, I offer on-site services where I work directly from the client’s location. This is particularly useful for projects that require hands-on support or close integration with a client’s team.
-                  </li>
-                </ul>
-              </ul>
-              <p class="header1">
-                By offering these varied services, I can cater to different project requirements and client needs, ensuring that I provide the most effective and tailored solutions. Whether it's a large-scale enterprise application or a small, custom-built solution, I am committed to delivering high-quality work and achieving client satisfaction.
-              </p>
-            </p>
-          </div>
-
-        
+     <section id="facts" class="facts">
+      <div class="container-fluid" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Services & Expertise</h2>
         </div>
-      </section>
-
+    
+        <!-- Service Cards -->
+        <div class="cards-grid">
+          <div class="fact-card" data-aos="zoom-in">
+            <div class="fact-number">10+</div>
+            <div class="fact-title">Years Experience</div>
+            <div class="fact-icon">
+              <i class="bx bx-time-five"></i>
+            </div>
+          </div>
+    
+          <div class="fact-card" data-aos="zoom-in">
+            <div class="fact-number">50+</div>
+            <div class="fact-title">Projects Completed</div>
+            <div class="fact-icon">
+              <i class="bx bx-check-circle"></i>
+            </div>
+          </div>
+    
+          <div class="fact-card" data-aos="zoom-in">
+            <div class="fact-number">100+</div>
+            <div class="fact-title">Happy Clients</div>
+            <div class="fact-icon">
+              <i class="bx bx-happy-beaming"></i>
+            </div>
+          </div>
+    
+          <div class="fact-card" data-aos="zoom-in">
+            <div class="fact-number">24/7</div>
+            <div class="fact-title">Support</div>
+            <div class="fact-icon">
+              <i class="bx bx-support"></i>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Services Section -->
+        <div class="services-container">
+          <div class="service-box" data-aos="fade-right">
+            <div class="service-icon">
+              <i class="bx bxs-time-five"></i>
+            </div>
+            <h3>Full Time</h3>
+            <p>Dedicated development and support</p>
+          </div>
+    
+          <div class="service-box" data-aos="fade-up">
+            <div class="service-icon">
+              <i class="bx bxs-timer"></i>
+            </div>
+            <h3>Part Time</h3>
+            <p>Flexible engagement model</p>
+          </div>
+    
+          <div class="service-box" data-aos="fade-up">
+            <div class="service-icon">
+              <i class="bx bxs-user-voice"></i>
+            </div>
+            <h3>Consultant</h3>
+            <p>Technical strategy & architecture</p>
+          </div>
+    
+          <div class="service-box" data-aos="fade-left">
+            <div class="service-icon">
+              <i class="bx bxs-graduation"></i>
+            </div>
+            <h3>Trainer</h3>
+            <p>Knowledge transfer & mentoring</p>
+          </div>
+        </div>
+    
+       
+      </div>
+    </section>
       <!-- End Facts Section -->
 
-      <!-- ======= Skills Section ======= -->
       <section id="skills" class="skills section-bg">
         <div class="container-fluid" data-aos="fade-up">
           <div class="section-title">
             <h2>Skills</h2>
-            <p></p>
           </div>
-
-          <div class="row skills-content">
-            <div class="col-lg-6">
-              <div class="progress">
-                <span class="skill">C# <i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="100"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+      
+          <div class="skills-wrapper">
+            <!-- Languages & Frameworks -->
+            <div class="skill-category">
+              <h3>Languages & Frameworks</h3>
+              <div class="skill-grid">
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-c-plus-plus"></i>
+                  <span>C# / .NET</span>
                 </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Azure <i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="90"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-python"></i>
+                  <span>Python</span>
                 </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Node.js <i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="80"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-angular"></i>
+                  <span>Angular</span>
                 </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">CI/CD<i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="100"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Azure Devops<i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="95"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-react"></i>
+                  <span>React</span>
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-6">
-              <div class="progress">
-                <span class="skill"
-                  >ASP.NET Core / MVC <i class="val"></i
-                ></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="100"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+      
+            <!-- Cloud & AI -->
+            <div class="skill-category">
+              <h3>Cloud & AI</h3>
+              <div class="skill-grid">
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-microsoft"></i>
+                  <span>Azure</span>
+                </div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bx-brain"></i>
+                  <span>ML.NET</span>
+                </div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bx-bot"></i>
+                  <span>Azure OpenAI</span>
+                </div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bx-network-chart"></i>
+                  <span>TensorFlow</span>
                 </div>
               </div>
-
-              <div class="progress">
-                <span class="skill"
-                  >Containerization / Orchestration <i class="val"></i
-                ></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="80"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+            </div>
+      
+            <!-- DevOps & Tools -->
+            <div class="skill-category">
+              <h3>DevOps & Tools</h3>
+              <div class="skill-grid">
+                <div class="skill-item" data-aos="flip-up">
+                  <i class='bx bxl-docker'></i>
+                  <span>Docker</span>
                 </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Angular / React <i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="80"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-kubernetes"></i>
+                  <span>Kubernetes</span>
                 </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Kubernetes<i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="80"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bxl-github"></i>
+                  <span>GitHub Actions</span>
                 </div>
-              </div>
-
-              <div class="progress">
-                <span class="skill">Github Actions<i class="val"></i></span>
-                <div class="progress-bar-wrap">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="100"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
+                <div class="skill-item" data-aos="flip-up">
+                  <i class="bx bx-cloud"></i>
+                  <span>Azure DevOps</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </section>
-      <!-- End Skills Section -->
-
       <!-- ======= Resume Section ======= -->
       <section id="resume" class="resume">
         <div class="container-fluid" data-aos="fade-up">
           <div class="section-title">
-            <h2>Experiences</h2>
-            <p>
-              <!-- resume title  -->
-            </p>
+            <h2>Professional Experience</h2>
+            <div class="status-banner">
+              <span class="open-badge">Open to Work - Available Immediately</span>
+            </div>
           </div>
-
-          <div class="row container-fluid">
+      
+          <div class="row">
+            <!-- Main Experience Column -->
             <div class="col-lg-8">
-              <h3 class="resume-title">Professional Experience</h3>
-              <div class="resume-item">
-                <h4>AE Live: Software Engineer</h4>
-                <h5>December 2022 - Present</h5>
-                <p><em>London, United Kingdom</em></p>
-                <ul>
-                  <li>Development of customized solution for inhouse projects using WPF and XML</li>
-                  <li>Active participation on development of web-based API using ASP.NET Core Web Api</li>
-                  <li>Workaround R&D on containers, kubernetes</li>
-                  <li>Performing R&D on various cutting edge technologies on Cloud</li>
-                  <li>Supporting development using Angular</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Amazing Digital: Technical Lead</h4>
-                <h5>May 2021 - October 2022</h5>
-                <p><em>Seatle, US - Remote</em></p>
-                <ul>
-                  <strong>Development and Management</strong>
-                  <li>Active involvement in developing backend APIs</li>
-                  <li>Supporting team members on their development blockades, verifying their codes on Pull Request and Code Reviews</li>
-                  <li>Advocating the idea, changes and progress among the stakeholders and to the team members</li>
-                  <li>Making sure that the team members have the same enthusiasm and motivation through regular 1-1 meetings</li>
-                  <li>Regular meetings and stand-ups to make sure the requirement provided by stakeholders are on same page.</li>
-                  <strong>Devops</strong>
-                  <li>Managing the source code and its automation using GitHub action</li>
-                  <li>Implementation of CI/CD of web api and frontend application from GitHub to IBM Cloud using GitHub Actions</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Agrisync: Devops / Software Engineer</h4>
-                <h5>2020 March - 2021 March</h5>
-                <p><em>Des Moines, Iowa</em></p>
-                <ul>
-                  <strong>Devops</strong>
-                  <li>Since, I was given the role of DevOps Engineer. Being single on that role, I had to work closely with the CTO to restructure the entire DevOps culture.</li>
-                  <li>Performed R&D stuffs, coordinating with stakeholders.</li>
-                  <li>Creating/Managing pipelines with GitHub actions for entire services in the system.</li>
-                  <li>Created private GitHub actions using node.js that fulfils devops requirements for the organization</li>
-                  <li>Containerizing the services built in .NET Core to Azure Container Registry.</li>
-                  <li>Implementation and Management of Kubernetes cluster and resources associated in it.</li>
-                  <li>Active participation in the deployments of web app, services and Mobile Apps.</li>
-                  <li>Worked with the CI/CD pipeline of Mobile App Deployment for Android and iOS using Microsoft AppCenter.</li>
-                  <li>Actively participated in Implementation of writing the Unit Tests in order to increase the code coverage.</li>
-                  <strong>Development</strong>
-                  <li>Salesforce Application Development according to the business requirement using Apex</li>
-                  <li>Worked with the integration/deployment of Salesforce Application in Marketplace</li>
-                  <li>Development of the service to connect the Salesforce Application</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Blue Panda Communications, Technical Lead</h4>
-                <h5>2019 July - 2020 February</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <strong>Management</strong>
-                  <li>Helping group of team members with their technical issues and defining the standards while developments.</li>
-                  <li>Defining requirement by coordinating the stakeholders.</li>
-                  <li>Advocating the idea, changes and progress among the stakeholders and to the team members</li>
-                  <li>Making sure that the team members have the same enthusiasm and motivation through regular 1-1 meetings</li>
-                  <li>Regular meetings and stand-ups to make sure the requirement provided by stakeholders are on same page.</li>
-                  <strong>Devops</strong>
-                  <li>Managing Azure resources</li>
-                  <li>Creating and managing CI/CD pipelines using Azure Devops</li>
-                  <li>Managing the containerized microservices on Kubernetes cluster, Azure Container Registry</li>
-                  <li>Available for production issues and support US Teams</li>
-                  <strong>Development</strong>
-                  <li>Active participation in development with the Different Services</li>
-                  <li>Integration of Salesforce in the system.</li>
-                  <li>Active participation in development for core modules</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Insight Workshop: Engineering Manager</h4>
-                <h5>2018 June - 2019 July</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <strong>Management</strong>
-                  <li>Helping group of team members with their technical issues and defining the standards while developments.</li>
-                  <li>Defining requirement by coordinating the stakeholders.</li>
-                  <li>Advocating the idea, changes and progress among the stakeholders and to the team members</li>
-                  <li>Making sure that the team members have the same enthusiasm and motivation through regular 1-1 meetings</li>
-                  <li>Regular meetings and stand-ups to make sure the requirement provided by stakeholders are on same page.</li>
-                  <strong>Development</strong>
-                  <li>Managing software development process for .NET Environment</li>
-                  <li>Enhancing software development process for .NET Environment for smooth development adapting the standards in industries.</li>
-                  <li>Helping group of team members with their technical issues according to the standards defined.</li>
-                  <li>Designing solution/architecture for the complex application</li>
-                  <li>Software development with Azure, ASP.NET, Xamarin and sometimes R&D for proof of concept.</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Agile IT Solutions: Software Engineer</h4>
-                <h5>2017 September - 2018 June</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <li>Development of a website using EpiServer</li>
-                  <li>
-                    Active participation in development and Communicating with
-                    remote team to get the requirements
-                  </li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Bidhee IT Solutions: Software Engineer</h4>
-                <h5>2017 February - 2017 September</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <li>Active on development of School MIS and Travel portal MIS using ASP.NET</li>
-                  <li>Worked in in-house project of digital wallet</li>
-                  <li>Active participation in communication with client to get the requirements</li>
-                  <li>Actively participation on designing solution based on the problems as per given by client with Project Manager</li>
-                  <li>R&D on various like managing CI/CD pipelines for the deployment using Jenkins</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Bajra Technologies: Software Engineer</h4>
-                <h5>2016 January - 2017 February</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <li>Desktop application development using WPF</li>
-                  <li>Development Portable Class Library (Compatible for Windows, iOS and Android) using Xamarin for various modules.</li>
-                  <li>Worked with Agile methodologies </li>
-                  <li>Working closely with the stakeholders to maintain the development and delivery on same page</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Spiralogics Inc.: Software Engineer</h4>
-                <h5>2014 December - 2016 January</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <li>Development of a website using ASP.NET</li>
-                  <li>Active participation in development and Communicating with remote team to get the requirements</li>
-                  <li>Active participation in designing solution based on the problems as per given by client with Project Manager</li>
-                  <li>Worked with Agile methodologies</li>
-                  <li>Working closely with the stakeholders to maintain the development and delivery on same page</li>
-                </ul>
-              </div>
-              <div class="resume-item">
-                <h4>Yorbit Technologies Pvt. Ltd.Co-Founder</h4>
-                <h5>2013 July - 2017 September</h5>
-                <p><em>Kathmandu, Nepal</em></p>
-                <ul>
-                  <li>Founding Member of Yorbit Technologies Pvt. Ltd.</li>
-                  <li>Active participation in the development and requirement gathering for the client project</li>
-                  <li>Active involved with the R&D on embedded systems</li>
-                  <li>Active involved with the R&D on IoT with enthusiasts Robotics Engineers</li>
-                  <li>Leading the project "Trackmandu.com", A system that was able to track vehicles in real time</li>
+              <div class="">
+                <!-- AE Live -->
+                <div class="resume-item" data-aos="fade-up">
+                  <h4>Software Engineer - AE Live</h4>
+                  <h5>December 2022 - May 2024</h5>
+                  <p><em>London, United Kingdom</em></p>
+                  <div class="tech-stack">
+                   
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">ASP.NET Core</span>
+                    <span class="tech-tag">Web API</span>
+                    <span class="tech-tag">Entity Framework</span>
+                  
+     
+                    <span class="tech-tag">WPF</span>
+                    <span class="tech-tag">XAML</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">TypeScript</span>
+                  
+           
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">CI/CD</span>
+                  </div>
+                  <ul class="achievements">
+                    <li>Engineered broadcast graphics solutions using WPF, improving rendering performance by 40%</li>
+                    <li>Developed and maintained scalable ASP.NET Core Web APIs handling 100K+ daily requests</li>
+                    <li>Implemented Kubernetes orchestration reducing deployment time by 60%</li>
+                    <li>Architected cloud-native solutions on Azure optimizing operational costs</li>
+                  </ul>
+                </div>
+      
+                <!-- Amazing Digital -->
+                <div class="resume-item" data-aos="fade-up">
+                  <h4>Technical Lead - Amazing Digital</h4>
+                  <h5>May 2021 - October 2022</h5>
+                  <p><em>Seattle, US (Remote)</em></p>
+                  <div class="tech-stack">
 
+                    <span class="tech-tag">Team Management</span>
+                    <span class="tech-tag">Agile</span>
+                    <span class="tech-tag">Scrum</span>
 
-                </ul>
+  
+                    <span class="tech-tag">Microservices</span>
+                    <span class="tech-tag">RESTful APIs</span>
+                    <span class="tech-tag">Cloud Architecture</span>
+
+            
+                    <span class="tech-tag">GitHub Actions</span>
+                    <span class="tech-tag">IBM Cloud</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">Next.Js</span>
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">React</span>
+                  </div>
+                  <ul class="achievements">
+                    <li>Led an 12-member development team across 3 time zones, delivering 5 major projects</li>
+                    <li>Implemented CI/CD pipelines reducing deployment time from 2 hours to 20 minutes</li>
+                    <li>Mentored 12+ developers through code reviews and technical guidance</li>
+                    <li>Automated deployment workflows using GitHub Actions and IBM Cloud</li>
+                  </ul>
+                </div>
+      
+                <!-- AgriSync -->
+                <div class="resume-item" data-aos="fade-up">
+                  <h4>DevOps/Software Engineer - AgriSync</h4>
+                  <h5>March 2020 - March 2021</h5>
+                  <p><em>Des Moines, Iowa</em></p>
+                  <div class="tech-stack">
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">DevOps</span>
+                    <span class="tech-tag">Shell Scripting</span>
+                    <span class="tech-tag">Azure Function</span>
+                    <span class="tech-tag">Container</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">Salesforce</span>
+                  </div>
+                  <ul class="achievements">
+                    <li>Spearheaded DevOps transformation reducing deployment failures by 80%</li>
+                    <li>Built custom GitHub Actions workflows automating deployment for 20+ services</li>
+                    <li>Managed Kubernetes clusters on Azure handling production workloads</li>
+                    <li>Developed Salesforce solutions integrated with .NET Core backend</li>
+                  </ul>
+                </div>
+      
+                <!-- Previous roles with condensed format -->
+                <div class="resume-item" data-aos="fade-up">
+                  <h4>Technical Lead - Blue Panda Communications</h4>
+                  <h5>July 2019 - February 2020</h5>
+                  <p><em>Kathmandu, Nepal</em></p>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Team Management</span>
+                    <span class="tech-tag">Agile</span>
+                    <span class="tech-tag">Scrum</span>
+
+  
+                    <span class="tech-tag">Microservices</span>
+                    <span class="tech-tag">RESTful APIs</span>
+                    <span class="tech-tag">Cloud Architecture</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">DevOps</span>
+                    <span class="tech-tag">Shell Scripting</span>
+                    <span class="tech-tag">Azure Function</span>
+                    <span class="tech-tag">Container</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">Salesforce</span>
+                    <span class="tech-tag">Service Bus</span>
+                    <span class="tech-tag">Event Grid</span>
+                    <span class="tech-tag">Event Hub</span>
+                  </div>
+                  <ul class="achievements">
+                    <li>Led technical initiatives across cloud migration projects</li>
+                    <li>Managed Azure resources and Kubernetes clusters</li>
+                    <li>Implemented CI/CD pipelines using Azure DevOps</li>
+                  </ul>
+                </div>
+      
+                <!-- Earlier roles in condensed format -->
+                <div class="earlier-roles" data-aos="fade-up">
+                  <h4>Earlier Roles</h4>
+                  <div class="tech-stack">
+                    <span class="tech-tag">Team Management</span>
+                    <span class="tech-tag">Agile</span>
+                    <span class="tech-tag">Scrum</span>
+                    <span class="tech-tag">Microservices</span>
+                    <span class="tech-tag">RESTful APIs</span>
+                    <span class="tech-tag">Cloud Architecture</span>
+                    <span class="tech-tag">C#</span>
+                    <span class="tech-tag">DevOps</span>
+                    <span class="tech-tag">Shell Scripting</span>
+                    <span class="tech-tag">Azure Function</span>
+                    <span class="tech-tag">Container</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Azure</span>
+                    <span class="tech-tag">Angular</span>
+                    <span class="tech-tag">Salesforce</span>
+                    <span class="tech-tag">Service Bus</span>
+                    <span class="tech-tag">Event Grid</span>
+                    <span class="tech-tag">Event Hub</span>
+                    <span class="tech-tag">WPF</span>
+                    <span class="tech-tag">Windows Forms</span>
+                    <span class="tech-tag">ASP.NET Core</span>
+                    <span class="tech-tag">ASP.NET MVC</span>
+                    <span class="tech-tag">ASP.NET Web Forms</span>
+                  </div>
+                  <ul class="role-list">
+                    <li>
+                      <strong>Engineering Manager</strong> at Insight Workshop (2018-2019)
+                      <br>Led .NET development teams and cloud initiatives
+                    </li>
+                    <li>
+                      <strong>Software Engineer</strong> at Multiple Organizations (2014-2018)
+                      <br>Developed solutions using .NET, WPF, and web technologies
+                    </li>
+                    <li>
+                      <strong>Co-Founder</strong> at Yorbit Technologies (2013-2017)
+                      <br>Led IoT and vehicle tracking solutions development
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
+      
+            <!-- Skills Sidebar -->
             <div class="col-lg-4">
-              <h3 class="resume-title">Training and Teachings</h3>
-              <div class="resume-item">
-                <h4>ASP.NET Training</h4>
-                <h5>2021 February - 2022 October</h5>
-                <p><em>Broadway Infosys, Kathmandu, Nepal </em></p>
-                <p>
-                  <ul>
-                    <li>Git</li>
-                    <li>GitHub</li>
-                    <li>Visual Studio</li>
-                    <li>Visual Studio Code</li>
-                    <li>OOP with C#</li>
-                    <li>Console Application</li>
-                    <li>Windows Forms</li>
-                    <li>SQl Server</li>
-                    <li>SQl Server Reporting Service</li>
-                    <li>ASP.NET</li>
-                    <li>ASP.NET MVC</li>
-                    <li>ASP.NET Web API</li>
-                    <li>Entity Framework</li>
-                    <li>ADO.NET</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>JavaScript</li>
-                    <li>jQuery</li>
-                    <li>Bootstrap</li>
-                    <li>Angular</li>
-                    <li>Node</li>
-                    <li>Microsoft Azure</li>
-
-                  </ul>
-                </p>
-              </div>
-              <div class="resume-item">
-                <h4>Part time Faculty Member</h4>
-                <h5>2021 April - 2022 August</h5>
-                <p><em>Aadim College, Kathmandu, Nepal </em></p>
-                <p>
-                  <ul>
-                    <li>Computer Network</li>
-                    <li>Numerical Methods</li>
-                    <li>Network Programming</li>
-                    <li>Distributed System</li>
-                  </ul>
-                </p>
-              </div>
-              <div class="resume-item">
-                <h4>Part time Faculty Member</h4>
-                <h5>2022 April - 2022 August</h5>
-                <p><em>Orchid International College, Kathmandu, Nepal </em></p>
-                <p>
-                  <ul>
-                    <li>Network Programming</li>
-                  </ul>
-                </p>
-              </div>
-              <div class="resume-item">
-                <h4>Part time Faculty Member</h4>
-                <h5>2019 April - 2022 August</h5>
-                <p><em>Academia College, Kathmandu, Nepal </em></p>
-                <p>
-                  <ul>
-                    <li>Net Centric Computing</li>
-                    <li>Cloud Computing</li>
-                    <li>Scripting Language</li>
-                  </ul>
-                </p>
-              </div>
-              <div class="resume-item">
-                <h4>.NET Trainer</h4>
-                <h5>2016 January - 2020 July</h5>
-                <p><em>IT Training Nepal, Kathmandu, Nepal </em></p>
-                <p>
-                  <ul>
-                    <li>Git</li>
-                    <li>GitHub</li>
-                    <li>Visual Studio</li>
-                    <li>Visual Studio Code</li>
-                    <li>OOP with C#</li>
-                    <li>Console Application</li>
-                    <li>Windows Forms</li>
-                    <li>SQl Server</li>
-                    <li>SQl Server Reporting Service</li>
-                    <li>ASP.NET</li>
-                    <li>ASP.NET MVC</li>
-                    <li>ASP.NET Web API</li>
-                    <li>Entity Framework</li>
-                    <li>ADO.NET</li>
-                    <li>HTML</li>
-                    <li>CSS</li>
-                    <li>JavaScript</li>
-                    <li>jQuery</li>
-                    <li>Bootstrap</li>
-                    <li>Microsoft Azure</li>
-                </p>
-              </div>
-
-              <h3 class="resume-title">Education</h3>
-              <div class="resume-item">
-                <h4>Bachelor </h4>
-                <h4>Computer Engineering</h4>
-                <h5>2011 - 2014</h5>
-                <p><em>IOE, Pulchowk Campus, Nepal </em></p>
-                <p></p>
+              <div class="resume-sidebar" data-aos="fade-left">
+                <div class="skills-section">
+                  <h3>Core Expertise</h3>
+                  <div class="skill-category">
+                    <h4>Backend & Cloud</h4>
+                    <div class="skill-tags">
+                      <span class="skill-tag">.NET Core</span>
+                      <span class="skill-tag">C#</span>
+                      <span class="skill-tag">Node.JS</span>
+                      <span class="skill-tag">Shell Scripting</span>
+                      <span class="skill-tag">Powershell script</span>
+                      <span class="skill-tag">Azure</span>
+                      <span class="skill-tag">Azure Function</span>
+                      <span class="skill-tag">AWS</span>
+                    </div>
+                  </div>
+                  <div class="skill-category">
+                    <h4>DevOps & Tools</h4>
+                    <div class="skill-tags">
+                      <span class="skill-tag">Kubernetes</span>
+                      <span class="skill-tag">Docker</span>
+                      <span class="skill-tag">CI/CD</span>
+                      <span class="skill-tag">Git</span>
+                      <span class="skill-tag">Azure Devops</span>
+                      <span class="skill-tag">SonaQube</span>
+                      <span class="skill-tag">Jenkins</span>
+                    </div>
+                  </div>
+                  <div class="skill-category">
+                    <h4>Frontend</h4>
+                    <div class="skill-tags">
+                      <span class="skill-tag">Angular</span>
+                      <span class="skill-tag">TypeScript</span>
+                      <span class="skill-tag">React</span>
+                      <span class="skill-tag">Next.JS</span>
+                      <span class="skill-tag">Lit Framework</span>
+                      <span class="skill-tag">WPF</span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="education-section">
+                  <h3>Education</h3>
+                  <div class="education-item">
+                    <h4>Bachelor in Computer Engineering</h4>
+                    <p>IOE, Pulchowk Campus</p>
+                    <span>2011 - 2014</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -782,292 +683,80 @@
       </section>
       <!-- End Resume Section -->
 
-      <!-- ======= Services Section ======= -->
-      <section id="services" class="services">
-        <div class="container-fluid" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Tools and Teachnologies I Use</h2>
-            <p>Here are the list of technologies that I usually work on.</p>
-          </div>
-
-          <div class="row">
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div
-                class="icon-box iconbox-blue"
-                style="width: -webkit-fill-available"
-              >
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,521.0016835830174C376.1290562159157,517.8887921683347,466.0731472004068,529.7835943286574,510.70327084640275,468.03025145048787C554.3714126377745,407.6079735673963,508.03601936045806,328.9844924480964,491.2728898941984,256.3432110539036C474.5976632858925,184.082847569629,479.9380746630129,96.60480741107993,416.23090153303,58.64404602377083C348.86323505073057,18.502131276798302,261.93793281208167,40.57373210992963,193.5410806939664,78.93577620505333C130.42746243093433,114.334589627462,98.30271207620316,179.96522072025542,76.75703585869454,249.04625023123273C51.97151888228291,328.5150500222984,13.704378332031375,421.85034740162234,66.52175969318436,486.19268352777647C119.04800174914682,550.1803526380478,217.28368757567262,524.383925680826,300,521.0016835830174"
-                    ></path>
-                  </svg>
-                  <i class="bx bxl-microsoft"> </i>
-                </div>
-                <h4><a href="">Azure</a></h4>
-                <p></p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div
-                class="icon-box iconbox-orange"
-                style="width: -webkit-fill-available"
-              >
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-code"></i>
-                </div>
-                <h4><a href="">C#</a></h4>
-                <p></p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div
-                class="icon-box iconbox-pink"
-                style="width: -webkit-fill-available"
-              >
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,541.5067337569781C382.14930387511276,545.0595476570109,479.8736841581634,548.3450877840088,526.4010558755058,480.5488172755941C571.5218469581645,414.80211281144784,517.5187510058486,332.0715597781072,496.52539010469104,255.14436215662573C477.37192572678356,184.95920475031193,473.57363656557914,105.61284051026155,413.0603344069578,65.22779650032875C343.27470386102294,18.654635553484475,251.2091493199835,5.337323636656869,175.0934190732945,40.62881213300186C97.87086631185822,76.43348514350839,51.98124368387456,156.15599469081315,36.44837278890362,239.84606092416172C21.716077023791087,319.22268207091537,43.775223500013084,401.1760424656574,96.891909868211,461.97329694683043C147.22146801428983,519.5804099606455,223.5754009179313,538.201503339737,300,541.5067337569781"
-                    ></path>
-                  </svg>
-                  <i class="bx bxs-box"></i>
-                </div>
-                <h4><a href="">Sql Server</a></h4>
-                <p></p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div
-                class="icon-box iconbox-teal"
-                style="width: -webkit-fill-available"
-              >
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,503.46388370962813C374.79870501325706,506.71871716319447,464.8034551963731,527.1746412648533,510.4981551193396,467.86667711651364C555.9287308511215,408.9015244558933,512.6030010748507,327.5744911775523,490.211057578863,256.5855673507754C471.097692560561,195.9906835881958,447.69079081568157,138.11976852964426,395.19560036434837,102.3242989838813C329.3053358748298,57.3949838291264,248.02791733380457,8.279543830951368,175.87071277845988,42.242879143198664C103.41431057327972,76.34704239035025,93.79494320519305,170.9812938413882,81.28167332365135,250.07896920659033C70.17666984294237,320.27484674793965,64.84698225790005,396.69656628748305,111.28512138212992,450.4950937839243C156.20124167950087,502.5303643271138,231.32542653798444,500.4755392045468,300,503.46388370962813"
-                    ></path>
-                  </svg>
-                  <i class="bx bxl-nodejs"></i>
-                </div>
-                <h4><a href="">Node.js</a></h4>
-                <p></p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div
-                class="icon-box iconbox-red"
-                style="width: -webkit-fill-available"
-              >
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,532.3542879108572C369.38199826031484,532.3153073249985,429.10787420159085,491.63046689027357,474.5244479745417,439.17860296908856C522.8885846962883,383.3225815378663,569.1668002868075,314.3205725914397,550.7432151929288,242.7694973846089C532.6665558377875,172.5657663291529,456.2379748765914,142.6223662098291,390.3689995646985,112.34683881706744C326.66090330228417,83.06452184765237,258.84405631176094,53.51806209861945,193.32584062364296,78.48882559362697C121.61183558270385,105.82097193414197,62.805066853699245,167.19869350419734,48.57481801355237,242.6138429142374C34.843463184063346,315.3850353017275,76.69343916112496,383.4422959591041,125.22947124332185,439.3748458443577C170.7312796277747,491.8107796887764,230.57421082200815,532.3932930995766,300,532.3542879108572"
-                    ></path>
-                  </svg>
-                  <i class="bx bx-add-to-queue"></i>
-                </div>
-                <h4><a href="">Devops</a></h4>
-                <p style="width: 100%"></p>
-              </div>
-            </div>
-
-            <div
-              class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div
-                class="icon-box iconbox-teal"
-                style="width: -webkit-fill-available"
-              >
-                <div class="icon">
-                  <svg
-                    width="100"
-                    height="100"
-                    viewBox="0 0 600 600"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke="none"
-                      stroke-width="0"
-                      fill="#f5f5f5"
-                      d="M300,566.797414625762C385.7384707136149,576.1784315230908,478.7894351017131,552.8928747891023,531.9192734346935,484.94944893311C584.6109503024035,417.5663521118492,582.489472248146,322.67544863468447,553.9536738515405,242.03673114598146C529.1557734026468,171.96086150256528,465.24506316201064,127.66468636344209,395.9583748389544,100.7403814666027C334.2173773831606,76.7482773500951,269.4350130405921,84.62216499799875,207.1952322260088,107.2889140133804C132.92018162631612,134.33871894543012,41.79353780512637,160.00259165414826,22.644507872594943,236.69541883565114C3.319112789854554,314.0945973066697,72.72355303640163,379.243833228382,124.04198916343866,440.3218312028393C172.9286146004772,498.5055451809895,224.45579914871206,558.5317968840102,300,566.797414625762"
-                    ></path>
-                  </svg>
-                  <i class="bx bxl-github"></i>
-                </div>
-                <h4><a href="">Github</a></h4>
-                <p></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Services Section -->
-
       <!-- ======= Contact Section ======= -->
       <section id="contact" class="contact">
         <div class="container-fluid" data-aos="fade-up">
           <div class="section-title">
-            <h2>Contact</h2>
+            <h2>Get in Touch</h2>
+            <p>Feel free to reach out through any of these channels</p>
           </div>
-
-          <div class="row mt-1">
-            <div class="col-lg-4">
-              <div class="info">
-                <div class="address">
+      
+          <div class="contact-wrapper">
+            <!-- Direct Contact Information -->
+            <div class="contact-info-container">
+              <div class="contact-card" data-aos="fade-right">
+                <div class="icon-box">
                   <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
+                </div>
+                <div class="contact-details">
+                  <h4>Location</h4>
                   <p>London, United Kingdom</p>
                 </div>
-
-                <div class="email">
+              </div>
+      
+              <div class="contact-card" data-aos="fade-right" data-aos-delay="100">
+                <div class="icon-box">
                   <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>chandan.bhagat@outlook.com</p>
                 </div>
-
-                <div class="phone">
+                <div class="contact-details">
+                  <h4>Email</h4>
+                  <a href="mailto:chandan.bhagat@outlook.com">chandan.bhagat@outlook.com</a>
+                </div>
+              </div>
+      
+              <div class="contact-card" data-aos="fade-right" data-aos-delay="200">
+                <div class="icon-box">
                   <i class="bi bi-phone"></i>
-                  <h4>Call:</h4>
-                  <p>+44 7818620731</p>
+                </div>
+                <div class="contact-details">
+                  <h4>Phone</h4>
+                  <a href="tel:+447818620731">+44 7818620731</a>
                 </div>
               </div>
             </div>
-
-            <div class="col-lg-4">
-              <div class="info">
-                <a
-                  href="https://twitter.com/chandangbhagat"
-                  class="address row center"
-                  target="_blank"
-                >
+      
+            <!-- Social Media Links -->
+            <div class="social-links-container">
+              <h3>Connect on Social Media</h3>
+              <div class="social-grid">
+                <a href="https://twitter.com/chandangbhagat" class="social-card" target="_blank" data-aos="zoom-in">
                   <i class="bi bi-twitter"></i>
-                  <h4></h4>
-                  <p></p>
+                  <span>Twitter</span>
                 </a>
-
-                <a
-                  href="https://facebook.com/thechandanbhagat"
-                  class="email row center"
-                  target="_blank"
-                >
+      
+                <a href="https://facebook.com/thechandanbhagat" class="social-card" target="_blank" data-aos="zoom-in" data-aos-delay="100">
                   <i class="bi bi-facebook"></i>
-                  <h4></h4>
-                  <p></p>
+                  <span>Facebook</span>
                 </a>
-
-                <a
-                  href="https://instagram.com/thechandanbhagat"
-                  class="phone row center"
-                  target="_blank"
-                >
+      
+                <a href="https://instagram.com/thechandanbhagat" class="social-card" target="_blank" data-aos="zoom-in" data-aos-delay="200">
                   <i class="bi bi-instagram"></i>
-                  <h4></h4>
-                  <p></p>
+                  <span>Instagram</span>
                 </a>
-              </div>
-            </div>
-            <div class="col-lg-4 align-content-center">
-              <div class="info">
-                <a
-                  href="skype:chandan.bhagat.msp"
-                  class="address row center"
-                  target="_blank"
-                >
+      
+                <a href="skype:chandan.bhagat.msp" class="social-card" target="_blank" data-aos="zoom-in" data-aos-delay="300">
                   <i class="bi bi-skype"></i>
-                  <h4></h4>
-                  <p></p>
+                  <span>Skype</span>
                 </a>
-
-                <a
-                  href="https://linkedin.com/in/guptac"
-                  class="email row center"
-                  target="_blank"
-                >
+      
+                <a href="https://linkedin.com/in/guptac" class="social-card" target="_blank" data-aos="zoom-in" data-aos-delay="400">
                   <i class="bi bi-linkedin"></i>
-                  <h4></h4>
-                  <p></p>
+                  <span>LinkedIn</span>
                 </a>
-
-                <a
-                  href="https://github.com/thechandanbhagat"
-                  class="phone row center"
-                  target="_blank"
-                >
+      
+                <a href="https://github.com/thechandanbhagat" class="social-card" target="_blank" data-aos="zoom-in" data-aos-delay="500">
                   <i class="bi bi-github"></i>
-                  <h4></h4>
-                  <p></p>
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>
@@ -1081,43 +770,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer">
       <div class="container-fluid">
-        <h3>Chandan Gupta Bhagat</h3>
-        <p></p>
-        <div class="social-links">
-          <a
-            href="https://twitter.com/chandangbhagat"
-            class="twitter"
-            target="_blank"
-            ><i class="bx bxl-twitter"></i
-          ></a>
-          <a
-            href="https://facebook.com/thechandanbhagat"
-            class="facebook"
-            target="_blank"
-            ><i class="bx bxl-facebook"></i
-          ></a>
-          <a
-            href="https://instagram.com/thechandanbhagat"
-            class="instagram"
-            target="_blank"
-            ><i class="bx bxl-instagram"></i
-          ></a>
-          <a href="skype:chandan.bhagat.msp" class="google-plus" target="_blank"
-            ><i class="bx bxl-skype"></i
-          ></a>
-          <a
-            href="https://linkedin.com/in/guptac"
-            class="linkedin"
-            target="_blank"
-            ><i class="bx bxl-linkedin"></i
-          ></a>
-          <a
-            href="https://github.com/thechandanbhagat"
-            class="linkedin"
-            target="_blank"
-            ><i class="bx bxl-github"></i
-          ></a>
-        </div>
+       
         <div class="copyright">
           &copy; Copyright <strong><span>Chandan Gupta Bhagat</span></strong
           >. All Rights Reserved
@@ -1149,4 +802,3 @@
     <script src="assets/js/main.js"></script>
   </body>
 </html>
-
