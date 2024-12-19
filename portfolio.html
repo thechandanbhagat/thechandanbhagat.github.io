@@ -78,10 +78,10 @@
              <!-- Update filter categories in portfolio.html -->
 <ul id="portfolio-filters">
     <li data-filter="*" class="filter-active">All</li>
-    <li data-filter="cloud">Cloud</li>
-    <li data-filter="apps">Apps</li>
-    <li data-filter="web">Web</li>
-    <li data-filter="mentoring">Mentoring</li>
+    <li data-filter=".filter-cloud">Cloud</li>
+    <li data-filter=".filter-apps">Apps</li>
+    <li data-filter=".filter-web">Web</li>
+    <li data-filter=".filter-mentoring">Mentoring</li>
 </ul>
             </div>
           </div>
@@ -113,6 +113,12 @@
     </main>
     <!-- End #main -->
 
+    <div class="fixed-buttons-container">
+      <button class="theme-toggle-btn">
+        <i class="bx bx-moon"></i>
+      </button>
+    </div>
+
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
       <i class="bi bi-arrow-up-short"></i>
@@ -126,6 +132,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/portfolio.js" type="text/javascript"></script>
     <script src="assets/js/important-links.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
   </body>
   <!-- Add before closing body tag -->
 <script>

@@ -42,4 +42,32 @@ function renderLinks(links) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', loadImportantLinks);
+document.addEventListener('DOMContentLoaded', () => {
+    loadImportantLinks();
+    
+    // Handle dark mode for link cards
+    const handleLinksDarkMode = () => {
+        const isDarkMode = document.body.classList.contains('dark-theme');
+        const linkCards = document.querySelectorAll('.link-card');
+        
+        linkCards.forEach(card => {
+            card.style.background = isDarkMode ? '#2d2d2d' : '#ffffff';
+        });
+    };
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                handleLinksDarkMode();
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        attributes: true
+    });
+
+    // Initial check for dark mode
+    handleLinksDarkMode();
+});

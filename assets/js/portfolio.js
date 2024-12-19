@@ -1,5 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadPortfolio();
+
+    // Handle dark mode for portfolio-specific elements
+    const handlePortfolioDarkMode = () => {
+        const isDarkMode = document.body.classList.contains('dark-theme');
+        const portfolioModals = document.querySelectorAll('.modal-content');
+        const resourceSections = document.querySelectorAll('.resources-section');
+        
+        portfolioModals.forEach(modal => {
+            modal.style.background = isDarkMode ? '#2d2d2d' : '#ffffff';
+            modal.style.color = isDarkMode ? '#e0e0e0' : '#45505b';
+        });
+
+        resourceSections.forEach(section => {
+            section.style.background = isDarkMode ? '#3d3d3d' : '#f8f9fa';
+        });
+    };
+
+    // Listen for theme changes
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                handlePortfolioDarkMode();
+            }
+        });
+    });
+
+    observer.observe(document.body, {
+        attributes: true
+    });
+
+    // Initial check for dark mode
+    handlePortfolioDarkMode();
 });
 
 async function loadPortfolio() {
@@ -46,7 +78,7 @@ async function loadPortfolio() {
         initializePortfolioHandlers(sortedItems);
         
         // Initialize Isotope after content is loaded
-        window.addEventListener('load', initializeIsotope);
+        initializeIsotope();
 
     } catch (error) {
         console.error('Error loading portfolio:', error);
@@ -63,8 +95,8 @@ function openPortfolioModal(index) {
             <h2>${item.program}</h2>
             <span class="close">&times;</span>
         </div>
-        <div class="modal-body">
-            <div class="modal-image-column">
+        <div class="modal-body row">
+            <div class="modal-image-column col-md-6">
                 <div class="swiper portfolioSwiper">
                     <div class="swiper-wrapper">
                         ${item.images.map(img => `
@@ -78,7 +110,7 @@ function openPortfolioModal(index) {
                     <div class="swiper-button-prev"></div>
                 </div>
             </div>
-            <div class="modal-info-column">
+            <div class="modal-info-column col-md-6">
                 <h3>${item.title}</h3>
                 <p class="date">${item.date}</p>
                 ${item.description ? `
@@ -107,6 +139,37 @@ function openPortfolioModal(index) {
         modal.classList.add('show');
     });
     
+    // Setup handlers after modal content is created
+    const closeModal = () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 300);
+    };
+
+    // Close modal with close button
+    const closeBtn = document.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.onclick = closeModal;
+    }
+    
+    // Close modal when clicking outside
+    modal.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+
+    // Add ESC key handler if not already added
+    if (!window.modalEscHandler) {
+        window.modalEscHandler = true;
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    }
+    
     initializeSwiperAndHandlers();
 }
 
@@ -124,25 +187,7 @@ function getResourceIcon(type) {
 function initializePortfolioHandlers(items) {
     window.portfolioItems = items;
     
-    // Close modal with animation
-    document.querySelector('.close').onclick = function() {
-        const modal = document.getElementById('portfolioModal');
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = "none";
-        }, 300);
-    }
-    
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        const modal = document.getElementById('portfolioModal');
-        if (event.target == modal) {
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = "none";
-            }, 300);
-        }
-    }
+    // Don't set up event handlers here, moved to after modal content is created
 }
 
 function renderItems(items) {
@@ -197,23 +242,43 @@ function initializeSwipers() {
 }
 
 function initializeIsotope() {
-    const iso = new Isotope('#portfolio-grid', {
-        itemSelector: '.portfolio-item',
-        layoutMode: 'masonry',
-        masonry: {
-            columnWidth: '.portfolio-item',
-            horizontalOrder: true
-        }
-    });
-
-    // Enhanced filter functionality
-    document.querySelectorAll('#portfolio-filters li').forEach(button => {
-        button.addEventListener('click', function() {
-            document.querySelector('.filter-active').classList.remove('filter-active');
-            this.classList.add('filter-active');
-            const filterValue = this.getAttribute('data-filter');
-            iso.arrange({ filter: filterValue });
+    // Wait for all images to load to prevent layout issues
+    imagesLoaded(document.querySelector('#portfolio-grid'), function() {
+        const grid = document.getElementById('portfolio-grid');
+        const iso = new Isotope(grid, {
+            itemSelector: '.portfolio-item',
+            layoutMode: 'fitRows',
+            percentPosition: true
         });
+
+        // Filter items on button click
+        document.querySelectorAll('#portfolio-filters li').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Remove active class from all buttons
+                document.querySelectorAll('#portfolio-filters li').forEach(btn => {
+                    btn.classList.remove('filter-active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('filter-active');
+                
+                // Apply filter
+                if (filterValue === '*') {
+                    iso.arrange({ filter: '*' });
+                } else {
+                    iso.arrange({ filter: filterValue });
+                }
+
+                // Trigger layout after filter
+                iso.layout();
+            });
+        });
+
+        // Initial layout
+        iso.layout();
     });
 }
 

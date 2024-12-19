@@ -127,3 +127,55 @@
     display: flex;
     align-items: stretch;
 }
+
+/* Dark Theme Styles for Important Links */
+body.dark-theme .category-title {
+    color: #ffffff;
+}
+
+body.dark-theme .link-card {
+    background: #2d2d2d;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .link-card:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .link-content h4 {
+    color: #ffffff;
+}
+
+body.dark-theme .link-content p {
+    color: #e0e0e0;
+}
+
+body.dark-theme .link-meta {
+    color: #b0b0b0;
+    border-top-color: #3d3d3d;
+}
+
+body.dark-theme .tag {
+    background: #3d3d3d;
+    color: #e0e0e0;
+}
+
+body.dark-theme .link-icon {
+    color: #0678e3;
+}
+
+/* Dark theme swiper navigation */
+body.dark-theme .swiper-button-next,
+body.dark-theme .swiper-button-prev {
+    background: rgba(45, 45, 45, 0.9);
+    color: #0678e3;
+}
+
+body.dark-theme .swiper-pagination-bullet {
+    background: #3d3d3d;
+    border-color: #0678e3;
+}
+
+body.dark-theme .swiper-pagination-bullet-active {
+    background: #0678e3;
+}

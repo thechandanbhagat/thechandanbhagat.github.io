@@ -175,16 +175,95 @@ body {
     background: rgba(0, 0, 0, 0.9);
 }
 
+/* Modal Styles Update */
 .modal-content {
     background: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 1200px;
+    margin: 2% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 95%;  /* Increased from 90% */
+    max-width: 1400px;  /* Increased from 1000px */
+    height: 90vh;  /* Added fixed height */
     opacity: 0;
     transform: translateY(-20px);
     transition: all 0.3s ease-in-out;
+}
+
+.modal-body {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    height: calc(90vh - 100px); /* Adjust for header space */
+    overflow: hidden;
+}
+
+.modal-image-column {
+    flex: 1;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.modal-info-column {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.portfolioSwiper {
+    width: 100%;
+    height: 100%;
+    max-height: calc(90vh - 150px); /* Adjust for modal padding */
+}
+
+.modal-info-column h3 {
+    color: #0563bb;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal-info-column .date {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.description-section {
+    margin: 20px 0;
+}
+
+.description-section h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Dark theme specific modal styles */
+body.dark-theme .modal-content {
+    background: #2d2d2d;
+}
+
+body.dark-theme .modal-info-column h3 {
+    color: #0678e3;
+}
+
+body.dark-theme .modal-info-column .date {
+    color: #b0b0b0;
+}
+
+/* Responsive Modal */
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+    }
+
+    .modal-image-column,
+    .modal-info-column {
+        width: 100%;
+    }
+
+    .modal-info-column {
+        max-height: 40vh;
+    }
 }
 
 .modal.show .modal-content {
@@ -586,4 +665,73 @@ body {
 
 .resource-link i {
     margin-right: 8px;
+}
+
+/* Dark Theme Portfolio Styles */
+body.dark-theme #portfolio {
+    background: #1a1a1a;
+}
+
+body.dark-theme #portfolio-filters {
+    background: #2d2d2d;
+}
+
+body.dark-theme #portfolio-filters li {
+    color: #e0e0e0;
+    background: #3d3d3d;
+}
+
+body.dark-theme #portfolio-filters li:hover,
+body.dark-theme #portfolio-filters li.filter-active {
+    background: #0678e3;
+    color: #ffffff;
+}
+
+body.dark-theme .portfolio-wrap {
+    background: #2d2d2d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .modal-content {
+    background: #2d2d2d;
+    color: #e0e0e0;
+}
+
+body.dark-theme .modal-header h2 {
+    color: #ffffff;
+}
+
+body.dark-theme .resources-section {
+    background: #3d3d3d;
+}
+
+body.dark-theme .resource-link {
+    background: #0678e3;
+    color: #ffffff;
+}
+
+body.dark-theme .resource-link:hover {
+    background: #0563bb;
+}
+
+body.dark-theme .portfolio-details {
+    background: #1a1a1a;
+}
+
+body.dark-theme .portfolio-description h2,
+body.dark-theme .portfolio-info h3 {
+    color: #ffffff;
+}
+
+body.dark-theme .portfolio-description p,
+body.dark-theme .portfolio-info p {
+    color: #e0e0e0;
+}
+
+body.dark-theme .close {
+    color: #ffffff;
+}
+
+body.dark-theme .close:hover {
+    color: #0678e3;
 }
