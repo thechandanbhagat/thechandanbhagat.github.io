@@ -60,6 +60,12 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
 }
 
+/* Ensure dark mode button remains visible */
+.back-to-top.active ~ .fixed-buttons-container .theme-toggle-btn {
+  visibility: visible;
+  opacity: 1;
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -335,6 +341,53 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Add these styles after the existing #hero section styles */
+
+/* Hero Section Dark Theme */
+body.dark-theme #hero {
+  background: url("../img/hero-bg.jpg") top right no-repeat;
+  background-size: cover;
+}
+
+body.dark-theme #hero:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.8); /* Darker overlay for dark mode */
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+body.dark-theme #hero h1 {
+  color: #ffffff;
+}
+
+body.dark-theme #hero p {
+  color: #ffffff;
+}
+
+body.dark-theme #hero p span {
+  color: #0678e3; /* Brighter blue for dark mode */
+  padding-bottom: 4px;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #0678e3;
+}
+
+body.dark-theme #hero .social-links a {
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+body.dark-theme #hero .social-links a:hover {
+  color: #0678e3;
+}
+
+/* Ensure typed cursor is visible in dark mode */
+body.dark-theme .typed-cursor {
+  color: #ffffff;
+}
+
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
@@ -419,6 +472,15 @@ section {
   margin-bottom: 0;
 }
 
+/* About Section Dark Theme */
+body.dark-theme #about {
+  background: #1a1a1a;
+}
+
+body.dark-theme #about .lead-text {
+  color: #e0e0e0;
+}
+
 /*--------------------------------------------------------------
 # Facts
 --------------------------------------------------------------*/
@@ -497,6 +559,25 @@ section {
   background-color: #0563bb;
 }
 
+/* Dark theme for skill cards */
+body.dark-theme .skill-card {
+  background: #2d2d2d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .skill-card h4 {
+  color: #ffffff;
+}
+
+body.dark-theme .skill-card p {
+  color: #e0e0e0;
+}
+
+body.dark-theme .skill-card:hover {
+  transform: translateY(-5px);
+  background: #363636;
+}
+
 /*--------------------------------------------------------------
 # Resume
 --------------------------------------------------------------*/
@@ -556,6 +637,75 @@ section {
   top: 0;
   background: #fff;
   border: 2px solid #0563bb;
+}
+
+/* Dark theme for resume section */
+body.dark-theme .resume {
+  /* background: #2d2d2d; */
+}
+
+body.dark-theme .resume-item {
+  background: #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .resume-item h4 {
+  color: #ffffff;
+}
+
+body.dark-theme .resume-item h5 {
+  background: #4a4a4a;
+  color: #e0e0e0;
+}
+
+body.dark-theme .resume-item ul li {
+  color: #e0e0e0;
+}
+
+body.dark-theme .resume-sidebar {
+  background: #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .resume-sidebar h3,
+body.dark-theme .resume-sidebar .skill-category h4,
+body.dark-theme .resume-sidebar .education-item h4 {
+  color: #ffffff;
+}
+
+body.dark-theme .resume-sidebar .skill-tag {
+  background: #0678e3;
+  color: #ffffff;
+}
+
+/* Dark theme for earlier roles section */
+body.dark-theme .earlier-roles {
+  background: #2d2d2d;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  color: #e0e0e0;
+}
+
+body.dark-theme .earlier-roles h3 {
+  color: #ffffff;
+}
+
+body.dark-theme .role-list li {
+  color: #e0e0e0;
+  border-color: #3d3d3d;
+}
+
+body.dark-theme .role-list h4 {
+  color: #ffffff;
+}
+
+body.dark-theme .role-list .tech-tag {
+  background: #3d3d3d;
+  color: #0678e3;
+}
+
+body.dark-theme .role-list .tech-tag:hover {
+  background: #0563bb;
+  color: #ffffff;
 }
 
 /*--------------------------------------------------------------
@@ -913,6 +1063,26 @@ section {
   }
 }
 
+/* Dark theme for contact section */
+body.dark-theme .contact {
+  /* background: #2d2d2d; */
+}
+
+body.dark-theme .contact-card {
+  background: #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .contact-card .icon-box {
+  background: #0678e3;
+}
+
+body.dark-theme .contact-details h4,
+body.dark-theme .contact-details p,
+body.dark-theme .contact-details a {
+  color: #e0e0e0;
+}
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -974,6 +1144,36 @@ section {
   font-size: 13px;
 }
 
+/* Dark theme for footer */
+body.dark-theme #footer {
+  background: #2d2d2d;
+  color: #e0e0e0;
+}
+
+body.dark-theme #footer h3 {
+  color: #ffffff;
+}
+
+body.dark-theme #footer p {
+  color: #e0e0e0;
+}
+
+body.dark-theme #footer .social-links a {
+  background: #0678e3;
+  color: #ffffff;
+}
+
+body.dark-theme #footer .social-links a:hover {
+  background: #0563bb;
+}
+
+body.dark-theme #footer .copyright {
+  color: #e0e0e0;
+}
+
+body.dark-theme #footer .credits {
+  color: #a0a0a0;
+}
 
 p.header{
   font-size: 30px; 
@@ -1159,6 +1359,33 @@ p.header2{
   }
 }
 
+/* Dark theme for profile card */
+body.dark-theme .profile-card {
+  background: #2d2d2d;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .profile-title {
+  color: #ffffff;
+}
+
+body.dark-theme .info-item strong {
+  color: #ffffff;
+}
+
+body.dark-theme .info-item span,
+body.dark-theme .info-item a {
+  color: #e0e0e0;
+}
+
+body.dark-theme .info-item a:hover {
+  color: #0678e3;
+}
+
+/* Dark theme status badge */
+body.dark-theme .status.available {
+  color: #4cd964;
+}
 
 .facts {
   padding: 60px 0;
@@ -1348,6 +1575,24 @@ p.header2{
   display: block;
   font-size: 16px;
   color: #45505b;
+}
+
+/* Dark theme for skills section */
+body.dark-theme .skills-title i {
+  color: #0678e3;
+}
+
+body.dark-theme .skill-item {
+  background: #2d2d2d;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .skill-item:hover {
+  background: #363636;
+}
+
+body.dark-theme .skill-item span {
+  color: #e0e0e0;
 }
 
 .resume {
@@ -1636,4 +1881,255 @@ p.header2{
     .portfolio-item {
         width: calc(100% - 30px);
     }
+}
+
+.fixed-buttons-container {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+  z-index: 996;
+}
+
+.portfolio-btn, .theme-toggle-btn {
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+  background: #0563bb;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+  color: #fff;
+  font-size: 24px;
+  border: none;
+}
+
+.portfolio-btn:hover, .theme-toggle-btn:hover {
+  background: #0678e3;
+  color: #fff;
+}
+
+.theme-toggle-btn i {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Dark theme styles */
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+body.dark-theme section {
+  background-color: #1a1a1a;
+}
+
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3, 
+body.dark-theme h4, 
+body.dark-theme h5, 
+body.dark-theme h6 {
+  color: #fff;
+}
+
+/* Dark theme section titles */
+body.dark-theme .section-title h2 {
+  color: #ffffff;
+}
+
+body.dark-theme .section-title h2::before {
+  background: #404040;
+}
+
+/* Dark theme for facts section */
+
+
+body.dark-theme .fact-card {
+  background: #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .fact-number {
+  color: #ffffff;
+}
+
+body.dark-theme .fact-title {
+  color: #e0e0e0;
+}
+
+body.dark-theme .fact-icon i {
+  color: #0678e3;
+}
+
+/* Dark theme for services section */
+body.dark-theme .service-box {
+  background: #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .service-box:hover {
+  background: #4a4a4a;
+}
+
+body.dark-theme .service-icon {
+  color: #0678e3;
+}
+
+body.dark-theme .service-box h3 {
+  color: #ffffff;
+}
+
+body.dark-theme .service-box p {
+  color: #e0e0e0;
+}
+
+/* Dark mode styles */
+.dark-theme .social-links a {
+  background: #2b2b2b;
+  color: #fff;
+}
+
+.dark-theme .social-links a:hover {
+  background: #149ddd;
+  color: #fff;
+  text-decoration: none;
+}
+
+.dark-theme .resume .resume-item {
+  border-left-color: #2b2b2b;
+}
+
+.dark-theme .resume .resume-item h4 {
+  color: #fff;
+}
+
+.dark-theme .resume .resume-item h5 {
+  color: #149ddd;
+  background: #2b2b2b;
+}
+
+.dark-theme .resume .resume-item::before {
+  border: 2px solid #2b2b2b;
+  background: #18181b;
+}
+
+/* Dark Theme Overrides */
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+body.dark-theme section {
+  background-color: #1a1a1a;
+}
+
+body.dark-theme .social-links a {
+  color: #ffffff;
+  background: #2d2d2d;
+}
+
+body.dark-theme .social-links a:hover {
+  background: #0563bb;
+}
+
+body.dark-theme .resume .resume-item {
+  background: #2d2d2d;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme .resume .resume-item h4 {
+  color: #ffffff;
+}
+
+body.dark-theme .resume .resume-item h5 {
+  color: #e0e0e0;
+  background: #3d3d3d;
+}
+
+body.dark-theme .resume .resume-item ul li {
+  color: #e0e0e0;
+}
+
+body.dark-theme .section-title h2 {
+  color: #ffffff;
+}
+
+/* Dark theme for social media cards */
+body.dark-theme .social-card {
+  background: #2d2d2d;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .social-card i {
+  color: #0678e3;
+}
+
+body.dark-theme .social-card span {
+  color: #e0e0e0;
+}
+
+body.dark-theme .social-card:hover {
+  background: #0678e3;
+}
+
+body.dark-theme .social-card:hover i,
+body.dark-theme .social-card:hover span {
+  color: #ffffff;
+}
+
+body.dark-theme .social-links-container h3 {
+  color: #ffffff;
+}
+
+/* Dark theme for navigation menu */
+body.dark-theme #header {
+  /* background: #2d2d2d; */
+  border-right-color: #3d3d3d;
+}
+
+body.dark-theme .nav-menu a, 
+body.dark-theme .nav-menu a:focus {
+  background: #3d3d3d;
+  color: #ffffff;
+}
+
+body.dark-theme .nav-menu a span, 
+body.dark-theme .nav-menu a:focus span {
+  color: #e0e0e0;
+}
+
+body.dark-theme .nav-menu a:hover, 
+body.dark-theme .nav-menu .active, 
+body.dark-theme .nav-menu .active:focus, 
+body.dark-theme .nav-menu li:hover > a {
+  background: #0678e3;
+  color: #ffffff;
+}
+
+body.dark-theme .mobile-nav-toggle i {
+  color: #ffffff;
+}
+
+body.dark-theme .mobile-nav-active .mobile-nav-toggle {
+  background-color: #0678e3;
+}
+
+/* Dark theme for tech tags */
+body.dark-theme .tech-tag {
+  background: #3d3d3d;
+  color: #b3d9fd;
+  border: 1px solid #4a4a4a;
+}
+
+body.dark-theme .tech-tag:hover {
+  background: #0678e3;
+  color: #ffffff;
+  border-color: #0678e3;
+}
+
+body.dark-theme .tech-tag-category {
+  color: #e0e0e0;
 }
