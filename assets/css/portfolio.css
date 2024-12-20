@@ -59,6 +59,80 @@ body {
     gap: 10px;
 }
 
+/* Portfolio Filters - Updated Mobile Styles */
+#portfolio-filters {
+    padding: 0;
+    margin: 0 auto 25px;
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 100%;
+    padding: 10px;
+}
+
+#portfolio-filters li {
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #45505b;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    margin: 0;
+    flex: 0 1 auto;
+}
+
+@media (max-width: 768px) {
+    #portfolio-filters {
+        gap: 6px;
+        padding: 8px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    }
+
+    #portfolio-filters::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
+    #portfolio-filters li {
+        padding: 6px 12px;
+        font-size: 13px;
+        flex-shrink: 0;
+    }
+
+    .portfolio-filters-container {
+        position: relative;
+        margin: 0 auto 25px;
+        max-width: 100%;
+    }
+
+    .portfolio-filters-container::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 30px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.9));
+        pointer-events: none;
+    }
+
+    body.dark-theme .portfolio-filters-container::after {
+        background: linear-gradient(to right, transparent, rgba(26,26,26,0.9));
+    }
+}
+
 #portfolio-filters li {
     cursor: pointer;
     padding: 8px 16px;
@@ -733,6 +807,7 @@ body.dark-theme #portfolio {
 
 body.dark-theme #portfolio-filters {
     background: #2d2d2d;
+    border-radius: 20px;
 }
 
 body.dark-theme #portfolio-filters li {

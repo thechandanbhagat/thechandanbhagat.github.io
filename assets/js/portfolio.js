@@ -40,6 +40,20 @@ async function loadPortfolio() {
         const data = await response.json();
         const container = document.getElementById('portfolio-grid');
         
+        // Generate filters
+        const categories = new Set();
+        data.portfolioItems.forEach(item => {
+            categories.add(item.category.toLowerCase());
+        });
+        
+        const filterContainer = document.getElementById('portfolio-filters');
+        filterContainer.innerHTML = `
+            <li data-filter="*" class="filter-active">All</li>
+            ${[...categories].map(category => `
+                <li data-filter=".filter-${category.toLowerCase()}">${category}</li>
+            `).join('')}
+        `;
+        
         // Sort items by date (newest first)
         const sortedItems = data.portfolioItems.sort((a, b) => 
             new Date(b.date || '1900-01-01') - new Date(a.date || '1900-01-01')
