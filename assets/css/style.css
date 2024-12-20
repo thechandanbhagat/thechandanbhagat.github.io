@@ -33,7 +33,6 @@ h1, h2, h3, h4, h5, h6 {
 .back-to-top {
   opacity: 0;
   visibility: hidden;
-
   z-index: 996;
   background: #0563bb;
   width: 40px;
@@ -607,13 +606,16 @@ body.dark-theme .skill-card:hover {
 }
 
 .resume .resume-item h4 {
-  line-height: 18px;
-  font-size: 30px;
+  line-height: 1.4; /* Changed from 18px to 1.4 for better readability */
+  font-size: 24px; /* Reduced from 30px */
   font-weight: 600;
   text-transform: uppercase;
   font-family: "Poppins", sans-serif;
   color: #0563bb;
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Increased from 10px */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .resume .resume-item h5 {
@@ -1344,6 +1346,7 @@ p.header2{
   color: #0563bb;
   text-decoration: none;
   transition: color 0.3s ease;
+  overflow-wrap: anywhere;
 }
 
 .info-item a:hover {
@@ -1896,7 +1899,7 @@ body.dark-theme .skill-item span {
 .fixed-buttons-container {
   position: fixed;
   bottom: 15px;
-  right: 15px;
+  right: 0px;
   display: flex;
   align-items: center;
   gap: 10px;
