@@ -11,6 +11,11 @@
    * Easy selector helper function
    */
   const select = (el, all = false) => {
+    // Return null if selector is empty or undefined
+    if (!el || el.trim() === '') {
+      return null;
+    }
+    
     el = el.trim()
     if (all) {
       return [...document.querySelectorAll(el)]
@@ -77,14 +82,26 @@
   let backtotop = select('.back-to-top')
   if (backtotop) {
     const toggleBacktotop = () => {
+      const fixedButtonsContainer = select('.fixed-buttons-container');
       if (window.scrollY > 100) {
         backtotop.classList.add('active')
+        fixedButtonsContainer.classList.add('shift-left')
       } else {
         backtotop.classList.remove('active')
+        fixedButtonsContainer.classList.remove('shift-left')
       }
     }
     window.addEventListener('load', toggleBacktotop)
     onscroll(document, toggleBacktotop)
+    
+    // Add click handler
+    backtotop.addEventListener('click', (e) => {
+      e.preventDefault()
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    })
   }
 
   /**
@@ -100,15 +117,18 @@
    * Scrool with ofset on links with a class name .scrollto
    */
   on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
+    // Add check for valid hash
+    if (this.hash && select(this.hash)) {
       e.preventDefault()
 
       let body = select('body')
-      if (body.classList.contains('mobile-nav-active')) {
+      if (body && body.classList.contains('mobile-nav-active')) {
         body.classList.remove('mobile-nav-active')
         let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+        if (navbarToggle) {
+          navbarToggle.classList.toggle('bi-list')
+          navbarToggle.classList.toggle('bi-x')
+        }
       }
       scrollto(this.hash)
     }

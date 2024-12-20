@@ -50,10 +50,14 @@
     <header id="header" class="d-flex flex-column justify-content-center">
       <nav id="navbar" class="navbar nav-menu">
         <ul>
-        
+        <li>
+
+          <a href="/" class="nav-link scrollto"
+            ><i class="bx bx-user"></i> <span>Profile</span></a>
+        </li>
           <li>
-            <a href="#portfoliodetails" class="nav-link scrollto"
-              ><i class="bx bx-user"></i> <span>Portfolio and Mentoring</span></a
+            <a href="#portfolio" class="nav-link scrollto"
+              ><i class="bx bx-user-voice"></i> <span>Portfolio and Mentoring</span></a
             >
           </li>
           <li>
@@ -114,16 +118,18 @@
     </main>
     <!-- End #main -->
 
+    <div id="preloader"></div>
     <div class="fixed-buttons-container">
-      <button class="theme-toggle-btn">
+      <a href="/" class="portfolio-btn d-flex align-items-center justify-content-center">
+        <i class="bx bx-user"></i>
+      </a>
+      <button class="theme-toggle-btn d-flex align-items-center justify-content-center">
         <i class="bx bx-moon"></i>
       </button>
+      <button class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+      </button>
     </div>
-
-    <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
-      <i class="bi bi-arrow-up-short"></i>
-    </a>
 
     
     <script src="assets/vendor/aos/aos.js"></script>

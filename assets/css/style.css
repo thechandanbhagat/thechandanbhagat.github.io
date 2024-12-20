@@ -31,11 +31,9 @@ h1, h2, h3, h4, h5, h6 {
 # Back to top button
 --------------------------------------------------------------*/
 .back-to-top {
-  position: fixed;
-  visibility: hidden;
   opacity: 0;
-  right: 15px;
-  bottom: 15px;
+  visibility: hidden;
+
   z-index: 996;
   background: #0563bb;
   width: 40px;
@@ -1900,14 +1898,20 @@ body.dark-theme .skill-item span {
   bottom: 15px;
   right: 15px;
   display: flex;
+  align-items: center;
   gap: 10px;
   z-index: 996;
+  transition: transform 0.3s ease;
 }
 
-.portfolio-btn, .theme-toggle-btn {
+.fixed-buttons-container.shift-left {
+  transform: translateX(-50px);
+}
+
+.portfolio-btn, 
+.theme-toggle-btn, 
+.back-to-top {
   position: relative;
-  visibility: visible;
-  opacity: 1;
   background: #0563bb;
   width: 40px;
   height: 40px;
@@ -1916,16 +1920,25 @@ body.dark-theme .skill-item span {
   color: #fff;
   font-size: 24px;
   border: none;
+  display: inline-flex;  /* Change to inline-flex */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
 }
 
-.portfolio-btn:hover, .theme-toggle-btn:hover {
-  background: #0678e3;
-  color: #fff;
-}
-
-.theme-toggle-btn i {
+.portfolio-btn i, 
+.theme-toggle-btn i, 
+.back-to-top i {
   font-size: 24px;
-  color: #fff;
+  line-height: 1;  /* Change from 0 to 1 */
+  margin: 0;
+  padding: 0;
+  display: inline-flex;  /* Add this */
+  align-items: center;
+  justify-content: center;
 }
 
 /* Dark theme styles */
@@ -2098,7 +2111,7 @@ body.dark-theme .social-links-container h3 {
 
 /* Dark theme for navigation menu */
 body.dark-theme #header {
-  background: #1a1a1a;
+  /* background: #1a1a1a; */
   border-right-color: #3d3d3d;
 }
 
