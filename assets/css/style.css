@@ -243,6 +243,18 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   border-radius: 50px;
   padding: 5px;
+  color: #45505b; /* Default color for light mode */
+}
+
+/* Dark theme overrides for mobile nav */
+body.dark-theme .mobile-nav-toggle i,
+body.dark-theme .mobile-nav-toggle.bi-list {
+  color: #ffffff !important;
+}
+
+body.dark-theme .mobile-nav-active .mobile-nav-toggle {
+  background-color: #0678e3;
+  color: #ffffff;
 }
 
 .mobile-nav-toggle i {
@@ -2086,8 +2098,15 @@ body.dark-theme .social-links-container h3 {
 
 /* Dark theme for navigation menu */
 body.dark-theme #header {
-  /* background: #2d2d2d; */
+  background: #1a1a1a;
   border-right-color: #3d3d3d;
+}
+
+@media (max-width: 992px) {
+    body.dark-theme #header {
+        background: #1a1a1a;
+        border-right: 1px solid #3d3d3d;
+    }
 }
 
 body.dark-theme .nav-menu a, 

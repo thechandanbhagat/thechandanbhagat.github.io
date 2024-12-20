@@ -187,6 +187,10 @@ body {
     opacity: 0;
     transform: translateY(-20px);
     transition: all 0.3s ease-in-out;
+    height: 95vh; /* Slightly less height on mobile */
+    margin: 2.5vh auto; /* Center vertically */
+    padding: 15px; /* Reduce padding on mobile */
+    overflow: hidden;
 }
 
 .modal-body {
@@ -263,6 +267,61 @@ body.dark-theme .modal-info-column .date {
 
     .modal-info-column {
         max-height: 40vh;
+    }
+    .modal-content {
+        width: 98%; /* Almost full width on mobile */
+        margin: 1vh auto; /* Less margin on mobile */
+        padding: 10px;
+    }
+
+    .modal-body {
+        flex-direction: column;
+        height: calc(95vh - 60px); /* Adjust for header */
+        gap: 15px;
+    }
+
+    .modal-image-column {
+        height: 40vh; /* Fixed height for image section */
+        max-height: 40vh;
+        width: 100%;
+    }
+
+    .modal-info-column {
+        height: calc(55vh - 60px); /* Remaining space */
+        width: 100%;
+        padding: 10px;
+    }
+
+    .portfolioSwiper {
+        height: 100%;
+        max-height: 40vh;
+    }
+
+    .modal-header {
+        padding: 10px 0;
+        margin-bottom: 10px;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .close {
+        font-size: 24px;
+        padding: 5px 10px;
+    }
+
+    .modal-info-column h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .description-section h4 {
+        font-size: 16px;
+    }
+
+    .description-section p {
+        font-size: 14px;
     }
 }
 
