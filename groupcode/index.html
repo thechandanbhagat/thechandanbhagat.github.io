@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Code - VS Code Extension</title>
+    <link rel="icon" type="image/png" href="../resources/compass-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <img src="compass-icon.svg" alt="Group Code Logo">
+                <h1>Group Code</h1>
+            </a>
+            <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                    <li><a href="#installation"><i class="fas fa-download"></i> Installation</a></li>
+                    <li><a href="#usage"><i class="fas fa-code"></i> Usage</a></li>
+                    <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    <li><a href="https://github.com/thechandanbhagat/code-compass" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </nav>
+            <!-- Adding notification badge -->
+            <div class="notification-badge">
+                <span>New</span>
+                <div class="pulse"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="container hero-content">
+            <h1>Navigate Code by Functionality, Not Just Files</h1>
+            <p>Group Code transforms how you organize and navigate your codebase. Using special comments to tag related code sections across multiple files and languages, it creates a unified view that makes it easier to understand and work with complex projects.</p>
+            <div class="cta-buttons">
+                <a href="https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Install from VS Code Marketplace
+                </a>
+                <a href="#installation" class="btn btn-secondary">
+                    <i class="fas fa-book"></i> Installation Guide
+                </a>
+            </div>
+          
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Features</h2>
+                <p>Discover how Group Code transforms your coding experience with these powerful features</p>
+            </div>
+            <div class="features">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Cross-File Code Organization</h3>
+                    <p>Group related code blocks from different file types under a common functionality, creating a cohesive view of your project components.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Unified View</h3>
+                    <p>Access all related code sections through the dedicated Group Code Explorer, making it easier to understand your project structure.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Extensive Language Support</h3>
+                    <p>Works with 40+ programming languages including JavaScript, TypeScript, Python, C#, Java, Go, HTML, CSS, Ruby, PHP, Rust, and many more.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Quick Navigation</h3>
+                    <p>Jump between related code sections with a single click, regardless of which file they're in.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Automatic Scanning</h3>
+                    <p>Automatically detects code groups in your workspace as you work, keeping your navigation up-to-date.</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">📊</div>
+                    <h3>Status Bar Integration</h3>
+                    <p>Quick access to code groups from the VS Code status bar for efficient navigation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="installation" class="section installation">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Installation</h2>
+                <p>Get started with Group Code in just a few simple steps</p>
+            </div>
+            <div class="installation-steps scroll-reveal">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>From VS Code Marketplace</h3>
+                        <p>The easiest way to install Group Code is directly from the VS Code Marketplace:</p>
+                        <ol>
+                            <li>Open VS Code</li>
+                            <li>Go to Extensions view (<span class="code-tag">Ctrl+Shift+X</span> / <span class="code-tag">Cmd+Shift+X</span>)</li>
+                            <li>Search for "Group Code"</li>
+                            <li>Click Install</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Manual Installation</h3>
+                        <p>Alternatively, you can install the extension manually using the VSIX file:</p>
+                        <ol>
+                            <li>Download the <span class="code-tag">groupcode-1.0.1.vsix</span> file</li>
+                            <li>In VS Code, open the Command Palette (<span class="code-tag">Ctrl+Shift+P</span> / <span class="code-tag">Cmd+Shift+P</span>)</li>
+                            <li>Run "Extensions: Install from VSIX..." and select the downloaded file</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Getting Started</h3>
+                        <p>After installation, you'll see a new Group Code icon in your Activity Bar. The extension will automatically scan your workspace for code groups when you open a folder.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="section">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>How to Use Group Code</h2>
+                <p>Learn how to create and navigate code groups in your projects</p>
+            </div>
+            
+            <h3 class="scroll-reveal">Creating Code Groups</h3>
+            <p class="scroll-reveal">Add special comments to your code following this pattern: <span class="code-tag">* GroupName: Description of functionality</span></p>
+            <p class="scroll-reveal">The extension automatically recognizes different comment formats based on the file type:</p>
+            
+            <div class="language-examples scroll-reveal">
+                <div class="language-example">
+                    <div class="language-name">JavaScript</div>
+                    <div class="language-code"><span class="code-comment">//* Authentication: User login process</span><br><span class="code-keyword">function</span> login(username, password) {<br>  <span class="code-comment">// Your code here</span><br>}</div>
+                </div>
+                
+                <div class="language-example">
+                    <div class="language-name">Python</div>
+                    <div class="language-code"><span class="code-comment"># * Authentication: User authentication backend</span><br><span class="code-keyword">def</span> authenticate_user(username, password):<br>  <span class="code-comment"># Your Python code here</span></div>
+                </div>
+                
+                <div class="language-example">
+                    <div class="language-name">HTML</div>
+                    <div class="language-code"><span class="code-comment">&lt;!-- * Authentication: Login form layout --&gt;</span><br>&lt;<span class="code-keyword">form</span> class=<span class="code-string">"login-form"</span>&gt;<br>  <span class="code-comment">&lt;!-- Your HTML here --&gt;</span><br>&lt;/<span class="code-keyword">form</span>&gt;</div>
+                </div>
+                
+                <div class="language-example">
+                    <div class="language-name">CSS</div>
+                    <div class="language-code"><span class="code-comment">/* * Authentication: Login form styling */</span><br>.<span class="code-keyword">login-form</span> {<br>  <span class="code-comment">/* Your CSS here */</span><br>}</div>
+                </div>
+            </div>
+            
+            <h3 class="scroll-reveal">Inline Comment Detection</h3>
+            <p class="scroll-reveal">The extension detects code group patterns in inline comments, which allows you to:</p>
+            <ul class="scroll-reveal">
+                <li>Add code groups to existing code without restructuring it</li>
+                <li>Create more targeted groups for specific lines</li>
+                <li>Document as you code without breaking your flow</li>
+            </ul>
+            
+            <div class="language-example scroll-reveal">
+                <div class="language-name">JavaScript</div>
+                <div class="language-code"><span class="code-keyword">const</span> apiKey = process.env.API_KEY; <span class="code-comment">// * Security: API authentication</span><br>fetchUserData(userId); <span class="code-comment">// * UserData: Fetch user information</span><br>updateUI(userData); <span class="code-comment">// * UserInterface: Update display with user data</span></div>
+            </div>
+            
+            <h3 class="scroll-reveal">Viewing & Navigating Code Groups</h3>
+            <p class="scroll-reveal">Once you've added code groups to your project, you can navigate them in several ways:</p>
+            
+            <div class="usage-examples">
+                <div class="example-card scroll-reveal">
+                    <div class="example-header">
+                        <h3>Using the Explorer</h3>
+                    </div>
+                    <div class="example-content">
+                        <ol>
+                            <li>Click on the Group Code icon in the Activity Bar</li>
+                            <li>Expand a functionality group to see all related code sections</li>
+                            <li>Click on any code section to navigate directly to that file and line</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="example-card scroll-reveal">
+                    <div class="example-header">
+                        <h3>Using the Status Bar</h3>
+                    </div>
+                    <div class="example-content">
+                        <ol>
+                            <li>Click on the Group Code indicator in the status bar (or press <span class="code-tag">Ctrl+Shift+G</span> / <span class="code-tag">Cmd+Shift+G</span>)</li>
+                            <li>Select a functionality from the dropdown</li>
+                            <li>Choose which specific code section to navigate to</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="example-card scroll-reveal">
+                    <div class="example-header">
+                        <h3>Available Commands</h3>
+                    </div>
+                    <div class="example-content">
+                        <p>Access these commands through the Command Palette (<span class="code-tag">Ctrl+Shift+P</span> / <span class="code-tag">Cmd+Shift+P</span>):</p>
+                        <ul>
+                            <li><strong>Group Code in Current File</strong>: Scan only the active file for code groups</li>
+                            <li><strong>Group Code in Workspace</strong>: Scan all supported files in the workspace</li>
+                            <li><strong>Scan External Project Folder</strong>: Scan code in a folder outside your workspace</li>
+                            <li><strong>Show Code Groups</strong>: Display the quick picker to navigate between groups</li>
+                            <li><strong>Refresh Code Groups</strong>: Perform a complete rescan of all files</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="supported-languages" class="section">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Supported Languages</h2>
+                <p>Group Code works with 40+ programming languages</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card scroll-reveal">
+                    <h3>Web Technologies</h3>
+                    <div class="language-badges">
+                        <span class="language-badge">JavaScript</span>
+                        <span class="language-badge">TypeScript</span>
+                        <span class="language-badge">HTML</span>
+                        <span class="language-badge">CSS</span>
+                        <span class="language-badge">SCSS</span>
+                        <span class="language-badge">Vue</span>
+                        <span class="language-badge">JSX</span>
+                        <span class="language-badge">XML</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Backend Languages</h3>
+                    <div class="language-badges">
+                        <span class="language-badge">Python</span>
+                        <span class="language-badge">Java</span>
+                        <span class="language-badge">C#</span>
+                        <span class="language-badge">Go</span>
+                        <span class="language-badge">PHP</span>
+                        <span class="language-badge">Ruby</span>
+                        <span class="language-badge">Rust</span>
+                        <span class="language-badge">Node.js</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>System Programming</h3>
+                    <div class="language-badges">
+                        <span class="language-badge">C</span>
+                        <span class="language-badge">C++</span>
+                        <span class="language-badge">Swift</span>
+                        <span class="language-badge">Objective-C</span>
+                        <span class="language-badge">Kotlin</span>
+                        <span class="language-badge">Assembly</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Functional Languages</h3>
+                    <div class="language-badges">
+                        <span class="language-badge">Haskell</span>
+                        <span class="language-badge">F#</span>
+                        <span class="language-badge">Clojure</span>
+                        <span class="language-badge">Scala</span>
+                        <span class="language-badge">Elm</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Scripting & Others</h3>
+                    <div class="language-badges">
+                        <span class="language-badge">Shell</span>
+                        <span class="language-badge">Bash</span>
+                        <span class="language-badge">PowerShell</span>
+                        <span class="language-badge">Lua</span>
+                        <span class="language-badge">R</span>
+                        <span class="language-badge">YAML</span>
+                        <span class="language-badge">Markdown</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Others</h3>
+                    <div class="language-badges">
+                        <span class="language-badge">SQL</span>
+                        <span class="language-badge">Dart</span>
+                        <span class="language-badge">Julia</span>
+                        <span class="language-badge">COBOL</span>
+                        <span class="language-badge">Fortran</span>
+                        <span class="language-badge">+Many More</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section faq">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions about Group Code</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <span>How does Group Code differ from regular code navigation?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Regular navigation is file-based, while Group Code organizes by functionality. This helps you understand the project from a feature perspective rather than a file structure perspective, making it easier to understand and maintain complex codebases.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <span>Will Group Code slow down my editor?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Group Code is designed to be lightweight and efficient. It scans files incrementally and caches results to avoid performance issues. For very large projects, the initial scan might take a moment, but subsequent operations are fast.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <span>Do I need to add comments to all my code?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, you can start by adding code group comments to just the most important parts of your codebase. You can gradually add more as you work with your project. The inline comment feature makes it easy to add groups without restructuring existing code.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <span>Does it work with version control systems?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, the code group comments are just regular comments in your code, so they work perfectly with Git or any other version control system. The extension stores its data in a .groupcode folder which you can add to your .gitignore if you prefer not to track it.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <span>What if I can't find my code groups?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If groups aren't appearing, try the "Refresh Code Groups" command. Ensure comments follow the exact pattern: <span class="code-tag">* GroupName: Description</span>. For inline comments, make sure there's a space after the comment marker (e.g., <span class="code-tag">// * Group</span> not <span class="code-tag">//* Group</span>). You can also check the Output panel (View → Output → Group Code) for detailed logs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Best Practices</h2>
+                <p>Get the most out of Group Code with these tips</p>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card scroll-reveal">
+                    <h3>Consistent Naming</h3>
+                    <p>Use the same group name across different files to ensure related code is grouped together properly.</p>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Descriptive Groups</h3>
+                    <p>Choose meaningful group names that reflect functionality rather than technical details.</p>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Hierarchical Organization</h3>
+                    <p>Consider using prefixes like "Auth:" for related groups to create a logical hierarchy.</p>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Regular Refreshing</h3>
+                    <p>Use the "Refresh Code Groups" command after significant changes to ensure your view is up-to-date.</p>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Mixed Approaches</h3>
+                    <p>Combine standalone comments for major blocks with inline comments for important individual lines.</p>
+                </div>
+                
+                <div class="feature-card scroll-reveal">
+                    <h3>Collaborative Usage</h3>
+                    <p>Agree on group naming conventions with your team to maintain consistency across the project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Group Code</h3>
+                    <p>Navigate and organize your codebase by functionality rather than just files.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                        <li><a href="#installation"><i class="fas fa-chevron-right"></i> Installation</a></li>
+                        <li><a href="#usage"><i class="fas fa-chevron-right"></i> Usage</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode" target="_blank"><i class="fas fa-chevron-right"></i> VS Code Marketplace</a></li>
+                        <li><a href="https://github.com/thechandanbhagat/code-compass" target="_blank"><i class="fas fa-chevron-right"></i> GitHub Repository</a></li>
+                        <li><a href="https://github.com/thechandanbhagat/code-compass/issues" target="_blank"><i class="fas fa-chevron-right"></i> Report Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 Group Code. Licensed under MIT License. Made with <i class="fas fa-heart" style="color: #ef4444;"></i> for developers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Language Example Modal -->
+    <div id="language-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-language-title">JavaScript Example</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-code-example" class="language-code"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
