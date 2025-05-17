@@ -1,5 +1,11 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize particles.js
+    initParticles();
+
+    // Initialize code preview
+    initCodePreview();
+
     // Initialize the mobile menu
     initMobileMenu();
     
@@ -27,6 +33,172 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize language badge modal functionality
     initLanguageModal();
 });
+
+// Initialize particles.js
+function initParticles() {
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 60,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#4F46E5", "#06B6D4", "#818CF8"]
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#4F46E5",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1.5,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.6
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 3
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    }
+}
+
+// Code preview animation
+function initCodePreview() {
+    const codeContent = document.querySelector('.code-content');
+    if (!codeContent) return;
+
+    const codeExamples = [
+        {
+            filename: 'auth.ts',
+            code: [
+                '<span class="code-comment">// * Authentication: User login process</span>',
+                'export class AuthService {',
+                '    <span class="code-comment">// * Security: Password validation</span>',
+                '    async validatePassword(password: string) {',
+                '        return await bcrypt.hash(password, 10);',
+                '    }',
+                '}'
+            ]
+        },
+        {
+            filename: 'api.py',
+            code: [
+                '<span class="code-comment"># * API: User data endpoints</span>',
+                'class UserController:',
+                '    <span class="code-comment"># * Database: User operations</span>',
+                '    def get_user_data(self, user_id):',
+                '        return self.db.query(user_id)'
+            ]
+        },
+        {
+            filename: 'ui.jsx',
+            code: [
+                '<span class="code-comment">/* * UserInterface: Login form */</span>',
+                'function LoginForm() {',
+                '    <span class="code-comment">// * Validation: Input handling</span>',
+                '    const handleSubmit = (e) => {',
+                '        validateInput(e.target.value);',
+                '    }',
+                '}'
+            ]
+        }
+    ];
+
+    let currentExampleIndex = 0;
+
+    function showNextExample() {
+        const example = codeExamples[currentExampleIndex];
+        const filename = document.querySelector('.code-filename');
+        
+        // Update filename
+        if (filename) {
+            filename.textContent = example.filename;
+        }
+
+        // Clear existing content
+        codeContent.innerHTML = '';
+
+        // Add new code lines with animation delay
+        example.code.forEach((line, index) => {
+            const codeLine = document.createElement('span');
+            codeLine.className = 'code-line';
+            codeLine.innerHTML = line;
+            codeLine.style.animationDelay = `${index * 0.1}s`;
+            codeContent.appendChild(codeLine);
+        });
+
+        // Increment index
+        currentExampleIndex = (currentExampleIndex + 1) % codeExamples.length;
+    }
+
+    // Show first example immediately
+    showNextExample();
+
+    // Change example every 5 seconds
+    setInterval(showNextExample, 5000);
+}
 
 // Mobile menu functionality
 function initMobileMenu() {

@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
     <header>
@@ -24,8 +25,8 @@
                     <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
                     <li><a href="#installation"><i class="fas fa-download"></i> Installation</a></li>
                     <li><a href="#usage"><i class="fas fa-code"></i> Usage</a></li>
+                    <li><a href="#supported-languages"><i class="fas fa-globe"></i> Languages</a></li>
                     <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
-                    <li><a href="https://github.com/thechandanbhagat/code-compass" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
                 </ul>
             </nav>
             <!-- Adding notification badge -->
@@ -39,18 +40,35 @@
     <section class="hero">
         <div id="particles-js"></div>
         <div class="container hero-content">
-            <h1>Navigate Code by Functionality, Not Just Files</h1>
-            <p>Group Code transforms how you organize and navigate your codebase. Using special comments to tag related code sections across multiple files and languages, it creates a unified view that makes it easier to understand and work with complex projects.</p>
-            <div class="cta-buttons">
-                <a href="https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Install from VS Code Marketplace
-                </a>
-                <a href="#installation" class="btn btn-secondary">
-                    <i class="fas fa-book"></i> Installation Guide
-                </a>
+            <div class="hero-text">
+                <h1>Navigate Code by Functionality, Not Just Files</h1>
+                <p>Group Code transforms how you organize and navigate your codebase. Using special comments to tag related code sections across multiple files and languages, it creates a unified view that makes it easier to understand and work with complex projects.</p>
+                <div class="cta-buttons">
+                    <a href="https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-download"></i> Install Extension
+                    </a>
+                    <a href="#installation" class="btn btn-secondary">
+                        <i class="fas fa-book"></i> Learn More
+                    </a>
+                </div>
             </div>
-          
+            <div class="code-preview-container">
+                <div class="code-preview">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="code-filename">example.ts</span>
+                    </div>
+                    <div class="code-content">
+                        <!-- Code examples will be injected here by JavaScript -->
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="hero-shapes"></div>
     </section>
 
     <section id="features" class="section">
@@ -61,34 +79,34 @@
             </div>
             <div class="features">
                 <div class="feature-card scroll-reveal">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Cross-File Code Organization</h3>
-                    <p>Group related code blocks from different file types under a common functionality, creating a cohesive view of your project components.</p>
+                    <i class="feature-icon fas fa-layer-group"></i>
+                    <h3>Smart Code Groups</h3>
+                    <p>Automatically organize your code into logical groups based on functionality using smart comment detection.</p>
                 </div>
                 <div class="feature-card scroll-reveal">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Unified View</h3>
-                    <p>Access all related code sections through the dedicated Group Code Explorer, making it easier to understand your project structure.</p>
+                    <i class="feature-icon fas fa-project-diagram"></i>
+                    <h3>Cross-File Navigation</h3>
+                    <p>Easily navigate related code sections across different files and languages.</p>
                 </div>
                 <div class="feature-card scroll-reveal">
-                    <div class="feature-icon">🌐</div>
-                    <h3>Extensive Language Support</h3>
-                    <p>Works with 40+ programming languages including JavaScript, TypeScript, Python, C#, Java, Go, HTML, CSS, Ruby, PHP, Rust, and many more.</p>
+                    <i class="feature-icon fas fa-sitemap"></i>
+                    <h3>Hierarchical View</h3>
+                    <p>View your codebase in a hierarchical structure based on functionality rather than file location.</p>
                 </div>
                 <div class="feature-card scroll-reveal">
-                    <div class="feature-icon">⚡</div>
+                    <i class="feature-icon fas fa-search"></i>
                     <h3>Quick Navigation</h3>
-                    <p>Jump between related code sections with a single click, regardless of which file they're in.</p>
+                    <p>Quickly find and jump to related code sections using the sidebar or command palette.</p>
                 </div>
                 <div class="feature-card scroll-reveal">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Automatic Scanning</h3>
-                    <p>Automatically detects code groups in your workspace as you work, keeping your navigation up-to-date.</p>
+                    <i class="feature-icon fas fa-code-branch"></i>
+                    <h3>Multi-Language Support</h3>
+                    <p>Works with 40+ programming languages, automatically detecting the appropriate comment syntax.</p>
                 </div>
                 <div class="feature-card scroll-reveal">
-                    <div class="feature-icon">📊</div>
-                    <h3>Status Bar Integration</h3>
-                    <p>Quick access to code groups from the VS Code status bar for efficient navigation.</p>
+                    <i class="feature-icon fas fa-magic"></i>
+                    <h3>Auto-Detection</h3>
+                    <p>Automatically detects and groups code based on existing comments in your codebase.</p>
                 </div>
             </div>
         </div>
@@ -377,6 +395,48 @@
                     </div>
                 </div>
             </div>
+
+            <div class="faq-list">
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <h3>How do I create code groups?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Simply add special comments in your code using the pattern "* GroupName: Description". The extension will automatically detect and group related code sections.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <h3>Which languages are supported?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Group Code supports 40+ programming languages including JavaScript, Python, Java, C++, TypeScript, Ruby, Go, and many more. The extension automatically detects the appropriate comment syntax for each language.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <h3>Can I customize the group detection?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can customize the comment patterns and group organization through VS Code settings. This allows you to adapt Group Code to your team's coding style and preferences.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        <h3>Does it work with existing codebases?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Group Code can analyze existing codebases and automatically detect code groups based on your existing comments. It's designed to work seamlessly with both new and existing projects.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -446,6 +506,21 @@
                         <li><a href="https://github.com/thechandanbhagat/code-compass" target="_blank"><i class="fas fa-chevron-right"></i> GitHub Repository</a></li>
                         <li><a href="https://github.com/thechandanbhagat/code-compass/issues" target="_blank"><i class="fas fa-chevron-right"></i> Report Issues</a></li>
                     </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/thechandanbhagat/code-compass" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/share?text=Check%20out%20Group%20Code%20-%20A%20VS%20Code%20extension%20that%20helps%20you%20navigate%20code%20by%20functionality!" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             
