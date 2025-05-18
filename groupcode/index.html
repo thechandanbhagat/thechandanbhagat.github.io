@@ -47,7 +47,7 @@
                     <a href="https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode" class="btn btn-primary" target="_blank">
                         <i class="fas fa-download"></i> Install Extension
                     </a>
-                    <a href="#installation" class="btn btn-secondary">
+                    <a href="#installation" class="btn btn-primary">
                         <i class="fas fa-book"></i> Learn More
                     </a>
                 </div>
@@ -169,36 +169,36 @@
             <div class="language-examples scroll-reveal">
                 <div class="language-example">
                     <div class="language-name">JavaScript</div>
-                    <div class="language-code"><span class="code-comment">//* Authentication: User login process</span><br><span class="code-keyword">function</span> login(username, password) {<br>  <span class="code-comment">// Your code here</span><br>}</div>
+                    <div class="language-code"><span class="code-comment">// @group Authentication: User login process</span><br><span class="code-keyword">function</span> login(username, password) {<br>  <span class="code-comment">// Your code here</span><br>}</div>
                 </div>
                 
                 <div class="language-example">
                     <div class="language-name">Python</div>
-                    <div class="language-code"><span class="code-comment"># * Authentication: User authentication backend</span><br><span class="code-keyword">def</span> authenticate_user(username, password):<br>  <span class="code-comment"># Your Python code here</span></div>
+                    <div class="language-code"><span class="code-comment"># @group Authentication: User authentication backend</span><br><span class="code-keyword">def</span> authenticate_user(username, password):<br>  <span class="code-comment"># Your Python code here</span></div>
                 </div>
                 
                 <div class="language-example">
                     <div class="language-name">HTML</div>
-                    <div class="language-code"><span class="code-comment">&lt;!-- * Authentication: Login form layout --&gt;</span><br>&lt;<span class="code-keyword">form</span> class=<span class="code-string">"login-form"</span>&gt;<br>  <span class="code-comment">&lt;!-- Your HTML here --&gt;</span><br>&lt;/<span class="code-keyword">form</span>&gt;</div>
+                    <div class="language-code"><span class="code-comment">&lt;!-- @group Authentication: Login form layout --&gt;</span><br>&lt;<span class="code-keyword">form</span> class=<span class="">"login-form"</span>&gt;<br>  <span class="code-comment">&lt;!-- Your HTML here --&gt;</span><br>&lt;/<span class="code-keyword">form</span>&gt;</div>
                 </div>
                 
                 <div class="language-example">
                     <div class="language-name">CSS</div>
-                    <div class="language-code"><span class="code-comment">/* * Authentication: Login form styling */</span><br>.<span class="code-keyword">login-form</span> {<br>  <span class="code-comment">/* Your CSS here */</span><br>}</div>
+                    <div class="language-code"><span class="code-comment">/* @group Authentication: Login form styling */</span><br>.<span class="code-keyword">login-form</span> {<br>  <span class="code-comment">/* Your CSS here */</span><br>}</div>
                 </div>
             </div>
             
-            <h3 class="scroll-reveal">Inline Comment Detection</h3>
-            <p class="scroll-reveal">The extension detects code group patterns in inline comments, which allows you to:</p>
+            <h3 class="scroll-reveal">Smart Inline Comments</h3>
+            <p class="scroll-reveal">Group Code automatically detects inline group markers, enabling you to:</p>
             <ul class="scroll-reveal">
-                <li>Add code groups to existing code without restructuring it</li>
-                <li>Create more targeted groups for specific lines</li>
-                <li>Document as you code without breaking your flow</li>
+                <li>Group existing code without restructuring</li>
+                <li>Create precise groups for individual code lines</li>
+                <li>Add groups seamlessly while coding</li>
             </ul>
-            
+
             <div class="language-example scroll-reveal">
                 <div class="language-name">JavaScript</div>
-                <div class="language-code"><span class="code-keyword">const</span> apiKey = process.env.API_KEY; <span class="code-comment">// * Security: API authentication</span><br>fetchUserData(userId); <span class="code-comment">// * UserData: Fetch user information</span><br>updateUI(userData); <span class="code-comment">// * UserInterface: Update display with user data</span></div>
+                <div class="language-code"><span class="code-keyword">const</span> apiKey = process.env.API_KEY; <span class="code-comment">// @group Security: API authentication</span><br>fetchUserData(userId); <span class="code-comment">// @group UserData: Fetch user information</span><br>updateUI(userData); <span class="code-comment">// @group UserInterface: Update display with user data</span></div>
             </div>
             
             <h3 class="scroll-reveal">Viewing & Navigating Code Groups</h3>

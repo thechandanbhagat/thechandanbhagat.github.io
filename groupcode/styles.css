@@ -320,6 +320,7 @@ nav a:hover i {
 
 .code-content {
     text-align: left;
+    min-height: 300px;
     background: rgba(15, 23, 42, 0.95);
     padding: 1.5rem;
     font-family: 'Fira Code', monospace;
@@ -332,6 +333,7 @@ nav a:hover i {
 .code-line {
     display: block;
     white-space: pre;
+    margin-bottom: 0.5rem;;
     opacity: 0;
     transform: translateX(-20px);
     animation: slideInCode 0.5s ease forwards;

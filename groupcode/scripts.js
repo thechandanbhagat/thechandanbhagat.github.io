@@ -133,9 +133,9 @@ function initCodePreview() {
         {
             filename: 'auth.ts',
             code: [
-                '<span class="code-comment">// * Authentication: User login process</span>',
+                '<span class="code-comment">// @group Authentication: User login process</span>',
                 'export class AuthService {',
-                '    <span class="code-comment">// * Security: Password validation</span>',
+                '    <span class="code-comment">// @group Security: Password validation</span>',
                 '    async validatePassword(password: string) {',
                 '        return await bcrypt.hash(password, 10);',
                 '    }',
@@ -145,9 +145,9 @@ function initCodePreview() {
         {
             filename: 'api.py',
             code: [
-                '<span class="code-comment"># * API: User data endpoints</span>',
+                '<span class="code-comment"># @group API: User data endpoints</span>',
                 'class UserController:',
-                '    <span class="code-comment"># * Database: User operations</span>',
+                '    <span class="code-comment"># @group Database: User operations</span>',
                 '    def get_user_data(self, user_id):',
                 '        return self.db.query(user_id)'
             ]
@@ -155,12 +155,45 @@ function initCodePreview() {
         {
             filename: 'ui.jsx',
             code: [
-                '<span class="code-comment">/* * UserInterface: Login form */</span>',
+                '<span class="code-comment">/* @group UserInterface: Login form */</span>',
                 'function LoginForm() {',
-                '    <span class="code-comment">// * Validation: Input handling</span>',
+                '    <span class="code-comment">// @group Validation: Input handling</span>',
                 '    const handleSubmit = (e) => {',
                 '        validateInput(e.target.value);',
                 '    }',
+                '}'
+            ]
+        },
+        {
+            filename: 'styles.css',
+            code: [
+                '<span class="code-comment">/* @group Styles: Button styles */</span>',
+                '.btn {',
+                '    <span class="code-comment">/* @group Animation: Hover effect */</span>',
+                '    transition: background-color 0.3s;',
+                '}'
+            ]
+        },
+        
+        {
+            filename: 'dataprocessor.cs',
+            code: [
+                '<span class="code-comment">// @group Backend: User data processing</span>',
+                'public class DataProcessor {',
+                '    <span class="code-comment">// @group Validation: Input sanitization</span>',
+                '    public async Task<bool> ValidateUserData(UserData data) {',
+                '        return await _validator.ValidateAsync(data);',
+                '    }',
+                '}'
+            ]
+        },
+        { 
+            filename: 'utils.go',
+            code: [
+                '<span class="code-comment">// @group Utilities: Helper functions</span>',
+                'func HashPassword(password string) (string, error) {',
+                '    <span class="code-comment">// @group Security: Password hashing</span>',
+                '    return bcrypt.GenerateFromPassword([]byte(password), 10)',
                 '}'
             ]
         }
