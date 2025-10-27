@@ -85,6 +85,7 @@
 | Package Name    | Downloads                                                                                         | Version                                                                                      |
 | --------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `gitignr`       | ![NPM Downloads](https://img.shields.io/npm/d18m/gitignr?style=for-the-badge&logo=npm)             | ![NPM Version](https://img.shields.io/npm/v/gitignr?style=for-the-badge&logo=npm&label=NPM%20Version) |
+| `cv-forge`      | ![NPM Downloads](https://img.shields.io/npm/d18m/cv-forge?style=for-the-badge&logo=npm)            | ![NPM Version](https://img.shields.io/npm/v/cv-forge?style=for-the-badge&logo=npm&label=NPM%20Version) |
 
 ### 🔧 **PowerShell Modules**
 | Package Name    | Downloads                                                                                         | Version                                                                                      |

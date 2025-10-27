@@ -124,6 +124,15 @@
           "icon": "bxl-github",
           "tags": ["kubernetes", "aks", "containers"],
           "stars": 150
+        },
+        {
+          "title": "cv-forge",
+          "url": "https://github.com/thechandanbhagat/cv-forge",
+          "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["mcp", "cv", "resume", "ats", "typescript", "ai"],
+          "stars": 0
         }
       ]
     },
@@ -159,6 +168,16 @@
           "version": "1.2.0",
           "downloads": 2000,
           "tags": ["ml-net", "machine-learning", "utilities"]
+        },
+        {
+          "title": "cv-forge",
+          "url": "https://www.npmjs.com/package/cv-forge",
+          "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
+          "platform": "NPM",
+          "icon": "bx-package",
+          "version": "1.0.3",
+          "downloads": 0,
+          "tags": ["mcp", "cv", "resume", "ats", "ai"]
         }
       ]
     },
