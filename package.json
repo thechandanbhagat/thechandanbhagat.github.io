@@ -1,0 +1,30 @@
+{
+  "name": "thechandanbhagat.github.io",
+  "version": "1.0.0",
+  "description": "[![Website Badge](https://img.shields.io/badge/-Website-4cbbb9?style=for-the-badge&logo=internet-explorer&logoColor=white)](https://chandanbhagat.com.np) [![Upwork Badge](https://img.shields.io/badge/Upwork-Freelancer-ff8c00?style=for-the-badge&logo=upwork&logoColor=white)](https://www.upwork.com/freelancers/thechandanbhagat) [![Personal Site](https://img.shields.io/badge/Personal_Site-4cbbb9?style=for-the-badge&logo=internet-explorer&logoColor=white)](https://me.chandanbhagat.com.np) [![Linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/guptac) [![Instagram](https://img.shields.io/badge/instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/thechandanbhagat)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:18122/git/thechandanbhagat/thechandanbhagat.github.io"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.0",
+    "swiper": "^8.4.7",
+    "typed.js": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.3",
+    "vite": "^7.3.1"
+  }
+}
