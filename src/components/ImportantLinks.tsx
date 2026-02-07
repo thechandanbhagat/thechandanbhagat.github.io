@@ -4,7 +4,22 @@ import { Pagination, Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-function LinkCard({ item }) {
+interface LinkItem {
+  title: string
+  url: string
+  description?: string
+  platform?: string
+  icon: string
+  date?: string
+  tags?: string[]
+}
+
+interface LinkCategory {
+  category: string
+  items: LinkItem[]
+}
+
+function LinkCard({ item }: { item: LinkItem }) {
   return (
     <div className="link-card" data-tags={item.tags?.join(',') || ''}>
       <div className="link-icon">
@@ -29,12 +44,12 @@ function LinkCard({ item }) {
 }
 
 export default function ImportantLinks() {
-  const [links, setLinks] = useState([])
+  const [links, setLinks] = useState<LinkCategory[]>([])
 
   useEffect(() => {
     fetch('/data/important-links.json')
       .then(res => res.json())
-      .then(data => setLinks(data.links))
+      .then((data: { links: LinkCategory[] }) => setLinks(data.links))
       .catch(err => console.error('Error loading links:', err))
   }, [])
 

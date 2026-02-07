@@ -1,7 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-export default function Header({ navItems }) {
+export interface NavItem {
+  href: string
+  icon: ReactNode
+  label: string
+}
+
+interface HeaderProps {
+  navItems: NavItem[]
+}
+
+export default function Header({ navItems }: HeaderProps) {
   const location = useLocation()
   const [mobileNavActive, setMobileNavActive] = useState(false)
   const [activeSection, setActiveSection] = useState('')
@@ -11,11 +21,9 @@ export default function Header({ navItems }) {
       const position = window.scrollY + 200
       const sections = document.querySelectorAll('section[id]')
       sections.forEach(section => {
-        if (
-          position >= section.offsetTop &&
-          position <= section.offsetTop + section.offsetHeight
-        ) {
-          setActiveSection('#' + section.id)
+        const el = section as HTMLElement
+        if (position >= el.offsetTop && position <= el.offsetTop + el.offsetHeight) {
+          setActiveSection('#' + el.id)
         }
       })
     }
@@ -24,10 +32,10 @@ export default function Header({ navItems }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [location])
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault()
-      const el = document.querySelector(href)
+      const el = document.querySelector(href) as HTMLElement | null
       if (el) {
         window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
       }
@@ -35,10 +43,6 @@ export default function Header({ navItems }) {
     } else {
       setMobileNavActive(false)
     }
-  }
-
-  const toggleMobileNav = () => {
-    setMobileNavActive(prev => !prev)
   }
 
   useEffect(() => {
@@ -54,7 +58,7 @@ export default function Header({ navItems }) {
       <button
         type="button"
         className={`mobile-nav-toggle d-xl-none ${mobileNavActive ? 'bi bi-x' : 'bi bi-list'}`}
-        onClick={toggleMobileNav}
+        onClick={() => setMobileNavActive(prev => !prev)}
       />
 
       <header id="header" className="d-flex flex-column justify-content-center">

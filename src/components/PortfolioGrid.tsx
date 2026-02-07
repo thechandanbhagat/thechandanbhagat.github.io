@@ -1,22 +1,38 @@
 import { useState, useEffect } from 'react'
 import PortfolioModal from './PortfolioModal'
 
+export interface PortfolioResource {
+  type: string
+  url: string
+  title: string
+}
+
+export interface PortfolioItem {
+  program: string
+  date: string
+  title: string
+  category: string
+  description: string
+  resources: PortfolioResource[]
+  images: string[]
+}
+
 export default function PortfolioGrid() {
-  const [items, setItems] = useState([])
-  const [categories, setCategories] = useState([])
+  const [items, setItems] = useState<PortfolioItem[]>([])
+  const [categories, setCategories] = useState<string[]>([])
   const [activeFilter, setActiveFilter] = useState('*')
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null)
 
   useEffect(() => {
     fetch('/data/portfolio.json')
       .then(res => res.json())
-      .then(data => {
+      .then((data: { portfolioItems: PortfolioItem[] }) => {
         const sorted = data.portfolioItems.sort((a, b) =>
-          new Date(b.date || '1900-01-01') - new Date(a.date || '1900-01-01')
+          new Date(b.date || '1900-01-01').getTime() - new Date(a.date || '1900-01-01').getTime()
         )
         setItems(sorted)
 
-        const cats = new Set()
+        const cats = new Set<string>()
         sorted.forEach(item => cats.add(item.category.toLowerCase()))
         setCategories([...cats])
       })

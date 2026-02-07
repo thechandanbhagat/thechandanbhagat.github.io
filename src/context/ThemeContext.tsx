@@ -1,8 +1,13 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
 
-const ThemeContext = createContext()
+interface ThemeContextType {
+  isDark: boolean
+  toggleTheme: () => void
+}
 
-export function ThemeProvider({ children }) {
+const ThemeContext = createContext<ThemeContextType>({ isDark: false, toggleTheme: () => {} })
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const [isDark, setIsDark] = useState(() => {
     return localStorage.getItem('theme') === 'dark'
   })
