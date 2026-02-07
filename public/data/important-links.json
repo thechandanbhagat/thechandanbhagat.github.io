@@ -1,0 +1,275 @@
+{
+  "links": [
+    {
+      "category": "Videos",
+      "items": [
+        {
+          "title": "Azure Service Bus and Functions Event-Driven Development",
+          "url": "https://youtube.com/your-video-id",
+          "description": "Learn event-driven architecture using Azure Services",
+          "platform": "YouTube",
+          "icon": "bx-video",
+          "date": "2024-03-01",
+          "tags": ["azure", "serverless", "integration"],
+          "views": 1000,
+          "duration": "45:00"
+        },
+        {
+          "title": "Building Scalable Microservices with .NET",
+          "url": "https://youtube.com/example2",
+          "description": "Deep dive into microservices architecture",
+          "platform": "YouTube",
+          "icon": "bx-video",
+          "date": "2024-02-15",
+          "tags": ["microservices", "dotnet", "architecture"],
+          "views": 2500,
+          "duration": "60:00"
+        },
+        {
+          "title": "ML.NET: Machine Learning for .NET Developers",
+          "url": "https://youtube.com/example3",
+          "description": "Introduction to ML.NET framework",
+          "platform": "YouTube",
+          "icon": "bx-video",
+          "date": "2024-01-20",
+          "tags": ["ml-net", "ai", "machine-learning"],
+          "views": 1800,
+          "duration": "50:00"
+        },
+        {
+          "title": "Azure Service Bus and Functions - London Reactor",
+          "url": "https://youtube.com/reactor-london",
+          "description": "Event-driven architectures using Azure Service Bus and Functions",
+          "platform": "YouTube",
+          "icon": "bx-video",
+          "date": "2024-05-07",
+          "tags": ["azure", "serverless", "integration"],
+          "duration": "45:00"
+        },
+        {
+          "title": "gRPC Apps in Azure - Nepal Cloud Summit",
+          "url": "https://youtube.com/ncs2022",
+          "description": "Building and deploying gRPC applications in Azure",
+          "platform": "YouTube",
+          "icon": "bx-video",
+          "date": "2022-04-23",
+          "tags": ["azure", "grpc", "cloud"],
+          "duration": "60:00"
+        },
+        {
+          "title": "ML.NET for .NET Applications - Global AI Bootcamp",
+          "url": "https://youtube.com/gaibc2021",
+          "description": "Power your .NET applications with ML.NET",
+          "platform": "YouTube",
+          "icon": "bx-video",
+          "date": "2021-01-16",
+          "tags": ["ml-net", "ai", "dotnet"],
+          "duration": "50:00"
+        }
+      ]
+    },
+    {
+      "category": "GitHub Repositories",
+      "items": [
+        {
+          "title": "Azure Functions Samples",
+          "url": "https://github.com/example/repo1",
+          "description": "Sample code for Azure Functions",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["samples", "azure-functions", "c-sharp"],
+          "stars": 100
+        },
+        {
+          "title": "Microservices Template",
+          "url": "https://github.com/example/repo2",
+          "description": "Production-ready microservices template",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["template", "microservices", "docker"],
+          "stars": 250
+        },
+        {
+          "title": "ML.NET Samples",
+          "url": "https://github.com/example/repo3",
+          "description": "Machine learning examples using ML.NET",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["ml-net", "samples", "ai"],
+          "stars": 180
+        },
+        {
+          "title": "Azure Functions Event-Driven Samples",
+          "url": "https://github.com/thechandanbhagat/azure-functions-samples",
+          "description": "Sample code from London Reactor presentation",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["azure-functions", "service-bus", "event-driven"],
+          "stars": 120
+        },
+        {
+          "title": "gRPC Azure Examples",
+          "url": "https://github.com/thechandanbhagat/grpc-azure-samples",
+          "description": "Examples from Nepal Cloud Summit 2022",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["grpc", "azure", "cloud"],
+          "stars": 85
+        },
+        {
+          "title": "Azure Kubernetes Workshop",
+          "url": "https://github.com/thechandanbhagat/aks-workshop",
+          "description": "Materials from Kubernetes Discovery Day",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["kubernetes", "aks", "containers"],
+          "stars": 150
+        },
+        {
+          "title": "cv-forge",
+          "url": "https://github.com/thechandanbhagat/cv-forge",
+          "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": ["mcp", "cv", "resume", "ats", "typescript", "ai"],
+          "stars": 0
+        }
+      ]
+    },
+    {
+      "category": "Packages",
+      "items": [
+        {
+          "title": "dotnet-essential",
+          "url": "https://www.nuget.org/packages/dotnet-essential",
+          "description": ".NET Essential utilities library",
+          "platform": "NuGet",
+          "icon": "bx-package",
+          "version": "1.0.0",
+          "downloads": 5000,
+          "tags": ["dotnet", "utilities"]
+        },
+        {
+          "title": "azure-functions-toolkit",
+          "url": "https://www.nuget.org/packages/azure-functions-toolkit",
+          "description": "Tools for Azure Functions development",
+          "platform": "NuGet",
+          "icon": "bx-package",
+          "version": "2.1.0",
+          "downloads": 3500,
+          "tags": ["azure", "functions", "tools"]
+        },
+        {
+          "title": "ml-net-utils",
+          "url": "https://www.nuget.org/packages/ml-net-utils",
+          "description": "Utilities for ML.NET projects",
+          "platform": "NuGet",
+          "icon": "bx-package",
+          "version": "1.2.0",
+          "downloads": 2000,
+          "tags": ["ml-net", "machine-learning", "utilities"]
+        },
+        {
+          "title": "cv-forge",
+          "url": "https://www.npmjs.com/package/cv-forge",
+          "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
+          "platform": "NPM",
+          "icon": "bx-package",
+          "version": "1.0.3",
+          "downloads": 0,
+          "tags": ["mcp", "cv", "resume", "ats", "ai"]
+        }
+      ]
+    },
+    {
+      "category": "Blog Posts",
+      "items": [
+        {
+          "title": "Best Practices for Azure Architecture",
+          "url": "https://blog.example.com/azure-architecture",
+          "description": "Comprehensive guide for Azure solutions",
+          "platform": "Medium",
+          "icon": "bx-book",
+          "date": "2024-03-10",
+          "tags": ["azure", "architecture", "best-practices"],
+          "readTime": "10 min"
+        },
+        {
+          "title": "Microservices Communication Patterns",
+          "url": "https://blog.example.com/microservices",
+          "description": "Deep dive into communication patterns",
+          "platform": "Dev.to",
+          "icon": "bx-book",
+          "date": "2024-02-28",
+          "tags": ["microservices", "architecture", "patterns"],
+          "readTime": "15 min"
+        },
+        {
+          "title": "Getting Started with ML.NET",
+          "url": "https://blog.example.com/mlnet",
+          "description": "Beginner's guide to ML.NET",
+          "platform": "Personal Blog",
+          "icon": "bx-book",
+          "date": "2024-02-15",
+          "tags": ["ml-net", "machine-learning", "tutorial"],
+          "readTime": "12 min"
+        }
+      ]
+    },
+    {
+      "category": "Training Materials",
+      "items": [
+        {
+          "title": "ML.NET Training",
+          "url": "https://training.chandanbhagat.com.np/ml-net",
+          "description": "Complete ML.NET development course",
+          "platform": "Website",
+          "icon": "bx-book",
+          "tags": ["ml-net", "ai", "dotnet"],
+          "lastUpdated": "2024-03-01"
+        },
+        {
+          "title": "Azure Functions Masterclass",
+          "url": "https://training.chandanbhagat.com.np/azure-functions",
+          "description": "Complete guide to Azure Functions development",
+          "platform": "Training",
+          "icon": "bx-book",
+          "date": "2024-03-01",
+          "tags": ["azure", "serverless", "training"]
+        },
+        {
+          "title": "Container Orchestration with AKS",
+          "url": "https://training.chandanbhagat.com.np/aks",
+          "description": "Azure Kubernetes Service deep dive",
+          "platform": "Training",
+          "icon": "bx-book",
+          "date": "2024-02-15",
+          "tags": ["kubernetes", "aks", "containers"]
+        },
+        {
+          "title": "Power Platform Integration Guide",
+          "url": "https://training.chandanbhagat.com.np/power-platform",
+          "description": "Integrating Power Platform with ASP.NET",
+          "platform": "Training",
+          "icon": "bx-book",
+          "date": "2024-01-20",
+          "tags": ["power-platform", "integration", "aspnet"]
+        }
+      ]
+    },
+    {
+      "category": "Certifications",
+      "items": [
+        {
+          "title": "Azure Solutions Architect",
+          "url": "https://www.credly.com/your-badge",
+          "platform": "Microsoft",
+          "icon": "bx-certification",
+          "date": "2024-01-01",
+          "validUntil": "2025-01-01",
+          "tags": ["azure", "architecture"]
+        }
+      ]
+    }
+  ]
+}
