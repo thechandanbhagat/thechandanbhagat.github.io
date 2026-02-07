@@ -4,8 +4,9 @@ import { Navigation, Pagination } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import type { PortfolioItem } from './PortfolioGrid'
 
-const RESOURCE_ICONS = {
+const RESOURCE_ICONS: Record<string, string> = {
   presentation: 'bx-slideshow',
   github: 'bxl-github',
   document: 'bx-file',
@@ -13,16 +14,20 @@ const RESOURCE_ICONS = {
   link: 'bx-link-external',
 }
 
-export default function PortfolioModal({ item, onClose }) {
-  const modalRef = useRef(null)
+interface PortfolioModalProps {
+  item: PortfolioItem
+  onClose: () => void
+}
+
+export default function PortfolioModal({ item, onClose }: PortfolioModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleEsc)
 
-    // Trigger show animation
     requestAnimationFrame(() => {
       if (modalRef.current) {
         modalRef.current.classList.add('show')
@@ -32,7 +37,7 @@ export default function PortfolioModal({ item, onClose }) {
     return () => document.removeEventListener('keydown', handleEsc)
   }, [onClose])
 
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === modalRef.current) {
       onClose()
     }

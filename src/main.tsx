@@ -7,7 +7,7 @@ import './css/style.css'
 import './css/portfolio.css'
 import './css/important-links.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
