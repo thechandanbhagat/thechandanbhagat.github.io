@@ -11,7 +11,6 @@ import './App.css'
 
 function App() {
   const [portfolioData, setPortfolioData] = useState([]);
-  const [linksData, setLinksData] = useState([]);
 
   useEffect(() => {
     // Load portfolio data
@@ -19,12 +18,6 @@ function App() {
       .then(res => res.json())
       .then(data => setPortfolioData(data.portfolioItems))
       .catch(err => console.error('Error loading portfolio:', err));
-
-    // Load important links data
-    fetch('/data/important-links.json')
-      .then(res => res.json())
-      .then(data => setLinksData(data.links))
-      .catch(err => console.error('Error loading links:', err));
   }, []);
 
   return (
