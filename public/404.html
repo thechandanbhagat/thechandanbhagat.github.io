@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <script>
+      // SPA redirect for GitHub Pages
+      // When GitHub Pages returns a 404, this saves the URL and redirects to index.html
+      // where React Router picks up the correct route
+      sessionStorage.redirect = location.href;
+      location.replace('/');
+    </script>
+  </head>
+  <body></body>
+</html>
