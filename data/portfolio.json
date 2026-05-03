@@ -145,6 +145,46 @@
           "assets/img/portfolio/Kubernetes_2.jpg",
           "assets/img/portfolio/Kubernetes_3.jpg"
         ]
+      },
+      {
+        "program": "NPM Package",
+        "date": "Published a month ago",
+        "title": "ezpm2gui",
+        "category": "opensource",
+        "description": "A modern web-based GUI for PM2 process manager",
+        "resources": [
+          {
+            "type": "npm",
+            "url": "https://www.npmjs.com/package/ezpm2gui",
+            "title": "NPM Package"
+          },
+          {
+            "type": "github",
+            "url": "https://github.com/thechandanbhagat/ezpm2gui",
+            "title": "Source Code"
+          }
+        ],
+        "images": []
+      },
+      {
+        "program": "NPM Package",
+        "date": "Published 3 years ago",
+        "title": "gitignr",
+        "category": "opensource",
+        "description": "Command line tool to generate gitignore files",
+        "resources": [
+          {
+            "type": "npm",
+            "url": "https://www.npmjs.com/package/gitignr",
+            "title": "NPM Package"
+          },
+          {
+            "type": "github",
+            "url": "https://github.com/thechandanbhagat/gitignr",
+            "title": "Source Code"
+          }
+        ],
+        "images": []
       }
     ]
   }
