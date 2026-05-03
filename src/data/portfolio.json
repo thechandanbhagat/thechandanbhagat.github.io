@@ -1,0 +1,871 @@
+{
+  "personal": {
+    "name": "Chandan Gupta Bhagat",
+    "title": "Software Engineer",
+    "tagline": "Crafting scalable solutions with .NET, Azure, and modern web technologies",
+    "location": "London, United Kingdom",
+    "email": "chandan.bhagat@outlook.com",
+    "phone": "+44 7123456789",
+    "website": "https://chandanbhagat.com.np",
+    "availability": {
+      "status": "available",
+      "message": "Available for new opportunities"
+    }
+  },
+  "hero": {
+    "typedStrings": [
+      "Software Engineer",
+      "Cloud Architect", 
+      "Technical Speaker",
+      "ML.NET Enthusiast",
+      "DevOps Engineer"
+    ],
+    "sanskritQuotes": [
+      {
+        "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन",
+        "english": "You have the right to perform actions, but never to the fruits of those actions"
+      },
+      {
+        "sanskrit": "विद्या ददाति विनयं",
+        "english": "Knowledge gives humility"
+      }
+    ]
+  },
+  "socialLinks": [
+    {
+      "platform": "LinkedIn",
+      "icon": "bi bi-linkedin",
+      "url": "https://linkedin.com/in/guptac"
+    },
+    {
+      "platform": "GitHub", 
+      "icon": "bi bi-github",
+      "url": "https://github.com/thechandanbhagat"
+    },
+    {
+      "platform": "Twitter",
+      "icon": "bi bi-twitter",
+      "url": "https://twitter.com/guptachandan"
+    }
+  ],
+  "navigation": [
+    { "label": "Home", "href": "#hero", "icon": "bi bi-house" },
+    { "label": "About", "href": "#about", "icon": "bi bi-person" },
+    { "label": "Facts", "href": "#facts", "icon": "bi bi-bar-chart" },
+    { "label": "Skills", "href": "#skills", "icon": "bi bi-gear" },
+    { "label": "Resume", "href": "#resume", "icon": "bi bi-file-text" },
+    { "label": "Contact", "href": "#contact", "icon": "bi bi-envelope" }
+  ],
+  "about": {
+    "introduction": "I am a passionate Software Engineer with extensive experience in cloud-native development, microservices architecture, and modern web technologies. My expertise spans across .NET ecosystem, Azure cloud services, and DevOps practices.",
+    "coreCompetencies": [
+      "Cloud-native application development",
+      "Microservices architecture design",
+      "DevOps and CI/CD implementation", 
+      "Machine Learning with ML.NET",
+      "Event-driven systems",
+      "Container orchestration"
+    ],
+    "additionalSkills": [
+      "Technical speaking and presentations",
+      "Team leadership and mentoring",
+      "Agile and Scrum methodologies",
+      "Open source contributions"
+    ],
+    "communityInvolvement": [
+      "Regular speaker at tech conferences and meetups",
+      "Microsoft community contributor",
+      "Open source project maintainer",
+      "Tech blog writer and content creator"
+    ],
+    "closingStatement": "I believe in continuous learning and sharing knowledge with the community. My goal is to build scalable, efficient solutions that make a positive impact.",
+    "education": {
+      "degree": "Bachelor of Computer Engineering",
+      "institution": "Tribhuvan University",
+      "year": "2014",
+      "location": "Nepal"
+    }
+  },
+  "facts": {
+    "statistics": [
+      {
+        "value": "5+",
+        "label": "Years Experience",
+        "icon": "bi bi-calendar",
+        "animation": "fade-up"
+      },
+      {
+        "value": "50+",
+        "label": "Projects Completed", 
+        "icon": "bi bi-folder",
+        "animation": "fade-up"
+      },
+      {
+        "value": "25+",
+        "label": "Tech Talks Given",
+        "icon": "bi bi-mic",
+        "animation": "fade-up"
+      },
+      {
+        "value": "10K+",
+        "label": "GitHub Contributions",
+        "icon": "bi bi-github", 
+        "animation": "fade-up"
+      }
+    ],
+    "services": [
+      {
+        "title": "Full-Stack Developer",
+        "description": "End-to-end application development",
+        "icon": "bx bx-code-alt",
+        "animation": "fade-right"
+      },
+      {
+        "title": "Cloud Architect", 
+        "description": "Scalable cloud solutions design",
+        "icon": "bx bx-cloud",
+        "animation": "fade-up"
+      },
+      {
+        "title": "Technical Consultant",
+        "description": "Technical strategy & architecture",
+        "icon": "bx bxs-user-voice", 
+        "animation": "fade-up"
+      },
+      {
+        "title": "Trainer",
+        "description": "Knowledge transfer & mentoring",
+        "icon": "bx bxs-graduation",
+        "animation": "fade-left"
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "title": "Languages & Frameworks",
+        "skills": [
+          {
+            "name": "C# / .NET",
+            "icon": "bx bxl-c-plus-plus"
+          },
+          {
+            "name": "Python", 
+            "icon": "bx bxl-python"
+          },
+          {
+            "name": "Angular",
+            "icon": "bx bxl-angular"
+          },
+          {
+            "name": "React",
+            "icon": "bx bxl-react"
+          }
+        ]
+      },
+      {
+        "title": "Cloud & AI",
+        "skills": [
+          {
+            "name": "Azure",
+            "icon": "bx bxl-microsoft"
+          },
+          {
+            "name": "ML.NET",
+            "icon": "bx bx-brain"
+          },
+          {
+            "name": "Azure OpenAI",
+            "icon": "bx bx-bot"
+          },
+          {
+            "name": "TensorFlow", 
+            "icon": "bx bx-network-chart"
+          },
+          {
+            "name": "GroupCode",
+            "icon": "bx bx-code-block"
+          }
+        ]
+      },
+      {
+        "title": "DevOps & Tools", 
+        "skills": [
+          {
+            "name": "Docker",
+            "icon": "docker-svg",
+            "customSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" style=\"fill: #0563bb;\"><path d=\"M20.17 9.82a4.76 4.76 0 0 0-.84.07 3.12 3.12 0 0 0-1.43-2.14l-.28-.16-.19.27a3.7 3.7 0 0 0-.51 1.19 2.84 2.84 0 0 0 .33 2.22 4.11 4.11 0 0 1-1.45.35H2.63a.63.63 0 0 0-.63.62 9.6 9.6 0 0 0 .58 3.39 5 5 0 0 0 2 2.6 8.86 8.86 0 0 0 4.42.95 13.27 13.27 0 0 0 2.42-.18 10.09 10.09 0 0 0 3.19-1.15A8.9 8.9 0 0 0 16.78 16a11.94 11.94 0 0 0 2.13-3.67h.19a3.08 3.08 0 0 0 2.23-.84 2.36 2.36 0 0 0 .59-.87l.08-.22-.2-.16a2.69 2.69 0 0 0-1.63-.42z\"></path><path d=\"M5.61 9.35H3.85a.16.16 0 0 0-.16.15v1.58a.16.16 0 0 0 .16.15h1.76a.16.16 0 0 0 .16-.15V9.5a.16.16 0 0 0-.16-.15zm2.44 0H6.28a.16.16 0 0 0-.16.15v1.58a.16.16 0 0 0 .16.15h1.77a.15.15 0 0 0 .15-.15V9.5a.15.15 0 0 0-.15-.15zm2.47 0H8.75a.15.15 0 0 0-.15.15v1.58a.15.15 0 0 0 .15.15h1.77a.15.15 0 0 0 .15-.15V9.5a.15.15 0 0 0-.15-.15zm.67 0a.15.15 0 0 0-.19.15v1.58a.15.15 0 0 0 .15.15H13a.15.15 0 0 0 .15-.15V9.5a.15.15 0 0 0-.15-.15zM6.28 7.09H8a.16.16 0 0 1 .16.16v1.56A.16.16 0 0 1 8 9H6.28a.15.15 0 0 1-.15-.15V7.24a.15.15 0 0 1 .15-.15zm2.47 0h1.77a.15.15 0 0 1 .15.15v1.57a.16.16 0 0 1-.16.16H8.75a.15.15 0 0 1-.15-.15V7.24a.15.15 0 0 1 .15-.15zm2.44 0H13a.15.15 0 0 1 .15.15v1.57A.15.15 0 0 1 13 9h-1.81a.16.16 0 0 1-.19-.19V7.24a.15.15 0 0 1 .19-.15z\"></path><rect x=\"11.04\" y=\"4.82\" width=\"2.07\" height=\"1.88\" rx=\".15\"></rect><path d=\"M13.65 9.35a.15.15 0 0 0-.15.15v1.58a.15.15 0 0 0 .15.15h1.77a.15.15 0 0 0 .15-.15V9.5a.15.15 0 0 0-.15-.15z\"></path></svg>"
+          },
+          {
+            "name": "Kubernetes",
+            "icon": "bx bxl-kubernetes"
+          },
+          {
+            "name": "GitHub Actions",
+            "icon": "bx bxl-github"
+          },
+          {
+            "name": "Azure DevOps",
+            "icon": "bx bx-cloud"
+          }
+        ]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "title": "Software Engineer",
+      "company": "AE Live",
+      "period": "December 2022 - May 2024",
+      "location": "London, United Kingdom",
+      "type": "full-time",
+      "technologies": [
+        "C#", "ASP.NET Core", "Web API", "Entity Framework", 
+        "WPF", "XAML", "Angular", "TypeScript", 
+        "Azure", "Kubernetes", "Docker", "CI/CD"
+      ],
+      "achievements": [
+        "Engineered broadcast graphics solutions using WPF, improving rendering performance by 40%",
+        "Developed and maintained scalable ASP.NET Core Web APIs handling 100K+ daily requests",
+        "Implemented Kubernetes orchestration reducing deployment time by 60%",
+        "Architected cloud-native solutions on Azure optimizing operational costs"
+      ]
+    },
+    {
+      "title": "Technical Lead",
+      "company": "Amazing Digital", 
+      "period": "May 2021 - October 2022",
+      "location": "Seattle, US (Remote)",
+      "type": "leadership",
+      "technologies": [
+        "Team Management", "Agile", "Scrum", "Microservices", 
+        "RESTful APIs", "Cloud Architecture", "GitHub Actions", 
+        "IBM Cloud", "Docker", "Kubernetes", "C#", "Next.Js", "AWS", "React"
+      ],
+      "achievements": [
+        "Led an 12-member development team across 3 time zones, delivering 5 major projects",
+        "Implemented CI/CD pipelines reducing deployment time from 2 hours to 20 minutes", 
+        "Mentored 12+ developers through code reviews and technical guidance",
+        "Automated deployment workflows using GitHub Actions and IBM Cloud"
+      ]
+    },
+    {
+      "title": "DevOps/Software Engineer",
+      "company": "AgriSync",
+      "period": "March 2020 - March 2021", 
+      "location": "Des Moines, Iowa",
+      "type": "full-time",
+      "technologies": [
+        "C#", "DevOps", "Shell Scripting", "Azure Function", 
+        "Container", "Kubernetes", "Azure", "Angular", "Salesforce"
+      ],
+      "achievements": [
+        "Spearheaded DevOps transformation reducing deployment failures by 80%",
+        "Built custom GitHub Actions workflows automating deployment for 20+ services",
+        "Managed Kubernetes clusters on Azure handling production workloads", 
+        "Developed Salesforce solutions integrated with .NET Core backend"
+      ]
+    },
+    {
+      "title": "Technical Lead",
+      "company": "Blue Panda Communications",
+      "period": "July 2019 - February 2020",
+      "location": "Kathmandu, Nepal", 
+      "type": "leadership",
+      "technologies": [
+        "Team Management", "Agile", "Scrum", "Microservices", 
+        "RESTful APIs", "Cloud Architecture", "C#", "DevOps", 
+        "Shell Scripting", "Azure Function", "Container", "Kubernetes", 
+        "Azure", "Angular", "Salesforce", "Service Bus", "Event Grid", "Event Hub"
+      ],
+      "achievements": [
+        "Led technical initiatives across cloud migration projects",
+        "Managed Azure resources and Kubernetes clusters",
+        "Implemented CI/CD pipelines using Azure DevOps"
+      ]
+    }
+  ],
+  "earlierRoles": [
+    {
+      "title": "Engineering Manager",
+      "company": "Insight Workshop", 
+      "period": "2018-2019",
+      "description": "Led .NET development teams and cloud initiatives"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Multiple Organizations",
+      "period": "2014-2018", 
+      "description": "Developed solutions using .NET, WPF, and web technologies"
+    },
+    {
+      "title": "Co-Founder",
+      "company": "Yorbit Technologies",
+      "period": "2013-2017",
+      "description": "Led IoT and vehicle tracking solutions development"
+    }
+  ],
+  "technicalSkills": {
+    "backendCloud": [
+      ".NET Core", "C#", "Node.JS", "Shell Scripting", 
+      "Powershell script", "Azure", "Azure Function", "AWS"
+    ],
+    "devopsTools": [
+      "Kubernetes", "Docker", "CI/CD", "Git", "Azure Devops", 
+      "SonaQube", "Jenkins"
+    ],
+    "frontend": [
+      "Angular", "TypeScript", "React", "Next.JS", "Lit Framework", "WPF"
+    ]
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Feel free to reach out through any of these channels",
+    "contactMethods": [
+      {
+        "type": "location",
+        "icon": "bi bi-geo-alt", 
+        "title": "Location",
+        "value": "London, United Kingdom",
+        "link": null
+      },
+      {
+        "type": "email",
+        "icon": "bi bi-envelope",
+        "title": "Email",
+        "value": "chandan.bhagat@outlook.com",
+        "link": "mailto:chandan.bhagat@outlook.com"
+      },
+      {
+        "type": "phone", 
+        "icon": "bi bi-phone",
+        "title": "Phone",
+        "value": "+44 7123456789",
+        "link": "tel:+447123456789"
+      }
+    ],
+    "socialMedia": [
+      {
+        "platform": "LinkedIn",
+        "icon": "bi bi-linkedin",
+        "url": "https://linkedin.com/in/guptac"
+      },
+      {
+        "platform": "GitHub", 
+        "icon": "bi bi-github",
+        "url": "https://github.com/thechandanbhagat"
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "Chandan Gupta Bhagat",
+    "rightsText": "All Rights Reserved"
+  },
+  "theme": {
+    "defaultTheme": "light",
+    "enableThemeToggle": true
+  },
+  "animations": {
+    "enableAOS": true,
+    "enableTyped": true
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "My Recent Work & Presentations",
+    "categories": [
+      {
+        "id": "all",
+        "name": "All",
+        "filter": "*"
+      },
+      {
+        "id": "cloud",
+        "name": "Cloud",
+        "filter": ".cloud"
+      },
+      {
+        "id": "ai",
+        "name": "AI & ML",
+        "filter": ".ai"
+      },
+      {
+        "id": "web",
+        "name": "Web",
+        "filter": ".web"
+      },
+      {
+        "id": "mentoring",
+        "name": "Mentoring",
+        "filter": ".mentoring"
+      },
+      {
+        "id": "projects",
+        "name": "Projects",
+        "filter": ".projects"
+      }
+    ],
+    "items": [
+      {
+        "id": "reactor-meetup-2024",
+        "title": "Accelerating Development: Harnessing Service Bus and Azure Functions for Event-Driven Development",
+        "category": "cloud speaking",
+        "date": "2024-05-07",
+        "location": "Reactor Meetup, London, UK",
+        "description": "Event-driven architectures using Azure Service Bus and Azure Functions",
+        "image": "/assets/img/portfolio/LondonReactorMeetup (1).JPG",
+        "images": [
+          "/assets/img/portfolio/LondonReactorMeetup (1).JPG",
+          "/assets/img/portfolio/LondonReactorMeetup (2).JPG",
+          "/assets/img/portfolio/LondonReactorMeetup (3).jpg"
+        ],
+        "resources": [
+          {
+            "type": "github",
+            "url": "https://github.com/thechandanbhagat",
+            "title": "Demo Code",
+            "icon": "bx bxl-github"
+          },
+          {
+            "type": "presentation",
+            "url": "https://github.com/thechandanbhagat",
+            "title": "Presentation Slides",
+            "icon": "bx bx-file-pdf"
+          }
+        ],
+        "technologies": ["Azure Service Bus", "Azure Functions", "Event-Driven Architecture", "Cloud"]
+      },
+      {
+        "id": "ncs-2022",
+        "title": "Creating and Managing gRPC Apps in Azure",
+        "category": "cloud speaking",
+        "date": "2022-04-23",
+        "location": "Nepal Cloud Summit",
+        "description": "Building and deploying gRPC applications in Azure",
+        "image": "/assets/img/portfolio/NCS2022.jpg",
+        "images": [
+          "/assets/img/portfolio/NCS2022.jpg",
+          "/assets/img/portfolio/NCS2022_1.jpg",
+          "/assets/img/portfolio/NCS2022_2.jpg"
+        ],
+        "resources": [
+          {
+            "type": "github",
+            "url": "https://github.com/thechandanbhagat",
+            "title": "Source Code",
+            "icon": "bx bxl-github"
+          }
+        ],
+        "technologies": ["gRPC", "Azure", "Microservices", "Cloud"]
+      },
+      {
+        "id": "global-azure-2021",
+        "title": "Azure and Github Combo",
+        "category": "cloud speaking",
+        "date": "2021-04-17",
+        "location": "Global Azure Bootcamp 2021",
+        "description": "Integration of Azure services with GitHub for DevOps workflows",
+        "image": "/assets/img/portfolio/GBAC2021.jpg",
+        "images": [
+          "/assets/img/portfolio/GBAC2021.jpg",
+          "/assets/img/portfolio/GBAC2021_1.png",
+          "/assets/img/portfolio/GBAC2021_2.png"
+        ],
+        "resources": [],
+        "technologies": ["Azure", "GitHub", "DevOps", "CI/CD"]
+      },
+      {
+        "id": "global-ai-2021",
+        "title": "Power your .NET App with ML.NET",
+        "category": "ai speaking",
+        "date": "2021-01-16",
+        "location": "Global AI Bootcamp 2021",
+        "description": "Building machine learning applications using ML.NET framework",
+        "image": "/assets/img/portfolio/GAIBC2021.jpg",
+        "images": [
+          "/assets/img/portfolio/GAIBC2021.jpg",
+          "/assets/img/portfolio/GAIBC2021_1.jpg"
+        ],
+        "resources": [],
+        "technologies": ["ML.NET", "Machine Learning", ".NET", "AI"]
+      },
+      {
+        "id": "power-automate-2021",
+        "title": "Power your ASP.NET Apps with Power Automate",
+        "category": "web speaking",
+        "date": "2021-06-27",
+        "location": "Dynamics 365 & Power Platform",
+        "description": "Integrating Power Automate with ASP.NET applications for workflow automation",
+        "image": "/assets/img/portfolio/PowerAutomate.jpg",
+        "images": [
+          "/assets/img/portfolio/PowerAutomate.jpg",
+          "/assets/img/portfolio/PowerAutomate_1.jpg"
+        ],
+        "resources": [],
+        "technologies": ["Power Automate", "ASP.NET", "Microsoft 365", "Workflow"]
+      },
+      {
+        "id": "global-azure-2020",
+        "title": "Azure and Github Combo",
+        "category": "cloud speaking",
+        "date": "2020-04-25",
+        "location": "Global Azure Virtual 2020",
+        "description": "Azure and GitHub integration for modern DevOps practices",
+        "image": "/assets/img/portfolio/GABC2020.jpg",
+        "images": [
+          "/assets/img/portfolio/GABC2020.jpg",
+          "/assets/img/portfolio/GABC2020_1.jpg"
+        ],
+        "resources": [],
+        "technologies": ["Azure", "GitHub", "DevOps", "Cloud"]
+      },
+      {
+        "id": "azure-saturday-2019",
+        "title": "Azure Container Instances and Azure Kubernetes Services",
+        "category": "cloud speaking",
+        "date": "2019-12-14",
+        "location": "Azure Saturday",
+        "description": "Container orchestration using Azure Container Instances and AKS",
+        "image": "/assets/img/portfolio/AzureSaturday2019.jpg",
+        "images": [
+          "/assets/img/portfolio/AzureSaturday2019.jpg",
+          "/assets/img/portfolio/AzureSaturday2019_1.jpg",
+          "/assets/img/portfolio/AzureSaturday2019_2.jpg"
+        ],
+        "resources": [],
+        "technologies": ["Azure Container Instances", "Azure Kubernetes Service", "Containers", "Azure"]
+      },
+      {
+        "id": "ideathon-2021",
+        "title": "Ideathon 2021",
+        "category": "mentoring projects",
+        "date": "2021-12-31",
+        "location": "Mentoring",
+        "description": "Mentoring participants in innovation and idea development competition",
+        "image": "/assets/img/portfolio/Ideathon2021.jpg",
+        "images": [
+          "/assets/img/portfolio/Ideathon2021.jpg",
+          "/assets/img/portfolio/Ideathon2021_1.jpg",
+          "/assets/img/portfolio/Ideathon2021_2.jpg"
+        ],
+        "resources": [],
+        "technologies": ["Mentoring", "Innovation", "Startup", "Ideas"]
+      },
+      {
+        "id": "quantum-hack-2020",
+        "title": "Quantum Hack 2020",
+        "category": "cloud projects",
+        "date": "2020",
+        "location": "Quantum Hack 2020",
+        "description": "Participation in quantum computing hackathon exploring quantum algorithms",
+        "image": "/assets/img/portfolio/QuantumHack.jpg",
+        "images": [
+          "/assets/img/portfolio/QuantumHack.jpg",
+          "/assets/img/portfolio/QuantumHack_1.jpg",
+          "/assets/img/portfolio/QuantumHack_2.jpg",
+          "/assets/img/portfolio/QuantumHack_3.jpg"
+        ],
+        "resources": [],
+        "technologies": ["Quantum Computing", "Hackathon", "Algorithms", "Research"]
+      },
+      {
+        "id": "kubernetes-discovery-2020",
+        "title": "Azure Container Instances and Azure Kubernetes Services",
+        "category": "cloud speaking",
+        "date": "2020-02-29",
+        "location": "Kubernetes Discovery Day",
+        "description": "Deep dive into container orchestration with ACI and AKS",
+        "image": "/assets/img/portfolio/Kubernetes.jpg",
+        "images": [
+          "/assets/img/portfolio/Kubernetes.jpg",
+          "/assets/img/portfolio/Kubernetes_1.jpg",
+          "/assets/img/portfolio/Kubernetes_2.jpg",
+          "/assets/img/portfolio/Kubernetes_3.jpg"
+        ],
+        "resources": [],
+        "technologies": ["Kubernetes", "Azure Container Instances", "Azure Kubernetes Service", "DevOps"]
+      }
+    ]
+  },
+  "groupcode": {
+    "title": "Group Code",
+    "subtitle": "VS Code Extension for Better Code Organization",
+    "description": "Navigate Code by Functionality, Not Just Files. Group Code transforms how you organize and navigate your codebase using special comments to tag related code sections across multiple files and languages.",
+    "logo": "/groupcode/compass-icon.svg",
+    "installUrl": "https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode",
+    "githubUrl": "https://github.com/thechandanbhagat/groupcode",
+    "features": [
+      {
+        "title": "Multi-Language Support",
+        "description": "Works across different programming languages with intelligent comment detection",
+        "icon": "fas fa-globe"
+      },
+      {
+        "title": "Smart Navigation",
+        "description": "Quickly jump between related code sections regardless of file location",
+        "icon": "fas fa-compass"
+      },
+      {
+        "title": "Visual Organization",
+        "description": "See your code organized by functionality rather than just file structure",
+        "icon": "fas fa-sitemap"
+      },
+      {
+        "title": "Team Collaboration",
+        "description": "Share code organization patterns with your team members",
+        "icon": "fas fa-users"
+      }
+    ],
+    "supportedLanguages": [
+      {
+        "name": "JavaScript",
+        "extensions": ["js", "jsx"],
+        "comment": "// @group",
+        "icon": "fab fa-js-square"
+      },
+      {
+        "name": "TypeScript",
+        "extensions": ["ts", "tsx"],
+        "comment": "// @group",
+        "icon": "fab fa-js-square"
+      },
+      {
+        "name": "Python",
+        "extensions": ["py"],
+        "comment": "# @group",
+        "icon": "fab fa-python"
+      },
+      {
+        "name": "Java",
+        "extensions": ["java"],
+        "comment": "// @group",
+        "icon": "fab fa-java"
+      },
+      {
+        "name": "C#",
+        "extensions": ["cs"],
+        "comment": "// @group",
+        "icon": "fas fa-code"
+      },
+      {
+        "name": "Go",
+        "extensions": ["go"],
+        "comment": "// @group",
+        "icon": "fab fa-golang"
+      }
+    ],
+    "installation": {
+      "steps": [
+        {
+          "title": "Install from VS Code Marketplace",
+          "description": "Search for 'Group Code' in the Extensions panel or install directly from the marketplace",
+          "icon": "fas fa-download"
+        },
+        {
+          "title": "Reload VS Code",
+          "description": "Restart VS Code to activate the extension",
+          "icon": "fas fa-sync-alt"
+        },
+        {
+          "title": "Start Organizing",
+          "description": "Begin adding @group comments to your code",
+          "icon": "fas fa-play"
+        }
+      ]
+    },
+    "usage": {
+      "examples": [
+        {
+          "language": "JavaScript",
+          "code": "// @group authentication\nfunction login(username, password) {\n  // Login implementation\n}\n\n// @group authentication\nfunction logout() {\n  // Logout implementation\n}",
+          "description": "Group related authentication functions"
+        },
+        {
+          "language": "Python",
+          "code": "# @group database\ndef connect_db():\n    # Database connection\n    pass\n\n# @group database\ndef query_data(sql):\n    # Query execution\n    pass",
+          "description": "Organize database-related functions"
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "How does Group Code work?",
+        "answer": "Group Code scans your codebase for special @group comments and organizes code sections by their group names, allowing you to navigate by functionality rather than file structure."
+      },
+      {
+        "question": "Which languages are supported?",
+        "answer": "Group Code supports JavaScript, TypeScript, Python, Java, C#, Go, and more. The extension automatically detects comment syntax for each language."
+      },
+      {
+        "question": "Can I use custom group names?",
+        "answer": "Yes! You can use any name after @group. For example: @group user-authentication, @group data-processing, etc."
+      }
+    ]
+  },
+  "importantLinks": {
+    "title": "Important Links",
+    "subtitle": "Explore my content, packages, and resources",
+    "categories": [
+      {
+        "category": "Videos",
+        "items": [
+          {
+            "title": "Event-Driven Architecture with Azure Service Bus",
+            "url": "https://youtube.com/watch?v=azure-service-bus",
+            "description": "Deep dive into Azure Service Bus patterns",
+            "platform": "YouTube",
+            "icon": "bx-video",
+            "date": "2024-05-07",
+            "tags": ["azure", "service-bus", "architecture"],
+            "duration": "45 min",
+            "views": "2.5K"
+          },
+          {
+            "title": "ML.NET for .NET Developers",
+            "url": "https://youtube.com/watch?v=mlnet-dotnet",
+            "description": "Getting started with ML.NET framework",
+            "platform": "YouTube",
+            "icon": "bx-video",
+            "date": "2021-01-16",
+            "tags": ["ml-net", "machine-learning", "dotnet"],
+            "duration": "1h 15min",
+            "views": "5.2K"
+          }
+        ]
+      },
+      {
+        "category": "GitHub Repositories",
+        "items": [
+          {
+            "title": "GroupCode VS Code Extension",
+            "url": "https://github.com/thechandanbhagat/groupcode",
+            "description": "Navigate code by functionality across files",
+            "platform": "GitHub",
+            "icon": "bx-code",
+            "date": "2024-01-10",
+            "tags": ["vscode", "extension", "productivity"],
+            "stars": "150",
+            "language": "TypeScript"
+          },
+          {
+            "title": "Azure Service Bus Samples",
+            "url": "https://github.com/thechandanbhagat/azure-servicebus-samples",
+            "description": "Event-driven architecture patterns with Azure Service Bus",
+            "platform": "GitHub",
+            "icon": "bx-cloud",
+            "date": "2024-05-07",
+            "tags": ["azure", "service-bus", "samples"],
+            "stars": "85",
+            "language": "C#"
+          },
+          {
+            "title": "ML.NET Workshop Materials",
+            "url": "https://github.com/thechandanbhagat/mlnet-workshop",
+            "description": "Complete workshop materials for ML.NET",
+            "platform": "GitHub",
+            "icon": "bx-brain",
+            "date": "2021-01-16",
+            "tags": ["ml-net", "workshop", "samples"],
+            "stars": "120",
+            "language": "C#"
+          }
+        ]
+      },
+      {
+        "category": "Packages",
+        "items": [
+          {
+            "title": "GroupCode Extension",
+            "url": "https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode",
+            "description": "VS Code extension for organizing code by functionality",
+            "platform": "VS Code Marketplace",
+            "icon": "bx-package",
+            "date": "2024-01-10",
+            "tags": ["vscode", "productivity", "organization"],
+            "downloads": "1.2K",
+            "version": "1.0.5"
+          }
+        ]
+      },
+      {
+        "category": "Blog Posts",
+        "items": [
+          {
+            "title": "Building Event-Driven Systems with Azure",
+            "url": "https://blog.chandanbhagat.com.np/event-driven-azure",
+            "description": "Comprehensive guide to event-driven architecture",
+            "platform": "Personal Blog",
+            "icon": "bx-book",
+            "date": "2024-05-15",
+            "tags": ["azure", "architecture", "events"],
+            "readTime": "15 min"
+          },
+          {
+            "title": "Getting Started with ML.NET",
+            "url": "https://blog.example.com/mlnet",
+            "description": "Beginner's guide to ML.NET",
+            "platform": "Personal Blog",
+            "icon": "bx-book",
+            "date": "2024-02-15",
+            "tags": ["ml-net", "machine-learning", "tutorial"],
+            "readTime": "12 min"
+          }
+        ]
+      },
+      {
+        "category": "Training Materials",
+        "items": [
+          {
+            "title": "ML.NET Training",
+            "url": "https://training.chandanbhagat.com.np/ml-net",
+            "description": "Complete ML.NET development course",
+            "platform": "Website",
+            "icon": "bx-book",
+            "tags": ["ml-net", "ai", "dotnet"],
+            "lastUpdated": "2024-03-01"
+          },
+          {
+            "title": "Azure Functions Masterclass",
+            "url": "https://training.chandanbhagat.com.np/azure-functions",
+            "description": "Complete guide to Azure Functions development",
+            "platform": "Training",
+            "icon": "bx-book",
+            "date": "2024-03-01",
+            "tags": ["azure", "serverless", "training"]
+          },
+          {
+            "title": "Container Orchestration with AKS",
+            "url": "https://training.chandanbhagat.com.np/aks",
+            "description": "Azure Kubernetes Service deep dive",
+            "platform": "Training",
+            "icon": "bx-book",
+            "date": "2024-02-15",
+            "tags": ["kubernetes", "aks", "containers"]
+          },
+          {
+            "title": "Power Platform Integration Guide",
+            "url": "https://training.chandanbhagat.com.np/power-platform",
+            "description": "Integrating Power Platform with ASP.NET",
+            "platform": "Training",
+            "icon": "bx-book",
+            "date": "2024-01-20",
+            "tags": ["power-platform", "integration", "aspnet"]
+          }
+        ]
+      },
+      {
+        "category": "Certifications",
+        "items": [
+          {
+            "title": "Azure Solutions Architect",
+            "url": "https://www.credly.com/your-badge",
+            "platform": "Microsoft",
+            "icon": "bx-certification",
+            "date": "2024-01-01",
+            "validUntil": "2025-01-01",
+            "tags": ["azure", "architecture"]
+          }
+        ]
+      }
+    ]
+  }
+}

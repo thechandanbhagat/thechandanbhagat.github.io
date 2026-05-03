@@ -1,0 +1,299 @@
+{
+  "personal": {
+    "name": "Your Full Name",
+    "title": "Your Professional Title",
+    "tagline": "Brief professional summary describing your expertise",
+    "location": "Your City, Country",
+    "email": "your.email@example.com",
+    "phone": "+1234567890",
+    "website": "https://yourwebsite.com",
+    "profileImage": "/assets/img/profile-img.jpg",
+    "heroBackground": "/assets/img/hero-bg.jpg",
+    "availability": {
+      "status": "available",
+      "message": "Available for new opportunities"
+    }
+  },
+  "hero": {
+    "typedStrings": [
+      "I'm a [Your Role]",
+      "I'm a [Another Role]",
+      "I'm a [Third Role]",
+      "Add more as needed"
+    ],
+    "sanskritQuotes": [
+      "Optional: Add quotes in any language",
+      "These will show with typing effect"
+    ]
+  },
+  "socialLinks": [
+    {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/in/yourprofile",
+      "icon": "bx bxl-linkedin",
+      "className": "linkedin"
+    },
+    {
+      "platform": "github",
+      "url": "https://github.com/yourusername",
+      "icon": "bx bxl-github",
+      "className": "github"
+    },
+    {
+      "platform": "twitter",
+      "url": "https://twitter.com/yourusername",
+      "icon": "bx bxl-twitter",
+      "className": "twitter"
+    }
+  ],
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "#hero",
+      "icon": "bx bx-home"
+    },
+    {
+      "label": "About",
+      "href": "#about",
+      "icon": "bx bx-user"
+    },
+    {
+      "label": "Resume",
+      "href": "#resume",
+      "icon": "bx bx-file-blank"
+    },
+    {
+      "label": "Skills",
+      "href": "#skills",
+      "icon": "bx bx-server"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact",
+      "icon": "bx bx-envelope"
+    }
+  ],
+  "about": {
+    "introduction": "Write your professional introduction here. Describe your experience, expertise, and what makes you unique in your field.",
+    "coreCompetencies": [
+      {
+        "title": "Primary Skill 1",
+        "description": "Detailed description of your expertise in this area, including specific technologies, years of experience, and notable achievements."
+      },
+      {
+        "title": "Primary Skill 2", 
+        "description": "Another core competency with specific details about your capabilities and experience."
+      }
+    ],
+    "additionalSkills": [
+      {
+        "title": "Secondary Skill 1",
+        "icon": "fas fa-code",
+        "description": "Description of additional skills that complement your core competencies."
+      }
+    ],
+    "communityInvolvement": [
+      {
+        "title": "Community Activity 1",
+        "description": "Describe your involvement in professional communities, teaching, mentoring, etc."
+      }
+    ],
+    "closingStatement": "A brief closing statement about your professional philosophy and goals.",
+    "education": {
+      "degree": "Your Degree",
+      "institution": "University/Institution Name",
+      "period": "Start Year - End Year"
+    }
+  },
+  "facts": {
+    "title": "Services & Expertise",
+    "statistics": [
+      {
+        "number": "X+",
+        "title": "Years Experience",
+        "icon": "bx bx-time-five"
+      },
+      {
+        "number": "XX+",
+        "title": "Projects Completed",
+        "icon": "bx bx-check-circle"
+      },
+      {
+        "number": "XXX+",
+        "title": "Happy Clients",
+        "icon": "bx bx-happy-beaming"
+      },
+      {
+        "number": "24/7",
+        "title": "Support",
+        "icon": "bx bx-support"
+      }
+    ],
+    "services": [
+      {
+        "title": "Full Time",
+        "description": "Available for full-time positions",
+        "icon": "bx bxs-time-five",
+        "animation": "fade-right"
+      },
+      {
+        "title": "Consulting",
+        "description": "Technical consulting services",
+        "icon": "bx bxs-user-voice",
+        "animation": "fade-up"
+      },
+      {
+        "title": "Freelance",
+        "description": "Project-based work",
+        "icon": "bx bxs-briefcase",
+        "animation": "fade-left"
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "title": "Languages & Frameworks",
+        "skills": [
+          {
+            "name": "JavaScript",
+            "icon": "bx bxl-javascript"
+          },
+          {
+            "name": "React",
+            "icon": "bx bxl-react"
+          },
+          {
+            "name": "Python",
+            "icon": "bx bxl-python"
+          }
+        ]
+      },
+      {
+        "title": "Tools & Technologies",
+        "skills": [
+          {
+            "name": "Git",
+            "icon": "bx bxl-git"
+          },
+          {
+            "name": "Docker",
+            "icon": "bx bxl-docker"
+          }
+        ]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "title": "Most Recent Job Title",
+      "company": "Company Name",
+      "period": "Start Date - End Date (or Present)",
+      "location": "City, Country (or Remote)",
+      "type": "full-time",
+      "technologies": [
+        "Technology 1",
+        "Technology 2", 
+        "Technology 3",
+        "Technology 4"
+      ],
+      "achievements": [
+        "Quantified achievement (improved X by Y%)",
+        "Leadership achievement (led team of X people)",
+        "Technical achievement (implemented X resulting in Y)",
+        "Business impact achievement (reduced costs by X)"
+      ]
+    },
+    {
+      "title": "Previous Job Title",
+      "company": "Previous Company",
+      "period": "Start Date - End Date",
+      "location": "City, Country",
+      "type": "full-time",
+      "technologies": [
+        "Tech 1",
+        "Tech 2"
+      ],
+      "achievements": [
+        "Achievement 1",
+        "Achievement 2"
+      ]
+    }
+  ],
+  "earlierRoles": [
+    {
+      "title": "Earlier Position",
+      "company": "Company Name",
+      "period": "YYYY-YYYY",
+      "description": "Brief description of role and key contributions"
+    }
+  ],
+  "technicalSkills": {
+    "backendCloud": [
+      "Backend Framework 1",
+      "Cloud Service 1",
+      "Database 1"
+    ],
+    "devopsTools": [
+      "CI/CD Tool",
+      "Container Technology",
+      "Monitoring Tool"
+    ],
+    "frontend": [
+      "Frontend Framework 1",
+      "Frontend Framework 2",
+      "CSS Framework"
+    ]
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Feel free to reach out through any of these channels",
+    "contactMethods": [
+      {
+        "type": "location",
+        "icon": "bi bi-geo-alt",
+        "title": "Location",
+        "value": "Your City, Country",
+        "link": null
+      },
+      {
+        "type": "email",
+        "icon": "bi bi-envelope",
+        "title": "Email",
+        "value": "your.email@example.com",
+        "link": "mailto:your.email@example.com"
+      },
+      {
+        "type": "phone",
+        "icon": "bi bi-phone",
+        "title": "Phone",
+        "value": "+1234567890",
+        "link": "tel:+1234567890"
+      }
+    ],
+    "socialMedia": [
+      {
+        "platform": "LinkedIn",
+        "icon": "bi bi-linkedin",
+        "url": "https://linkedin.com/in/yourprofile"
+      },
+      {
+        "platform": "GitHub",
+        "icon": "bi bi-github",
+        "url": "https://github.com/yourusername"
+      }
+    ]
+  },
+  "footer": {
+    "copyright": "Your Full Name",
+    "rightsText": "All Rights Reserved"
+  },
+  "theme": {
+    "defaultTheme": "light",
+    "enableThemeToggle": true
+  },
+  "animations": {
+    "enableAOS": true,
+    "enableTyped": true
+  }
+}

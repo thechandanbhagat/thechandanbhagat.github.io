@@ -1,0 +1,8 @@
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'boxicons/css/boxicons.min.css';
+@import 'aos/dist/aos.css';
+
+/* Import custom styles */
+@import './assets/assets/css/style.css';
