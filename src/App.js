@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import AOS from 'aos';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -140,14 +140,12 @@ function App() {
   return (
     <div className="App">
       <Preloader />
-      <Router>
-        <Routes>
-          <Route path="/" element={<TerminalPortfolio />} />
-          <Route path="/classic" element={<Home />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/groupcode" element={<GroupCode />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<TerminalPortfolio />} />
+        <Route path="/classic" element={<Home />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/groupcode" element={<GroupCode />} />
+      </Routes>
     </div>
   );
 }
