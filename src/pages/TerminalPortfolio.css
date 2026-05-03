@@ -1,0 +1,310 @@
+/* @group Styles : Terminal Portfolio - Full viewport terminal IDE design */
+
+.tp-wrap {
+  position: fixed;
+  inset: 0;
+  background: #0d1117;
+  color: #c9d1d9;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.tp-wrap *,
+.tp-wrap *::before,
+.tp-wrap *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* @group TitleBar : macOS-style title bar */
+.tp-titlebar {
+  background: #21262d;
+  border-bottom: 1px solid #30363d;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+  flex-shrink: 0;
+  position: relative;
+  user-select: none;
+}
+
+.tp-tb-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tp-tb-close  { background: #ff5f57; }
+.tp-tb-min    { background: #febc2e; }
+.tp-tb-max    { background: #28c840; }
+
+.tp-tb-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #8b949e;
+  letter-spacing: 0.02em;
+}
+
+.tp-tb-right {
+  margin-left: auto;
+  font-size: 11px;
+  color: #8b949e;
+  display: flex;
+  gap: 16px;
+}
+
+/* @group TabBar : Editor tab strip */
+.tp-tabbar {
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: stretch;
+  height: 32px;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.tp-tabbar::-webkit-scrollbar { display: none; }
+
+.tp-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  font-size: 12px;
+  color: #8b949e;
+  border-right: 1px solid #30363d;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s;
+  flex-shrink: 0;
+}
+
+.tp-tab:hover { background: #21262d; }
+
+.tp-tab.active {
+  background: #0d1117;
+  color: #c9d1d9;
+  border-bottom: 1px solid #0d1117;
+  margin-bottom: -1px;
+}
+
+.tp-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3fb950;
+}
+
+.tp-tab-dot.red    { background: #f85149; }
+.tp-tab-dot.yellow { background: #e3b341; }
+
+/* @group Workspace : Main content area */
+.tp-workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* @group Sidebar : File explorer panel */
+.tp-sidebar {
+  width: 220px;
+  background: #161b22;
+  border-right: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.tp-sidebar-header {
+  padding: 10px 14px;
+  font-size: 11px;
+  color: #8b949e;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #30363d;
+  flex-shrink: 0;
+}
+
+.tp-filetree {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.tp-filetree::-webkit-scrollbar { width: 3px; }
+.tp-filetree::-webkit-scrollbar-thumb { background: #30363d; }
+
+.tp-ft-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 12px;
+  color: #8b949e;
+  cursor: pointer;
+  transition: background 0.1s;
+  white-space: nowrap;
+}
+
+.tp-ft-item:hover { background: #21262d; color: #c9d1d9; }
+.tp-ft-item.active { background: rgba(63, 185, 80, 0.1); color: #56d364; }
+
+.tp-ft-item .icon { width: 16px; text-align: center; flex-shrink: 0; }
+
+.tp-ft-dir   { color: #79c0ff; font-weight: 500; }
+.tp-ft-i1    { padding-left: 30px; }
+.tp-ft-i2    { padding-left: 46px; }
+
+.tp-ft-divider {
+  margin-top: 8px;
+  border-top: 1px solid #30363d;
+  padding-top: 8px;
+}
+
+/* @group Terminal : Main terminal output area */
+.tp-terminal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.tp-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  scroll-behavior: smooth;
+}
+
+.tp-output::-webkit-scrollbar { width: 4px; }
+.tp-output::-webkit-scrollbar-thumb { background: #30363d; }
+
+/* @group OutputLines : Terminal line styles */
+.tp-line {
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.tp-line.gap  { margin-bottom: 10px; }
+.tp-line.gap2 { margin-bottom: 20px; }
+
+/* colors */
+.tp-wrap .g   { color: #3fb950; }
+.tp-wrap .g2  { color: #56d364; }
+.tp-wrap .c   { color: #79c0ff; }
+.tp-wrap .y   { color: #e3b341; }
+.tp-wrap .r   { color: #f85149; }
+.tp-wrap .p   { color: #bc8cff; }
+.tp-wrap .o   { color: #ffa657; }
+.tp-wrap .gr  { color: #8b949e; }
+.tp-wrap .w   { color: #c9d1d9; }
+.tp-wrap .br  { color: #f0f6fc; }
+.tp-wrap .b   { font-weight: 700; }
+.tp-wrap .dim { opacity: 0.5; }
+
+/* prompt */
+.tp-prompt       { display: flex; align-items: center; flex-wrap: wrap; }
+.tp-prompt .user { color: #3fb950; font-weight: 700; }
+.tp-prompt .at   { color: #8b949e; }
+.tp-prompt .host { color: #79c0ff; font-weight: 700; }
+.tp-prompt .colon{ color: #8b949e; }
+.tp-prompt .path { color: #bc8cff; }
+.tp-prompt .dollar{ color: #c9d1d9; margin: 0 8px; }
+.tp-prompt .cmd  { color: #f0f6fc; }
+.tp-prompt .arg  { color: #ffa657; }
+.tp-prompt .flag { color: #e3b341; }
+
+/* @group InputArea : Command input row */
+.tp-input-area {
+  border-top: 1px solid #30363d;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #0d1117;
+  flex-shrink: 0;
+}
+
+.tp-input-area .tp-prompt { flex: 1; }
+
+.tp-cli-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f0f6fc;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  caret-color: #3fb950;
+}
+
+.tp-cli-input::placeholder { color: #8b949e; opacity: 0.6; }
+
+/* @group StatusBar : Bottom status strip */
+.tp-statusbar {
+  background: #1f2937;
+  border-top: 1px solid #30363d;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 0;
+  flex-shrink: 0;
+  font-size: 11px;
+}
+
+.tp-sb-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  border-right: 1px solid #30363d;
+  color: #8b949e;
+  height: 100%;
+}
+
+.tp-sb-item:first-child { background: #3fb950; color: #0d1117; font-weight: 700; }
+.tp-sb-item.blue        { background: #1f6feb; color: #fff; }
+.tp-sb-item.right       { margin-left: auto; border-right: none; border-left: 1px solid #30363d; }
+
+/* @group Cursor : Blinking block cursor */
+.tp-cur {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: #3fb950;
+  animation: tp-cur-blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 1px;
+}
+
+@keyframes tp-cur-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* @group Selection : Text selection color */
+.tp-wrap ::selection {
+  background: rgba(63, 185, 80, 0.3);
+  color: #f0f6fc;
+}
+
+/* @group Responsive : Mobile adjustments */
+@media (max-width: 640px) {
+  .tp-sidebar { display: none; }
+  .tp-wrap    { font-size: 12px; }
+}
