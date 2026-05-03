@@ -43,12 +43,6 @@
       "lineNumbers": "195"
     },
     {
-      "functionality": "legacyhome",
-      "description": "Original multi-section home (kept for /classic route)",
-      "filePath": "src/App.js",
-      "lineNumbers": "18-38"
-    },
-    {
       "functionality": "imports",
       "description": "React core and styles",
       "filePath": "src/pages/TerminalPortfolio.js",
@@ -227,6 +221,12 @@
       "description": "Component JSX",
       "filePath": "src/pages/TerminalPortfolio.js",
       "lineNumbers": "729-864"
+    },
+    {
+      "functionality": "legacyhome",
+      "description": "Original multi-section home (kept for /classic route)",
+      "filePath": "src/App.js",
+      "lineNumbers": "18-38"
     }
   ]
 }

@@ -47,15 +47,6 @@
         "js"
       ]
     },
-    "legacyhome": {
-      "level": 1,
-      "parent": null,
-      "children": [],
-      "groupCount": 1,
-      "fileTypes": [
-        "js"
-      ]
-    },
     "imports": {
       "level": 1,
       "parent": null,
@@ -335,6 +326,15 @@
       ]
     },
     "render": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "legacyhome": {
       "level": 1,
       "parent": null,
       "children": [],
