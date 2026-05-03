@@ -1,6 +1,347 @@
-[
-  "a.width),n.indexof(\"%\")!=-1&&(r=r/100*a.height),s=isnan(s)?0",
-  "[\".concat(this.settings.selector,\"]\")",
-  "(?",
-  "$/i,safe_url_pattern=/^(?"
-]
+{
+  "version": "1.3.0",
+  "totalFunctionalities": 36,
+  "functionalities": {
+    "authentication": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "security": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 2,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "validation": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 2,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "backend": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "utilities": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "legacyhome": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "imports": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "data": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "helpers": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "terminalportfolio": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "state": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "outputhelpers": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands": {
+      "level": 1,
+      "parent": null,
+      "children": [
+        "commands > about",
+        "commands > contact",
+        "commands > experience",
+        "commands > groupcode",
+        "commands > help",
+        "commands > history",
+        "commands > lsla",
+        "commands > misc",
+        "commands > neofetch",
+        "commands > psaux",
+        "commands > skills",
+        "commands > sshhireme",
+        "commands > sudohireme",
+        "commands > talks",
+        "commands > top",
+        "commands > whoami"
+      ],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > help": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > neofetch": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > whoami": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > lsla": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > about": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > experience": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > skills": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > talks": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > contact": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > groupcode": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > psaux": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > top": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > history": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > sshhireme": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > sudohireme": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commands > misc": {
+      "level": 2,
+      "parent": "commands",
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "commandrunner": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "sidebarclick": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "inputhandler": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "bootsequence": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "clock": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "bodyoverride": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    },
+    "render": {
+      "level": 1,
+      "parent": null,
+      "children": [],
+      "groupCount": 1,
+      "fileTypes": [
+        "js"
+      ]
+    }
+  }
+}
