@@ -228,5 +228,111 @@
       "filePath": "src/App.js",
       "lineNumbers": "18-38"
     }
+  ],
+  "tsx": [
+    {
+      "functionality": "motion",
+      "description": "Stagger delay helper for scroll-reveal sequencing",
+      "filePath": "src/pages/PortfolioDossier.tsx",
+      "lineNumbers": "4-7"
+    },
+    {
+      "functionality": "types",
+      "description": "Portfolio dossier data contracts",
+      "filePath": "src/pages/PortfolioDossier.tsx",
+      "lineNumbers": "8-68"
+    },
+    {
+      "functionality": "content",
+      "description": "Curated content for the redesigned portfolio",
+      "filePath": "src/pages/PortfolioDossier.tsx",
+      "lineNumbers": "69-346"
+    },
+    {
+      "functionality": "portfoliodossier",
+      "description": "New root portfolio page",
+      "filePath": "src/pages/PortfolioDossier.tsx",
+      "lineNumbers": "347-350"
+    },
+    {
+      "functionality": "motion",
+      "description": "Scroll-reveal, stat count-up, and read-progress wiring",
+      "filePath": "src/pages/PortfolioDossier.tsx",
+      "lineNumbers": "351-667"
+    }
+  ],
+  "css": [
+    {
+      "functionality": "theme",
+      "description": "Portfolio dossier design tokens",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "1-16"
+    },
+    {
+      "functionality": "base",
+      "description": "Page shell and global dossier behavior",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "18-29"
+    },
+    {
+      "functionality": "hero",
+      "description": "First viewport with real profile image and console signature",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "42-54"
+    },
+    {
+      "functionality": "proof",
+      "description": "Outcome strip below hero",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "284-290"
+    },
+    {
+      "functionality": "sections",
+      "description": "Shared portfolio section layout",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "323-326"
+    },
+    {
+      "functionality": "cases",
+      "description": "Delivery record cards",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "360-364"
+    },
+    {
+      "functionality": "fieldnotes",
+      "description": "Visual project and speaking highlights",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "439-444"
+    },
+    {
+      "functionality": "capabilities",
+      "description": "Skill groups",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "522-527"
+    },
+    {
+      "functionality": "tools",
+      "description": "Published package and extension registry section",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "568-571"
+    },
+    {
+      "functionality": "credentials",
+      "description": "Certifications, teaching, and education from CV",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "645-648"
+    },
+    {
+      "functionality": "contact",
+      "description": "Final call to action",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "712-721"
+    },
+    {
+      "functionality": "responsive",
+      "description": "Tablet and mobile refinements",
+      "filePath": "src/pages/PortfolioDossier.css",
+      "lineNumbers": "773-782"
+    }
   ]
 }
