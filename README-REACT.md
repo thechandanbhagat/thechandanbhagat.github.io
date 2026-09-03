@@ -187,3 +187,7 @@ This React application was migrated from a static HTML website with the followin
 - ✅ TypeScript ready (can be added later)
 
 The original static files are preserved in the repository for reference.
+
+## Three.js landing page (`/`)
+
+The root route renders `src/pages/Immersive`, a scroll-driven WebGL portfolio built with React Three Fiber: a particle cloud that morphs into a new shape per section, a pearlescent core object, a starfield and light bloom. Content comes from `src/data/profile.ts`, which is shared with the dossier page. The previous root page is still available at `/dossier`.
