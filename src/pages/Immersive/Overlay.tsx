@@ -10,7 +10,7 @@ import {
   registryStats,
 } from '../../data/profile'
 
-// @group Overlay : DOM content layered over the WebGL scene, one section per particle shape
+// @group Overlay : DOM content layered over the WebGL scene, each section steers the camera to a different part of the system
 
 const delay = (index: number, step = 0.08): CSSProperties => ({ '--d': `${index * step}s` } as CSSProperties)
 

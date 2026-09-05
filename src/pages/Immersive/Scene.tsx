@@ -1,70 +1,110 @@
 import { useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
-import MorphParticles from './MorphParticles'
-import Core from './Core'
-import Starfield from './Starfield'
+import Flow from './Flow'
+import Ground from './Ground'
+import Links from './Links'
+import Nodes from './Nodes'
+import { buildPathTexture, buildStateTexture, EDGE_COUNT } from './system'
+import { systemState, tickSystem } from './systemStore'
 import { scrollState } from './scrollStore'
-import { keyframes, particleCountFor, type Quality } from './theme'
+import {
+  cameraKeyframes,
+  COMPACT_ASPECT,
+  COMPACT_WIDTH,
+  FOV_LANDSCAPE,
+  FOV_PORTRAIT,
+  mobileCameraKeyframes,
+  palette,
+  particleCountFor,
+  type Quality,
+} from './theme'
 
-// @group Scene : R3F canvas, camera rig and post-processing stack
+// @group Scene : R3F canvas, the scroll-driven camera path and the per-frame system tick
+
+/** Advances the simulation and pushes edge state into the shared texture before anything draws. */
+function SystemTicker({ stateTexture }: { stateTexture: THREE.DataTexture }) {
+  useFrame((_, delta) => {
+    const dt = Math.min(delta, 0.05)
+    tickSystem(dt, scrollState.progress, scrollState.ready)
+    const data = stateTexture.image.data as Float32Array
+    for (let i = 0; i < EDGE_COUNT; i += 1) {
+      data[i * 4] = systemState.edgeAlive[i]
+      data[i * 4 + 1] = systemState.edgeHighlight[i]
+    }
+    stateTexture.needsUpdate = true
+  })
+  return null
+}
+
+function buildCurves(frames: typeof cameraKeyframes) {
+  return {
+    position: new THREE.CatmullRomCurve3(frames.map((k) => new THREE.Vector3(...k.position)), false, 'centripetal', 0.5),
+    look: new THREE.CatmullRomCurve3(frames.map((k) => new THREE.Vector3(...k.lookAt)), false, 'centripetal', 0.5),
+  }
+}
 
 function CameraRig() {
+  const landscape = useMemo(() => buildCurves(cameraKeyframes), [])
+  const portrait = useMemo(() => buildCurves(mobileCameraKeyframes), [])
   const target = useMemo(() => new THREE.Vector3(), [])
-  const lookAt = useMemo(() => new THREE.Vector3(), [])
-  const lookTarget = useMemo(() => new THREE.Vector3(), [])
+  const look = useMemo(() => new THREE.Vector3(), [])
+  const lookSmooth = useMemo(() => new THREE.Vector3(...cameraKeyframes[0].lookAt), [])
+  const offset = useMemo(() => new THREE.Vector3(), [])
 
   useFrame((state, delta) => {
     const dt = Math.min(delta, 0.05)
-    const { morph, pointer, reducedMotion } = scrollState
-    const from = Math.min(Math.floor(morph), keyframes.length - 1)
-    const to = Math.min(from + 1, keyframes.length - 1)
-    const mix = from === to ? 0 : morph - from
-    const kfFrom = keyframes[from]
-    const kfTo = keyframes[to]
-
-    // Push the camera back on narrow screens so the composition still fits.
+    const { progress, pointer, reducedMotion } = scrollState
+    const t = THREE.MathUtils.clamp(progress / (cameraKeyframes.length - 1), 0, 1)
     const aspect = state.viewport.aspect
-    const distanceScale = aspect < 1 ? 1.55 : aspect < 1.4 ? 1.2 : 1
+    // Must agree with the CSS breakpoint that opens the top window in each section.
+    const isPortrait = aspect < COMPACT_ASPECT || state.size.width < COMPACT_WIDTH
+    const curves = isPortrait ? portrait : landscape
+    curves.position.getPoint(t, target)
+    curves.look.getPoint(t, look)
+
+    // Portrait phones get their own framing and a wider lens; tablets back the desktop camera off a little.
+    const camera = state.camera as THREE.PerspectiveCamera
+    const fov = isPortrait ? FOV_PORTRAIT : FOV_LANDSCAPE
+    if (camera.fov !== fov) {
+      camera.fov = fov
+      camera.updateProjectionMatrix()
+    }
+    const distance = isPortrait ? 1 : aspect < 1.2 ? 1.35 : aspect < 1.6 ? 1.12 : 1
+    offset.copy(target).sub(look).multiplyScalar(distance)
+    target.copy(look).add(offset)
+
     const parallax = reducedMotion ? 0 : 1
+    target.x += pointer.x * 0.5 * parallax
+    target.y += pointer.y * 0.25 * parallax
 
-    target.set(
-      THREE.MathUtils.lerp(kfFrom.camera[0], kfTo.camera[0], mix) + pointer.x * 0.45 * parallax,
-      THREE.MathUtils.lerp(kfFrom.camera[1], kfTo.camera[1], mix) + pointer.y * 0.3 * parallax,
-      THREE.MathUtils.lerp(kfFrom.camera[2], kfTo.camera[2], mix) * distanceScale
-    )
-    state.camera.position.lerp(target, dt * 2.6)
-
-    lookTarget.set(pointer.x * 0.2 * parallax, pointer.y * 0.15 * parallax, 0)
-    lookAt.lerp(lookTarget, dt * 3)
-    state.camera.lookAt(lookAt)
-    state.camera.rotation.z += THREE.MathUtils.lerp(kfFrom.tilt, kfTo.tilt, mix) * parallax
+    state.camera.position.lerp(target, dt * 2.2)
+    lookSmooth.lerp(look, dt * 2.2)
+    state.camera.lookAt(lookSmooth)
   })
 
   return null
 }
 
 export default function Scene({ quality }: { quality: Quality }) {
+  const pathTexture = useMemo(() => buildPathTexture(), [])
+  const stateTexture = useMemo(() => buildStateTexture(), [])
+
   return (
     <Canvas
       dpr={[1, quality === 'high' ? 1.75 : 1.25]}
-      camera={{ fov: 42, near: 0.1, far: 140, position: [0, 0, 8] }}
-      gl={{ antialias: false, powerPreference: 'high-performance', alpha: false, stencil: false }}
+      camera={{ fov: FOV_LANDSCAPE, near: 0.5, far: 90, position: cameraKeyframes[0].position }}
+      gl={{ antialias: true, powerPreference: 'high-performance', alpha: false, stencil: false }}
       style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}
     >
-      <color attach="background" args={['#0a0c12']} />
-      <fog attach="fog" args={['#0a0c12', 14, 48]} />
+      <color attach="background" args={[palette.background]} />
+      <fog attach="fog" args={[palette.background, 24, 60]} />
+      <SystemTicker stateTexture={stateTexture} />
       <CameraRig />
-      <Starfield count={quality === 'high' ? 2200 : 1000} />
-      <MorphParticles count={particleCountFor(quality)} />
-      <Core />
-      {quality === 'high' && (
-        <EffectComposer multisampling={0}>
-          <Bloom mipmapBlur intensity={0.55} luminanceThreshold={0.38} luminanceSmoothing={0.5} radius={0.65} />
-          <Vignette eskil={false} offset={0.2} darkness={0.75} />
-        </EffectComposer>
-      )}
+      <Ground />
+      <Links pathTexture={pathTexture} stateTexture={stateTexture} />
+      <Flow count={particleCountFor(quality)} pathTexture={pathTexture} stateTexture={stateTexture} />
+      <Nodes />
     </Canvas>
   )
 }

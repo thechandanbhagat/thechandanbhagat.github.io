@@ -1,36 +1,56 @@
-// @group Theme : Per-section colour palettes, object keyframes and quality detection for the immersive scene
+// @group Theme : Palette, per-section camera keyframes and quality detection for the living-system scene
 
-export interface SectionPalette {
-  a: string
-  b: string
-  c: string
+/** Restrained palette: silver, one soft blue accent, champagne for events, muted amber for alerts */
+export const palette = {
+  background: '#0a0c12',
+  glass: '#1a2233',
+  rim: '#e6ecf5',
+  accent: '#9cc3ff',
+  warm: '#d9c39a',
+  alert: '#d9a05b',
+  request: '#e8ecf4',
+  event: '#d9c39a',
+  deploy: '#9cc3ff',
+  grid: '#f4f5f7',
 }
 
-export const sectionPalettes: SectionPalette[] = [
-  { a: '#dfe7f5', b: '#9cc3ff', c: '#ffffff' }, // hero — silver / soft blue
-  { a: '#cfd8e8', b: '#8fb4f0', c: '#ffffff' }, // about
-  { a: '#e8e2d6', b: '#c9b48a', c: '#fff8ea' }, // experience — ivory / champagne
-  { a: '#d5dde9', b: '#9cc3ff', c: '#ffffff' }, // capabilities
-  { a: '#e3e8f0', b: '#aac6f5', c: '#ffffff' }, // registry
-  { a: '#dfe7f5', b: '#9cc3ff', c: '#ffffff' }, // contact
-]
-
-export interface Keyframe {
-  core: [number, number, number]
-  coreScale: number
-  camera: [number, number, number]
-  tilt: number
+export interface CameraKeyframe {
+  position: [number, number, number]
+  lookAt: [number, number, number]
 }
 
-/** Where the hero core and camera sit for each section (desktop layout) */
-export const keyframes: Keyframe[] = [
-  { core: [0, 0, 0], coreScale: 1.15, camera: [0, 0, 8], tilt: 0 },
-  { core: [2.9, 0.3, -1.2], coreScale: 0.75, camera: [0.4, 0.2, 8.4], tilt: -0.04 },
-  { core: [-3.1, 0.1, -1.6], coreScale: 0.55, camera: [-0.3, 0.1, 8.8], tilt: 0.05 },
-  { core: [3.0, -0.2, -1.4], coreScale: 0.65, camera: [0.3, -0.1, 8.2], tilt: -0.03 },
-  { core: [-3.0, 0.4, -1.8], coreScale: 0.6, camera: [-0.4, 0.3, 9.0], tilt: 0.06 },
-  { core: [3.4, -1.9, -1.5], coreScale: 0.5, camera: [0, 0.2, 8.2], tilt: 0 },
+/**
+ * Where the camera sits for each section (desktop). Sections with copy on the left push the
+ * focus to the right of the screen and vice versa, so the diorama never hides behind the text.
+ */
+export const cameraKeyframes: CameraKeyframe[] = [
+  { position: [1.0, 11.0, 16.0], lookAt: [-0.6, 0, -1.6] }, // hero — full overview
+  { position: [-8.3, 15.4, 21.2], lookAt: [-8.3, 0, 2.9] }, // about — request path, copy on the left
+  { position: [-2.2, 18.0, 22.8], lookAt: [7.8, 0, 3.9] }, // experience — media pipeline + RAG, copy on the right
+  { position: [-19.4, 15.1, 12.0], lookAt: [-8.9, 0, -7.7] }, // capabilities — delivery pipeline, copy on the left
+  { position: [11.3, 19.4, 6.5], lookAt: [2.5, 0, -10.1] }, // registry — registries and cluster, copy on the right
+  { position: [-4.0, 13.0, 17.0], lookAt: [-0.6, 0, -1.8] }, // contact — calm overview from the other side
 ]
+
+/**
+ * Portrait phones: every section opens with a clear window at the top of the viewport
+ * (the hero keeps its copy at the top and the window below), so the focus is framed there.
+ */
+export const mobileCameraKeyframes: CameraKeyframe[] = [
+  { position: [-0.5, 33.9, 17.5], lookAt: [-0.5, 0, -10.5] }, // hero — overview in the lower half
+  { position: [-2.3, 16.0, 25.3], lookAt: [-2.3, 0, 4.8] }, // about — request path
+  { position: [-3.2, 12.9, 16.0], lookAt: [-0.2, 0, 3.9] }, // experience — media pipeline + RAG
+  { position: [-8.9, 15.9, 5.8], lookAt: [-5.0, 0, -1.7] }, // capabilities — delivery pipeline
+  { position: [-3.3, 17.0, 8.4], lookAt: [-1.5, 0, -2.0] }, // registry — registries and cluster
+  { position: [-0.5, 32.0, 22.0], lookAt: [-0.5, 0, 7.0] }, // contact — overview in the top window
+]
+
+/** Below this width, or below this aspect ratio, the page uses the phone layout and the portrait camera */
+export const COMPACT_WIDTH = 900
+export const COMPACT_ASPECT = 0.9
+
+export const FOV_LANDSCAPE = 34
+export const FOV_PORTRAIT = 48
 
 export type Quality = 'high' | 'low'
 
@@ -45,5 +65,5 @@ export function detectQuality(): Quality {
 }
 
 export function particleCountFor(quality: Quality) {
-  return quality === 'high' ? 42000 : 14000
+  return quality === 'high' ? 9000 : 3600
 }

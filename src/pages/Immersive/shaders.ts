@@ -1,198 +1,260 @@
-// @group Shaders : GLSL for the morphing particle field and the pearlescent core
+// @group Shaders : GLSL for the message flow, the glass nodes, the edge traces and the ground grid
 
-const simplexNoise = /* glsl */ `
-vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
-vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+/** Shared helpers: sample a point along an edge's baked path and read the edge state row. */
+const pathSampling = /* glsl */ `
+uniform sampler2D uPath;
+uniform sampler2D uState;
+uniform float uEdgeCount;
+uniform float uSamples;
 
-float snoise(vec3 v) {
-  const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
-  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
-  vec3 i = floor(v + dot(v, C.yyy));
-  vec3 x0 = v - i + dot(i, C.xxx);
-  vec3 g = step(x0.yzx, x0.xyz);
-  vec3 l = 1.0 - g;
-  vec3 i1 = min(g.xyz, l.zxy);
-  vec3 i2 = max(g.xyz, l.zxy);
-  vec3 x1 = x0 - i1 + C.xxx;
-  vec3 x2 = x0 - i2 + C.yyy;
-  vec3 x3 = x0 - D.yyy;
-  i = mod289(i);
-  vec4 p = permute(permute(permute(
-    i.z + vec4(0.0, i1.z, i2.z, 1.0))
-    + i.y + vec4(0.0, i1.y, i2.y, 1.0))
-    + i.x + vec4(0.0, i1.x, i2.x, 1.0));
-  float n_ = 0.142857142857;
-  vec3 ns = n_ * D.wyz - D.xzx;
-  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
-  vec4 x_ = floor(j * ns.z);
-  vec4 y_ = floor(j - 7.0 * x_);
-  vec4 x = x_ * ns.x + ns.yyyy;
-  vec4 y = y_ * ns.x + ns.yyyy;
-  vec4 h = 1.0 - abs(x) - abs(y);
-  vec4 b0 = vec4(x.xy, y.xy);
-  vec4 b1 = vec4(x.zw, y.zw);
-  vec4 s0 = floor(b0) * 2.0 + 1.0;
-  vec4 s1 = floor(b1) * 2.0 + 1.0;
-  vec4 sh = -step(h, vec4(0.0));
-  vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-  vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-  vec3 p0 = vec3(a0.xy, h.x);
-  vec3 p1 = vec3(a0.zw, h.y);
-  vec3 p2 = vec3(a1.xy, h.z);
-  vec3 p3 = vec3(a1.zw, h.w);
-  vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
-  p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
-  vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
-  m = m * m;
-  return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+vec3 samplePath(float edge, float t) {
+  float x = clamp(t, 0.0, 1.0) * (uSamples - 1.0);
+  float i0 = floor(x);
+  float f = x - i0;
+  float row = (edge + 0.5) / uEdgeCount;
+  vec3 p0 = texture2D(uPath, vec2((i0 + 0.5) / uSamples, row)).xyz;
+  vec3 p1 = texture2D(uPath, vec2((min(i0 + 1.0, uSamples - 1.0) + 0.5) / uSamples, row)).xyz;
+  return mix(p0, p1, f);
+}
+
+vec4 edgeState(float edge) {
+  return texture2D(uState, vec2(0.5, (edge + 0.5) / uEdgeCount));
+}
+
+vec3 kindColor(float kind, vec3 request, vec3 event, vec3 deploy) {
+  if (kind < 0.5) return request;
+  if (kind < 1.5) return event;
+  return deploy;
 }
 `
 
-export const particleVertex = /* glsl */ `
-${simplexNoise}
+export const flowVertex = /* glsl */ `
+${pathSampling}
 
-attribute vec3 aShape0;
-attribute vec3 aShape1;
-attribute vec3 aShape2;
-attribute vec3 aShape3;
-attribute vec3 aShape4;
-attribute vec3 aShape5;
-attribute float aRand;
-attribute float aSeed;
+attribute float aEdge;
+attribute float aPhase;
+attribute float aRate;
+attribute float aSize;
+attribute vec3 aOffset;
 
 uniform float uTime;
-uniform float uFrom;
-uniform float uTo;
-uniform float uMix;
 uniform float uPixelRatio;
-uniform vec3 uMouse;
-uniform float uMouseStrength;
-uniform vec3 uColorA;
-uniform vec3 uColorB;
-uniform vec3 uColorC;
+uniform float uReveal;
+uniform vec3 uRequest;
+uniform vec3 uEvent;
+uniform vec3 uDeploy;
 
-varying float vAlpha;
 varying vec3 vColor;
-
-vec3 pickShape(float index) {
-  if (index < 0.5) return aShape0;
-  if (index < 1.5) return aShape1;
-  if (index < 2.5) return aShape2;
-  if (index < 3.5) return aShape3;
-  if (index < 4.5) return aShape4;
-  return aShape5;
-}
+varying float vAlpha;
 
 void main() {
-  vec3 from = pickShape(uFrom);
-  vec3 to = pickShape(uTo);
+  vec4 st = edgeState(aEdge);
+  float alive = st.x;
+  float highlight = st.y;
+  float t = fract(uTime * aRate + aPhase);
 
-  // Per-particle staggered easing so the swarm peels apart instead of sliding as a block.
-  float t = clamp((uMix - aRand * 0.4) / 0.6, 0.0, 1.0);
-  t = t * t * (3.0 - 2.0 * t);
-  vec3 p = mix(from, to, t);
+  vec3 p = samplePath(aEdge, t);
+  vec3 pAlt = samplePath(st.w, t);
+  bool hasAlt = abs(st.w - aEdge) > 0.5;
+  p = hasAlt ? mix(pAlt, p, alive) : p;
+  // Loose, slowly drifting spread so streams read as packets rather than a solid rope.
+  float wobble = 1.0 + 0.35 * sin(uTime * 1.4 + aPhase * 31.0);
+  p += aOffset * (0.09 * wobble + 0.04 * (1.0 - alive));
 
-  // Gentle outward arc mid-transition.
-  float arc = sin(t * 3.14159265);
-  p += normalize(p + vec3(0.0001, 0.0002, 0.0003)) * arc * (0.4 + aRand * 0.8);
+  // Fade at both ends so packets appear to leave one node and land in the next.
+  float ends = smoothstep(0.0, 0.08, t) * (1.0 - smoothstep(0.9, 1.0, t));
+  float presence = hasAlt ? 1.0 : alive;
+  float emphasis = 0.55 + 0.45 * clamp(highlight, 0.0, 1.0);
+  float dim = 1.0 + min(highlight, 0.0);
+  vAlpha = ends * presence * emphasis * dim * uReveal;
 
-  // Slow organic drift.
-  float n1 = snoise(p * 0.7 + vec3(uTime * 0.12, 0.0, 0.0));
-  float n2 = snoise(p * 0.7 + vec3(0.0, uTime * 0.1, 31.0));
-  float n3 = snoise(p * 0.7 + vec3(53.0, 0.0, uTime * 0.14));
-  p += vec3(n1, n2, n3) * 0.12 * (0.6 + aSeed * 0.8);
+  vec3 base = kindColor(st.z, uRequest, uEvent, uDeploy);
+  vColor = mix(base, vec3(1.0), clamp(highlight, 0.0, 1.0) * 0.35);
 
-  vec4 world = modelMatrix * vec4(p, 1.0);
-
-  // Pointer repulsion in world space.
-  vec3 diff = world.xyz - uMouse;
-  float push = smoothstep(2.0, 0.0, length(diff)) * uMouseStrength;
-  world.xyz += normalize(diff + vec3(0.0001)) * push;
-
-  vec4 mv = viewMatrix * world;
+  vec4 mv = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * mv;
-
-  float size = (0.45 + aRand * 1.1) * (1.0 + arc * 0.6);
-  gl_PointSize = size * uPixelRatio * (9.0 / max(-mv.z, 0.1));
-
-  float depthFade = smoothstep(-22.0, -2.0, mv.z);
-  vAlpha = (0.3 + aSeed * 0.6) * depthFade;
-
-  vec3 base = mix(uColorA, uColorB, clamp(0.5 + 0.5 * n1, 0.0, 1.0));
-  vColor = mix(base, uColorC, aSeed * aSeed * 0.7);
+  float size = aSize * (1.0 + clamp(highlight, 0.0, 1.0) * 0.6);
+  gl_PointSize = size * uPixelRatio * (28.0 / -mv.z);
 }
 `
 
-export const particleFragment = /* glsl */ `
-varying float vAlpha;
+export const flowFragment = /* glsl */ `
 varying vec3 vColor;
+varying float vAlpha;
 
 void main() {
-  float d = length(gl_PointCoord - 0.5);
+  vec2 uv = gl_PointCoord - 0.5;
+  float d = length(uv);
   if (d > 0.5) discard;
-  float soft = smoothstep(0.5, 0.05, d);
-  float core = smoothstep(0.16, 0.0, d);
-  gl_FragColor = vec4(vColor + core * 0.3, soft * soft * vAlpha);
+  float core = smoothstep(0.5, 0.12, d);
+  float alpha = core * vAlpha;
+  if (alpha < 0.01) discard;
+  gl_FragColor = vec4(vColor, alpha * 0.85);
+  #include <colorspace_fragment>
 }
 `
 
-export const coreVertex = /* glsl */ `
-${simplexNoise}
+export const linkVertex = /* glsl */ `
+${pathSampling}
 
-uniform float uTime;
-uniform float uDistort;
+attribute float aEdge;
+attribute float aT;
 
-varying vec3 vNormal;
-varying vec3 vView;
-varying float vDisp;
+uniform vec3 uRequest;
+uniform vec3 uEvent;
+uniform vec3 uDeploy;
+uniform float uReveal;
+
+varying vec3 vColor;
+varying float vAlpha;
 
 void main() {
-  float n = snoise(position * 1.6 + vec3(uTime * 0.3, uTime * 0.2, -uTime * 0.25));
-  float n2 = snoise(position * 4.2 - vec3(uTime * 0.4));
-  float disp = (n * 0.14 + n2 * 0.03) * uDistort;
-  vec4 mv = modelViewMatrix * vec4(position + normal * disp, 1.0);
-
-  vNormal = normalize(normalMatrix * normal);
-  vView = normalize(-mv.xyz);
-  vDisp = disp;
-
-  gl_Position = projectionMatrix * mv;
+  vec4 st = edgeState(aEdge);
+  vec3 p = samplePath(aEdge, aT);
+  vec3 base = kindColor(st.z, uRequest, uEvent, uDeploy);
+  float h = clamp(st.y, 0.0, 1.0);
+  float dim = 1.0 + min(st.y, 0.0);
+  vColor = mix(base, vec3(1.0), h * 0.4);
+  // Trace fades toward the middle of the span so nodes read as the anchors.
+  float span = 0.55 + 0.45 * abs(aT - 0.5) * 2.0;
+  vAlpha = (0.05 + 0.18 * h) * dim * span * (0.25 + 0.75 * st.x) * uReveal;
+  gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
 }
 `
 
-export const coreFragment = /* glsl */ `
+export const linkFragment = /* glsl */ `
+varying vec3 vColor;
+varying float vAlpha;
+
+void main() {
+  gl_FragColor = vec4(vColor, vAlpha);
+  #include <colorspace_fragment>
+}
+`
+
+export const nodeVertex = /* glsl */ `
+attribute vec3 aState; // alive, highlight, kind
+attribute float aStagger;
+
+uniform float uReveal;
+
+varying vec3 vLocal;
+varying vec3 vWorldNormal;
+varying vec3 vViewDir;
+varying vec3 vState;
+
+void main() {
+  vState = aState;
+  vLocal = position;
+  float grow = smoothstep(aStagger, aStagger + 0.45, uReveal);
+  vec3 scaled = vec3(position.x, (position.y + 0.5) * grow - 0.5, position.z);
+  vec4 world = modelMatrix * instanceMatrix * vec4(scaled, 1.0);
+  vWorldNormal = normalize(mat3(modelMatrix * instanceMatrix) * normal);
+  vViewDir = normalize(cameraPosition - world.xyz);
+  gl_Position = projectionMatrix * viewMatrix * world;
+}
+`
+
+export const nodeFragment = /* glsl */ `
 uniform float uTime;
-uniform vec3 uTintA;
-uniform vec3 uTintB;
-uniform vec3 uTintC;
+uniform vec3 uGlass;
+uniform vec3 uRim;
+uniform vec3 uAccent;
+uniform vec3 uWarm;
+uniform vec3 uAlert;
 
-varying vec3 vNormal;
-varying vec3 vView;
-varying float vDisp;
+varying vec3 vLocal;
+varying vec3 vWorldNormal;
+varying vec3 vViewDir;
+varying vec3 vState;
 
-// Low-amplitude pearlescent palette: mostly silver with a faint blue shimmer.
-vec3 palette(float t) {
-  return vec3(0.82, 0.85, 0.9) + vec3(0.1, 0.08, 0.12) * cos(6.28318 * (t + vec3(0.0, 0.2, 0.5)));
+void main() {
+  float alive = vState.x;
+  float highlight = vState.y;
+  float kind = vState.z;
+
+  float fresnel = pow(1.0 - clamp(dot(normalize(vWorldNormal), normalize(vViewDir)), 0.0, 1.0), 2.2);
+  vec3 tint = kind < 0.5 ? uRim : (kind < 1.5 ? uAccent : uWarm);
+
+  // Body: deep glass with a soft vertical gradient and a fresnel rim.
+  float vertical = smoothstep(-0.5, 0.5, vLocal.y);
+  vec3 color = mix(uGlass * 0.6, uGlass * 1.4, vertical);
+  color += tint * fresnel * (0.45 + highlight * 0.7);
+  // Top face catches a little light; a fine bright lip runs around it.
+  float topFace = smoothstep(0.6, 1.0, vWorldNormal.y);
+  color += tint * topFace * (0.1 + highlight * 0.2);
+  float topEdge = (1.0 - smoothstep(0.0, 0.03, 0.5 - vLocal.y)) * (1.0 - topFace);
+  color += uRim * topEdge * (0.4 + highlight * 0.5);
+
+  // Status strip along the base: accent when healthy, pulsing alert when offline.
+  float strip = 1.0 - smoothstep(0.0, 0.08, vLocal.y + 0.5 - 0.05);
+  float pulse = 0.6 + 0.4 * sin(uTime * 5.0);
+  vec3 stripColor = mix(uAlert * pulse, uAccent, alive);
+  color = mix(color, stripColor, strip * 0.9);
+
+  float alpha = 0.26 + fresnel * 0.5 + topEdge * 0.5 + strip * 0.5 + topFace * 0.08 + highlight * 0.18;
+  // Offline nodes lose their body and keep only the outline.
+  alpha *= mix(0.55, 1.0, alive);
+  gl_FragColor = vec4(color, clamp(alpha, 0.0, 1.0));
+  #include <colorspace_fragment>
+}
+`
+
+export const groundVertex = /* glsl */ `
+varying vec3 vWorld;
+void main() {
+  vec4 world = modelMatrix * vec4(position, 1.0);
+  vWorld = world.xyz;
+  gl_Position = projectionMatrix * viewMatrix * world;
+}
+`
+
+export const groundFragment = /* glsl */ `
+uniform vec3 uLine;
+uniform float uReveal;
+varying vec3 vWorld;
+
+float gridLine(vec2 p, float scale, float width) {
+  vec2 g = abs(fract(p * scale - 0.5) - 0.5) / fwidth(p * scale);
+  float line = 1.0 - min(min(g.x, g.y), 1.0);
+  return line * width;
 }
 
 void main() {
-  vec3 n = normalize(vNormal);
-  vec3 v = normalize(vView);
-  float ndv = clamp(dot(n, v), 0.0, 1.0);
-  float fresnel = pow(1.0 - ndv, 2.6);
+  vec2 p = vWorld.xz;
+  float fine = gridLine(p, 1.0, 1.0);
+  float coarse = gridLine(p, 0.25, 1.0);
+  float falloff = 1.0 - smoothstep(6.0, 17.0, length(p - vec2(-0.6, -1.4)));
+  float alpha = (fine * 0.035 + coarse * 0.06) * falloff * uReveal;
+  gl_FragColor = vec4(uLine, alpha);
+  #include <colorspace_fragment>
+}
+`
 
-  vec3 sheen = palette(fresnel * 1.6 + vDisp * 2.5 + uTime * 0.08);
-  vec3 tint = mix(uTintA, uTintB, smoothstep(-0.2, 0.2, vDisp));
-  tint = mix(tint, uTintC, fresnel);
+export const decalVertex = /* glsl */ `
+attribute vec3 aState;
+varying vec2 vUv;
+varying vec3 vState;
+void main() {
+  vUv = uv;
+  vState = aState;
+  gl_Position = projectionMatrix * viewMatrix * modelMatrix * instanceMatrix * vec4(position, 1.0);
+}
+`
 
-  vec3 color = mix(tint, sheen, 0.35) * (0.16 + fresnel * 1.25);
-  color += uTintC * pow(1.0 - ndv, 6.0) * 1.1;
-
-  vec3 h = normalize(normalize(vec3(0.6, 0.9, 0.7)) + v);
-  color += vec3(1.0) * pow(max(dot(n, h), 0.0), 60.0) * 0.6;
-
-  gl_FragColor = vec4(color, 1.0);
+export const decalFragment = /* glsl */ `
+uniform vec3 uAccent;
+uniform vec3 uAlert;
+uniform float uReveal;
+varying vec2 vUv;
+varying vec3 vState;
+void main() {
+  float d = length((vUv - 0.5) * vec2(1.0, 1.6));
+  float glow = smoothstep(0.5, 0.0, d);
+  glow *= glow;
+  vec3 color = mix(uAlert, uAccent, vState.x);
+  float alpha = glow * (0.07 + vState.y * 0.12 + (1.0 - vState.x) * 0.1) * uReveal;
+  gl_FragColor = vec4(color, alpha);
+  #include <colorspace_fragment>
 }
 `

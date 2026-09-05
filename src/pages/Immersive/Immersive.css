@@ -1,4 +1,4 @@
-/* @group ImmersiveStyles : Overlay, typography and motion for the Three.js landing page */
+/* @group ImmersiveStyles : Overlay, typography, HUD and motion for the Three.js landing page */
 
 .imm {
   --bg: #0a0c12;
@@ -633,6 +633,82 @@ body.dark-theme .imm .imm-section {
   transform: none;
 }
 
+/* ---------- System HUD ---------- */
+
+.imm-hud {
+  position: fixed;
+  left: clamp(20px, 4vw, 56px);
+  bottom: 28px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  align-items: center;
+  max-width: min(420px, calc(100vw - 40px));
+  padding: 10px 14px 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  color: var(--muted);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s var(--ease) 1.4s, transform 0.8s var(--ease) 1.4s;
+}
+
+.imm.is-ready .imm-hud {
+  opacity: 1;
+  transform: none;
+}
+
+.imm-hud__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.imm-hud__title {
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+}
+
+.imm-hud__body {
+  grid-column: 2;
+}
+
+.imm-hud--hover .imm-hud__dot {
+  background: #e6ecf5;
+  box-shadow: 0 0 0 3px rgba(230, 236, 245, 0.18);
+}
+
+.imm-hud--alert .imm-hud__dot {
+  background: #d9a05b;
+  box-shadow: 0 0 0 3px rgba(217, 160, 91, 0.22);
+  animation: imm-hud-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes imm-hud-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(217, 160, 91, 0.22);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(217, 160, 91, 0.08);
+  }
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1080px) {
@@ -645,7 +721,8 @@ body.dark-theme .imm .imm-section {
   }
 }
 
-@media (max-width: 760px) {
+/* Phone layout. Keep in step with COMPACT_WIDTH / COMPACT_ASPECT in theme.ts */
+@media (max-width: 900px), (max-aspect-ratio: 9/10) {
   .imm {
     font-size: 1rem;
   }
@@ -658,17 +735,44 @@ body.dark-theme .imm .imm-section {
     gap: 16px;
   }
 
+  /* Every section opens with a clear window onto the diorama, then the copy scrolls over it */
   .imm-section {
-    padding: 110px 0 90px;
+    padding: 42svh 0 80px;
   }
 
-  /* Soften the scene behind dense text on narrow screens */
   .imm .imm-section:not(.imm-section--hero) {
-    background: linear-gradient(180deg, rgba(10, 12, 18, 0) 0%, rgba(10, 12, 18, 0.6) 18%, rgba(10, 12, 18, 0.6) 82%, rgba(10, 12, 18, 0) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(10, 12, 18, 0) 0,
+      rgba(10, 12, 18, 0) 34svh,
+      rgba(10, 12, 18, 0.72) 42svh,
+      rgba(10, 12, 18, 0.72) calc(100% - 70px),
+      rgba(10, 12, 18, 0) 100%
+    );
+  }
+
+  /* The hero flips it: copy at the top, the system in the lower half */
+  .imm-section--hero {
+    justify-content: flex-start;
+    padding: 104px 0 0;
   }
 
   .imm-hero__title {
-    font-size: clamp(2.6rem, 14vw, 6rem);
+    font-size: clamp(2.2rem, 10.5vw, 6rem);
+  }
+
+  /* The status line only appears on phones when something has been taken offline */
+  .imm-hud {
+    display: none;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+    font-size: 0.68rem;
+  }
+
+  .imm-hud--alert {
+    display: grid;
   }
 
   .imm-hero__line--muted {

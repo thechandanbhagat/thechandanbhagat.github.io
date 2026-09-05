@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Lenis from 'lenis'
 import Overlay from './Overlay'
+import SystemHud from './SystemHud'
 import { measureSections, scrollState, updateScroll } from './scrollStore'
 import { detectQuality } from './theme'
 import './Immersive.css'
@@ -54,10 +55,12 @@ function usePointer() {
     const onMove = (event: PointerEvent) => {
       scrollState.pointer.x = (event.clientX / window.innerWidth) * 2 - 1
       scrollState.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1
+      scrollState.pointerActive = event.pointerType !== 'touch'
     }
     const onLeave = () => {
       scrollState.pointer.x = 0
       scrollState.pointer.y = 0
+      scrollState.pointerActive = false
     }
     window.addEventListener('pointermove', onMove, { passive: true })
     document.addEventListener('mouseleave', onLeave)
@@ -142,6 +145,7 @@ export default function Immersive() {
       </header>
 
       <Overlay onNavigate={navigate} />
+      <SystemHud />
     </div>
   )
 }

@@ -190,4 +190,14 @@ The original static files are preserved in the repository for reference.
 
 ## Three.js landing page (`/`)
 
-The root route renders `src/pages/Immersive`, a scroll-driven WebGL portfolio built with React Three Fiber: a particle cloud that morphs into a new shape per section, a pearlescent core object, a starfield and light bloom. Content comes from `src/data/profile.ts`, which is shared with the dossier page. The previous root page is still available at `/dossier`.
+The root route renders `src/pages/Immersive`, a scroll-driven WebGL portfolio built with React Three Fiber. The scene is a living diorama of a distributed system: glass nodes for the gateway, services, Kafka, workers, stores, the RAG path and the delivery pipeline, with thousands of GPU-driven messages flowing along the edges between them. Each section steers the camera to the subsystem it talks about. Hovering a node traces its traffic; clicking one takes it offline so you can watch traffic reroute, and it heals itself a few seconds later.
+
+Key files:
+
+- `system.ts` — nodes, edges, flow curves and which nodes each section focuses on
+- `systemStore.ts` — frame-updated hover, outage and focus state
+- `Flow.tsx`, `Links.tsx`, `Nodes.tsx`, `Ground.tsx` — the four scene layers
+- `theme.ts` — palette and per-section camera keyframes
+- `shaders.ts` — GLSL for all layers
+
+Content comes from `src/data/profile.ts`, which is shared with the dossier page. The previous root page is still available at `/dossier`.
