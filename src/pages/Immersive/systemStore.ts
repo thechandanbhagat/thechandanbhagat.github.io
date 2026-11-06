@@ -1,4 +1,4 @@
-import { EDGE_COUNT, NODE_COUNT, edges, nodes, sectionFocus } from './system'
+import { EDGE_COUNT, NODE_COUNT, links, nodes, sectionFocus } from './systemGraph'
 import { SECTION_IDS } from './scrollStore'
 
 // @group SystemStore : Frame-updated interaction state for the diorama — hover, outages, section focus
@@ -71,9 +71,9 @@ export function isDown(index: number) {
 /** Human-readable reroute target for a node that is offline, if traffic has somewhere to go */
 export function rerouteTargetFor(nodeIdx: number): string | null {
   for (let i = 0; i < EDGE_COUNT; i += 1) {
-    const e = edges[i]
+    const e = links[i]
     if (e.to !== nodeIdx || e.alt === i) continue
-    const alt = edges[e.alt]
+    const alt = links[e.alt]
     return nodes[alt.to].label
   }
   return null
@@ -122,7 +122,7 @@ export function tickSystem(dt: number, progress: number, ready: boolean, now = p
   }
 
   for (let i = 0; i < EDGE_COUNT; i += 1) {
-    const e = edges[i]
+    const e = links[i]
     const alive = Math.min(s.nodeAlive[e.from], s.nodeAlive[e.to])
     s.edgeAlive[i] = alive
     const inFocus = focusSet.has(e.from) && focusSet.has(e.to)

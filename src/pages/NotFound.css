@@ -1,0 +1,85 @@
+/* @group NotFoundStyles : Standalone styles, because this page loads without the landing page's scene or the template CSS */
+
+.nf {
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: min(100% - clamp(40px, 8vw, 112px), 960px);
+  margin: 0 auto;
+  padding: 96px 0;
+  color: #f4f5f7;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nf__trace {
+  margin: 0 0 28px;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: rgba(244, 245, 247, 0.62);
+  overflow-wrap: anywhere;
+}
+
+.nf__path {
+  color: #f4f5f7;
+}
+
+.nf__status {
+  color: #d9a05b;
+}
+
+.nf__title {
+  margin: 0 0 22px;
+  font-family: 'Syne', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #f4f5f7;
+}
+
+.nf__body {
+  max-width: 52ch;
+  margin: 0 0 36px;
+  font-size: clamp(1.02rem, 1.4vw, 1.2rem);
+  color: rgba(244, 245, 247, 0.62);
+}
+
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nf__btn {
+  padding: 13px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: #f4f5f7;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.nf__btn:hover {
+  color: #f4f5f7;
+  border-color: rgba(156, 195, 255, 0.7);
+}
+
+.nf__btn--primary {
+  border-color: #f4f5f7;
+  background: #f4f5f7;
+  color: #0a0c12;
+}
+
+.nf__btn--primary:hover {
+  border-color: #9cc3ff;
+  background: #9cc3ff;
+  color: #0a0c12;
+}

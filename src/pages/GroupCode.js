@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getGroupCodeData } from '../utils/data';
-import './GroupCode.css';
 
 const GroupCode = () => {
   const groupCodeData = getGroupCodeData();

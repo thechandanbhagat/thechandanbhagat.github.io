@@ -1,6 +1,5 @@
 // @group Imports : React core and styles
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import './TerminalPortfolio.css';
 
 // @group Data : Portfolio content for terminal commands
 const DATA = {

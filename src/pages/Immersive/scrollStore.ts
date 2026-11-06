@@ -38,6 +38,15 @@ export function measureSections(root: HTMLElement | null) {
   })
 }
 
+/** The section occupying a given page height */
+export function sectionAt(pageY: number): SectionId {
+  let index = 0
+  sectionTops.forEach((top, i) => {
+    if (pageY >= top) index = i
+  })
+  return SECTION_IDS[index]
+}
+
 export function updateScroll(scrollY: number) {
   if (sectionTops.length < 2) return
   const anchor = scrollY + window.innerHeight * 0.35

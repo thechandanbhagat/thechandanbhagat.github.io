@@ -196,11 +196,12 @@
   background: #f8f9fa;
 }
 
-section {
+/* :where keeps these as weak as bare element rules, but stops them reaching other routes */
+:where(.groupcode-page) section {
   padding: 80px 0;
 }
 
-section h2 {
+:where(.groupcode-page) section h2 {
   font-size: 42px;
   font-weight: 800;
   text-align: center;

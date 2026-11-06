@@ -96,6 +96,24 @@ body.dark-theme .imm .imm-section {
   opacity: 1;
 }
 
+/* Content scrolls beneath the bar, so it gets a backing as soon as the page moves */
+.imm-topbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(10, 12, 18, 0.78);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.imm[data-scrolled='true'] .imm-topbar::before {
+  opacity: 1;
+}
+
 .imm-topbar__brand {
   background: none;
   border: 0;
@@ -204,6 +222,7 @@ body.dark-theme .imm .imm-section {
   line-height: 1.04;
   letter-spacing: -0.03em;
   margin-bottom: 26px;
+  color: var(--ink);
   text-wrap: balance;
 }
 
@@ -386,6 +405,7 @@ body.dark-theme .imm .imm-section {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.22rem;
+  line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
@@ -636,16 +656,19 @@ body.dark-theme .imm .imm-section {
 /* ---------- System HUD ---------- */
 
 .imm-hud {
+  --hud-inset: clamp(20px, 4vw, 56px);
+
   position: fixed;
-  left: clamp(20px, 4vw, 56px);
+  left: var(--hud-inset);
   bottom: 28px;
   z-index: 3;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 1fr;
   grid-template-rows: auto auto;
   column-gap: 10px;
   align-items: center;
-  max-width: min(420px, calc(100vw - 40px));
+  width: 320px;
+  max-width: calc(100vw - 40px);
   padding: 10px 14px 11px;
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -658,14 +681,31 @@ body.dark-theme .imm .imm-section {
   line-height: 1.45;
   color: var(--muted);
   pointer-events: none;
+  transition: opacity 0.4s var(--ease), transform 0.7s var(--ease);
+}
+
+.imm:not(.is-ready) .imm-hud {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.8s var(--ease) 1.4s, transform 0.8s var(--ease) 1.4s;
 }
 
 .imm.is-ready .imm-hud {
-  opacity: 1;
-  transform: none;
+  animation: imm-hud-in 0.8s var(--ease) 1.4s backwards;
+}
+
+@keyframes imm-hud-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+/* Moves to whichever side has no copy at this height, so it never covers the content */
+.imm[data-hud='right'] .imm-hud {
+  transform: translateX(calc(100vw - 100% - 2 * var(--hud-inset)));
+}
+
+.imm[data-hud='hidden'] .imm-hud:not(.imm-hud--alert) {
+  opacity: 0;
 }
 
 .imm-hud__dot {
@@ -711,6 +751,17 @@ body.dark-theme .imm .imm-section {
 
 /* ---------- Responsive ---------- */
 
+/* Too narrow for the full status box beside the copy, so the idle hint shrinks to its title */
+@media (max-width: 1259px) {
+  .imm-hud:not(.imm-hud--alert):not(.imm-hud--hover) {
+    width: auto;
+  }
+
+  .imm-hud:not(.imm-hud--alert):not(.imm-hud--hover) .imm-hud__body {
+    display: none;
+  }
+}
+
 @media (max-width: 1080px) {
   .imm-section--right .imm-content {
     margin-left: 0;
@@ -718,6 +769,19 @@ body.dark-theme .imm .imm-section {
 
   .imm-grid--3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* All copy sits on the left here and fills the width, so there is no free side */
+  .imm-hud {
+    display: none;
+  }
+
+  .imm-hud--alert {
+    display: grid;
+  }
+
+  .imm[data-hud] .imm-hud {
+    transform: none;
   }
 }
 
@@ -767,12 +831,17 @@ body.dark-theme .imm .imm-section {
     left: 16px;
     right: 16px;
     bottom: 16px;
+    width: auto;
     max-width: none;
     font-size: 0.68rem;
   }
 
   .imm-hud--alert {
     display: grid;
+  }
+
+  .imm[data-hud] .imm-hud {
+    transform: none;
   }
 
   .imm-hero__line--muted {
@@ -805,5 +874,13 @@ body.dark-theme .imm .imm-section {
   .imm-hero__actions {
     transition-duration: 0.01s;
     transform: none;
+  }
+
+  .imm-hud {
+    transition-duration: 0.01s;
+  }
+
+  .imm.is-ready .imm-hud {
+    animation: none;
   }
 }
