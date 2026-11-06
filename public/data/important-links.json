@@ -1,129 +1,19 @@
 {
   "links": [
     {
-      "category": "Videos",
-      "items": [
-        {
-          "title": "Azure Service Bus and Functions Event-Driven Development",
-          "url": "https://youtube.com/your-video-id",
-          "description": "Learn event-driven architecture using Azure Services",
-          "platform": "YouTube",
-          "icon": "bx-video",
-          "date": "2024-03-01",
-          "tags": ["azure", "serverless", "integration"],
-          "views": 1000,
-          "duration": "45:00"
-        },
-        {
-          "title": "Building Scalable Microservices with .NET",
-          "url": "https://youtube.com/example2",
-          "description": "Deep dive into microservices architecture",
-          "platform": "YouTube",
-          "icon": "bx-video",
-          "date": "2024-02-15",
-          "tags": ["microservices", "dotnet", "architecture"],
-          "views": 2500,
-          "duration": "60:00"
-        },
-        {
-          "title": "ML.NET: Machine Learning for .NET Developers",
-          "url": "https://youtube.com/example3",
-          "description": "Introduction to ML.NET framework",
-          "platform": "YouTube",
-          "icon": "bx-video",
-          "date": "2024-01-20",
-          "tags": ["ml-net", "ai", "machine-learning"],
-          "views": 1800,
-          "duration": "50:00"
-        },
-        {
-          "title": "Azure Service Bus and Functions - London Reactor",
-          "url": "https://youtube.com/reactor-london",
-          "description": "Event-driven architectures using Azure Service Bus and Functions",
-          "platform": "YouTube",
-          "icon": "bx-video",
-          "date": "2024-05-07",
-          "tags": ["azure", "serverless", "integration"],
-          "duration": "45:00"
-        },
-        {
-          "title": "gRPC Apps in Azure - Nepal Cloud Summit",
-          "url": "https://youtube.com/ncs2022",
-          "description": "Building and deploying gRPC applications in Azure",
-          "platform": "YouTube",
-          "icon": "bx-video",
-          "date": "2022-04-23",
-          "tags": ["azure", "grpc", "cloud"],
-          "duration": "60:00"
-        },
-        {
-          "title": "ML.NET for .NET Applications - Global AI Bootcamp",
-          "url": "https://youtube.com/gaibc2021",
-          "description": "Power your .NET applications with ML.NET",
-          "platform": "YouTube",
-          "icon": "bx-video",
-          "date": "2021-01-16",
-          "tags": ["ml-net", "ai", "dotnet"],
-          "duration": "50:00"
-        }
-      ]
-    },
-    {
       "category": "GitHub Repositories",
       "items": [
         {
-          "title": "Azure Functions Samples",
-          "url": "https://github.com/example/repo1",
-          "description": "Sample code for Azure Functions",
+          "title": "ezpm2gui",
+          "url": "https://github.com/thechandanbhagat/ezpm2gui",
+          "description": "Unofficial GUI for PM2 process management",
           "platform": "GitHub",
           "icon": "bxl-github",
-          "tags": ["samples", "azure-functions", "c-sharp"],
-          "stars": 100
-        },
-        {
-          "title": "Microservices Template",
-          "url": "https://github.com/example/repo2",
-          "description": "Production-ready microservices template",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": ["template", "microservices", "docker"],
-          "stars": 250
-        },
-        {
-          "title": "ML.NET Samples",
-          "url": "https://github.com/example/repo3",
-          "description": "Machine learning examples using ML.NET",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": ["ml-net", "samples", "ai"],
-          "stars": 180
-        },
-        {
-          "title": "Azure Functions Event-Driven Samples",
-          "url": "https://github.com/thechandanbhagat/azure-functions-samples",
-          "description": "Sample code from London Reactor presentation",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": ["azure-functions", "service-bus", "event-driven"],
-          "stars": 120
-        },
-        {
-          "title": "gRPC Azure Examples",
-          "url": "https://github.com/thechandanbhagat/grpc-azure-samples",
-          "description": "Examples from Nepal Cloud Summit 2022",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": ["grpc", "azure", "cloud"],
-          "stars": 85
-        },
-        {
-          "title": "Azure Kubernetes Workshop",
-          "url": "https://github.com/thechandanbhagat/aks-workshop",
-          "description": "Materials from Kubernetes Discovery Day",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": ["kubernetes", "aks", "containers"],
-          "stars": 150
+          "tags": [
+            "pm2",
+            "typescript",
+            "devtools"
+          ]
         },
         {
           "title": "cv-forge",
@@ -131,8 +21,72 @@
           "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
           "platform": "GitHub",
           "icon": "bxl-github",
-          "tags": ["mcp", "cv", "resume", "ats", "typescript", "ai"],
-          "stars": 0
+          "tags": [
+            "mcp",
+            "cv",
+            "resume",
+            "ats",
+            "typescript",
+            "ai"
+          ]
+        },
+        {
+          "title": "Group Code",
+          "url": "https://github.com/thechandanbhagat/group-code",
+          "description": "Navigate large codebases by functionality instead of files",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "vscode",
+            "typescript",
+            "devtools"
+          ]
+        },
+        {
+          "title": "PR Hub",
+          "url": "https://github.com/thechandanbhagat/pr-hub",
+          "description": "AI-powered pull request reviews across GitHub, Azure DevOps, GitLab and Bitbucket",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "vscode",
+            "ai",
+            "code-review"
+          ]
+        },
+        {
+          "title": "Khukuri",
+          "url": "https://github.com/thechandanbhagat/khukuri",
+          "description": "A Nepali slang programming language",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "rust",
+            "language"
+          ]
+        },
+        {
+          "title": "Service Bus Demo",
+          "url": "https://github.com/Demo-by-Chandan/Service-Bus-Demo",
+          "description": "Azure Service Bus demo in C#",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "azure",
+            "service-bus",
+            "c-sharp"
+          ]
+        },
+        {
+          "title": "gRPC Sample",
+          "url": "https://github.com/Demo-by-Chandan/SampleGrpc.Server",
+          "description": "gRPC server sample in C#",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "grpc",
+            "c-sharp"
+          ]
         }
       ]
     },
@@ -145,29 +99,10 @@
           "description": ".NET Essential utilities library",
           "platform": "NuGet",
           "icon": "bx-package",
-          "version": "1.0.0",
-          "downloads": 5000,
-          "tags": ["dotnet", "utilities"]
-        },
-        {
-          "title": "azure-functions-toolkit",
-          "url": "https://www.nuget.org/packages/azure-functions-toolkit",
-          "description": "Tools for Azure Functions development",
-          "platform": "NuGet",
-          "icon": "bx-package",
-          "version": "2.1.0",
-          "downloads": 3500,
-          "tags": ["azure", "functions", "tools"]
-        },
-        {
-          "title": "ml-net-utils",
-          "url": "https://www.nuget.org/packages/ml-net-utils",
-          "description": "Utilities for ML.NET projects",
-          "platform": "NuGet",
-          "icon": "bx-package",
-          "version": "1.2.0",
-          "downloads": 2000,
-          "tags": ["ml-net", "machine-learning", "utilities"]
+          "tags": [
+            "dotnet",
+            "utilities"
+          ]
         },
         {
           "title": "cv-forge",
@@ -175,9 +110,35 @@
           "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
           "platform": "NPM",
           "icon": "bx-package",
-          "version": "1.0.3",
-          "downloads": 0,
-          "tags": ["mcp", "cv", "resume", "ats", "ai"]
+          "tags": [
+            "mcp",
+            "cv",
+            "resume",
+            "ats",
+            "ai"
+          ]
+        },
+        {
+          "title": "ezpm2gui",
+          "url": "https://www.npmjs.com/package/ezpm2gui",
+          "description": "Modern web-based GUI for the PM2 process manager",
+          "platform": "NPM",
+          "icon": "bx-package",
+          "tags": [
+            "pm2",
+            "devtools"
+          ]
+        },
+        {
+          "title": "gitignr",
+          "url": "https://www.npmjs.com/package/gitignr",
+          "description": "Command-line tool that generates .gitignore files",
+          "platform": "NPM",
+          "icon": "bx-package",
+          "tags": [
+            "cli",
+            "git"
+          ]
         }
       ]
     },
@@ -185,34 +146,53 @@
       "category": "Blog Posts",
       "items": [
         {
-          "title": "Best Practices for Azure Architecture",
-          "url": "https://blog.example.com/azure-architecture",
-          "description": "Comprehensive guide for Azure solutions",
-          "platform": "Medium",
+          "title": "FinOps for AI Agents with Node.js and Postgres, Part 1: What the Invoice Cannot Tell You",
+          "url": "https://chandanbhagat.com.np/finops-ai-agents-nodejs-postgres-part-1-what-the-invoice-cannot-tell-you/",
+          "description": "First part of a series on the real cost of running AI agents",
+          "platform": "Blog",
           "icon": "bx-book",
-          "date": "2024-03-10",
-          "tags": ["azure", "architecture", "best-practices"],
-          "readTime": "10 min"
+          "date": "2026-11-05",
+          "tags": [
+            "ai",
+            "finops",
+            "nodejs",
+            "postgres"
+          ]
         },
         {
-          "title": "Microservices Communication Patterns",
-          "url": "https://blog.example.com/microservices",
-          "description": "Deep dive into communication patterns",
-          "platform": "Dev.to",
+          "title": "Bounded Autonomy for AI Agents in Python, Part 1: The Threat Model and One Choke Point",
+          "url": "https://chandanbhagat.com.np/bounded-autonomy-ai-agents-python-part-1-threat-model-gateway/",
+          "description": "First part of a series on keeping AI agents inside safe limits",
+          "platform": "Blog",
           "icon": "bx-book",
-          "date": "2024-02-28",
-          "tags": ["microservices", "architecture", "patterns"],
-          "readTime": "15 min"
+          "date": "2026-10-26",
+          "tags": [
+            "ai",
+            "python",
+            "security"
+          ]
         },
         {
-          "title": "Getting Started with ML.NET",
-          "url": "https://blog.example.com/mlnet",
-          "description": "Beginner's guide to ML.NET",
-          "platform": "Personal Blog",
+          "title": "Event-Driven Architecture in Practice, Part 1: Concepts, Patterns, and Trade-offs",
+          "url": "https://chandanbhagat.com.np/event-driven-architecture-in-practice-part-1-conce/",
+          "description": "First part of a series on building event-driven systems",
+          "platform": "Blog",
           "icon": "bx-book",
-          "date": "2024-02-15",
-          "tags": ["ml-net", "machine-learning", "tutorial"],
-          "readTime": "12 min"
+          "date": "2026-06-18",
+          "tags": [
+            "architecture",
+            "distributed-systems"
+          ]
+        },
+        {
+          "title": "All posts",
+          "url": "https://chandanbhagat.com.np/",
+          "description": "Every article on software engineering, Azure, AI and distributed systems",
+          "platform": "Blog",
+          "icon": "bx-book",
+          "tags": [
+            "blog"
+          ]
         }
       ]
     },
@@ -220,40 +200,51 @@
       "category": "Training Materials",
       "items": [
         {
-          "title": "ML.NET Training",
-          "url": "https://training.chandanbhagat.com.np/ml-net",
-          "description": "Complete ML.NET development course",
+          "title": "Training Materials",
+          "url": "https://training-by-chandan.github.io",
+          "description": "Course material for ASP.NET, Node.js and SQL",
           "platform": "Website",
           "icon": "bx-book",
-          "tags": ["ml-net", "ai", "dotnet"],
-          "lastUpdated": "2024-03-01"
+          "tags": [
+            "training",
+            "aspnet",
+            "nodejs",
+            "sql"
+          ]
         },
         {
-          "title": "Azure Functions Masterclass",
-          "url": "https://training.chandanbhagat.com.np/azure-functions",
-          "description": "Complete guide to Azure Functions development",
-          "platform": "Training",
+          "title": "Demo Materials",
+          "url": "https://demo-by-chandan.github.io",
+          "description": "Demos for Azure messaging, C# and more",
+          "platform": "Website",
           "icon": "bx-book",
-          "date": "2024-03-01",
-          "tags": ["azure", "serverless", "training"]
+          "tags": [
+            "demos",
+            "azure",
+            "c-sharp"
+          ]
         },
         {
-          "title": "Container Orchestration with AKS",
-          "url": "https://training.chandanbhagat.com.np/aks",
-          "description": "Azure Kubernetes Service deep dive",
-          "platform": "Training",
-          "icon": "bx-book",
-          "date": "2024-02-15",
-          "tags": ["kubernetes", "aks", "containers"]
+          "title": "Training-by-Chandan",
+          "url": "https://github.com/Training-by-Chandan",
+          "description": "Class projects and exercises on GitHub",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "training",
+            "github"
+          ]
         },
         {
-          "title": "Power Platform Integration Guide",
-          "url": "https://training.chandanbhagat.com.np/power-platform",
-          "description": "Integrating Power Platform with ASP.NET",
-          "platform": "Training",
-          "icon": "bx-book",
-          "date": "2024-01-20",
-          "tags": ["power-platform", "integration", "aspnet"]
+          "title": "Demo-by-Chandan",
+          "url": "https://github.com/Demo-by-Chandan",
+          "description": "Demo projects on GitHub",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "demos",
+            "github"
+          ]
         }
       ]
     },
@@ -261,13 +252,57 @@
       "category": "Certifications",
       "items": [
         {
-          "title": "Azure Solutions Architect",
-          "url": "https://www.credly.com/your-badge",
+          "title": "Azure AI Fundamentals",
+          "url": "https://learn.microsoft.com/en-us/users/chandanbhagat/credentials/c6cae068c19caa1a",
+          "description": "March 2024",
           "platform": "Microsoft",
           "icon": "bx-certification",
-          "date": "2024-01-01",
-          "validUntil": "2025-01-01",
-          "tags": ["azure", "architecture"]
+          "tags": [
+            "azure",
+            "ai"
+          ]
+        },
+        {
+          "title": "Develop an ASP.NET Core web app that consumes an API",
+          "url": "https://learn.microsoft.com/en-us/users/chandanbhagat/credentials/9695ccb3071bf5a2",
+          "description": "January 2024",
+          "platform": "Microsoft",
+          "icon": "bx-certification",
+          "tags": [
+            "dotnet",
+            "asp-net-core"
+          ]
+        },
+        {
+          "title": "Principles of Secure Coding",
+          "url": "https://www.udemy.com/certificate/UC-e5cf7457-e545-4703-8b03-ae02ea5da66c/",
+          "description": "March 2024",
+          "platform": "Udemy",
+          "icon": "bx-certification",
+          "tags": [
+            "security"
+          ]
+        },
+        {
+          "title": "DevOps Foundations: Microservices",
+          "url": "https://www.linkedin.com/learning/certificates/2c3d20fc58a3ff718af08736592a56e9b10e350fb5ae3612ffac03d5f0843e45",
+          "description": "July 2020",
+          "platform": "LinkedIn Learning",
+          "icon": "bx-certification",
+          "tags": [
+            "devops",
+            "microservices"
+          ]
+        },
+        {
+          "title": "MTA: Networking Fundamentals",
+          "url": "https://www.credly.com/badges/3dba0ee7-1549-4394-bf8b-f281ea6c215a/",
+          "description": "November 2016",
+          "platform": "Microsoft",
+          "icon": "bx-certification",
+          "tags": [
+            "networking"
+          ]
         }
       ]
     }

@@ -1,5 +1,4 @@
 import { useEffect, useRef, type CSSProperties } from 'react'
-import './PortfolioDossier.css'
 import {
   proofPoints,
   caseStudies,

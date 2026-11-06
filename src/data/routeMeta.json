@@ -1,0 +1,24 @@
+{
+  "/": {
+    "title": "Chandan Bhagat | Software engineer in London"
+  },
+  "/dossier": {
+    "title": "Dossier | Chandan Bhagat",
+    "description": "The full record: delivery work, talks, published tools, certifications, teaching and education."
+  },
+  "/terminal": {
+    "title": "Terminal | Chandan Bhagat",
+    "description": "Explore the portfolio of software engineer Chandan Bhagat from an interactive terminal."
+  },
+  "/classic": {
+    "title": "Classic portfolio | Chandan Bhagat",
+    "description": "Experience, skills, services and contact details for software engineer Chandan Bhagat."
+  },
+  "/portfolio": {
+    "title": "Talks and links | Chandan Bhagat",
+    "description": "Talks, workshops and community work, with links to projects, packages, writing and training materials."
+  },
+  "/groupcode": {
+    "title": "Group Code | Chandan Bhagat"
+  }
+}

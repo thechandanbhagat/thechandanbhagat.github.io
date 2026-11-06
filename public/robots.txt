@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://me.chandanbhagat.com.np/sitemap.xml

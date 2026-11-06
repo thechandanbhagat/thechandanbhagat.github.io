@@ -3,13 +3,33 @@ import { Link } from 'react-router-dom'
 import Lenis from 'lenis'
 import Overlay from './Overlay'
 import SystemHud from './SystemHud'
-import { measureSections, scrollState, updateScroll } from './scrollStore'
+import { measureSections, scrollState, sectionAt, updateScroll, type SectionId } from './scrollStore'
 import { detectQuality } from './theme'
 import './Immersive.css'
 
 const Scene = lazy(() => import('./Scene'))
 
 // @group Immersive : Root page — smooth scroll, pointer tracking, scroll reveals and the lazy WebGL scene
+
+/** The side of the screen each section leaves free of copy, where the status box can sit without covering anything */
+const HUD_SIDE: Record<SectionId, 'left' | 'right' | 'hidden'> = {
+  hero: 'right',
+  about: 'right',
+  experience: 'left',
+  capabilities: 'right',
+  registry: 'left',
+  contact: 'hidden',
+}
+
+/** Distance from the bottom of the viewport to the top of the status box */
+const HUD_CLEARANCE = 110
+
+/** Keeps the fixed chrome in step with the page: the top bar's backing and the side the status box sits on. */
+function syncChrome(root: HTMLElement | null, scrollY: number) {
+  if (!root) return
+  root.dataset.scrolled = String(scrollY > 24)
+  root.dataset.hud = HUD_SIDE[sectionAt(scrollY + window.innerHeight - HUD_CLEARANCE)]
+}
 
 function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
   const lenisRef = useRef<Lenis | null>(null)
@@ -20,7 +40,10 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
 
     const lenis = new Lenis({ lerp: reduced ? 1 : 0.085, smoothWheel: !reduced })
     lenisRef.current = lenis
-    lenis.on('scroll', ({ scroll }: { scroll: number }) => updateScroll(scroll))
+    lenis.on('scroll', ({ scroll }: { scroll: number }) => {
+      updateScroll(scroll)
+      syncChrome(rootRef.current, scroll)
+    })
 
     let frame = 0
     const raf = (time: number) => {
@@ -32,6 +55,7 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
     const measure = () => {
       measureSections(rootRef.current)
       updateScroll(window.scrollY)
+      syncChrome(rootRef.current, window.scrollY)
     }
     measure()
     const observer = new ResizeObserver(measure)

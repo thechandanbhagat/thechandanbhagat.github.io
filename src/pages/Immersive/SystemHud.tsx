@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { nodes } from './system'
+import { nodes } from './systemGraph'
 import { rerouteTargetFor, subscribeSystem, systemState } from './systemStore'
 
 // @group SystemHud : Small status line that explains what the diorama is doing and how to poke it
