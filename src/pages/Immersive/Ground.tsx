@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { trustBoundary } from './systemGraph'
 import { systemState } from './systemStore'
 import { groundFragment, groundVertex } from './shaders'
 import { palette } from './theme'
@@ -18,13 +19,23 @@ export default function Ground() {
         uniforms: {
           uLine: { value: new THREE.Color(palette.grid) },
           uReveal: { value: 0 },
+          uBoundary: { value: new THREE.Vector4(trustBoundary.x, trustBoundary.z, trustBoundary.halfWidth, trustBoundary.halfDepth) },
+          uBoundaryGlow: { value: 0 },
+          uBoundaryAlert: { value: 0 },
+          uFence: { value: 1 },
+          uAccent: { value: new THREE.Color(palette.accent) },
+          uAlert: { value: new THREE.Color(palette.alert) },
         },
       }),
     []
   )
 
   useFrame(() => {
-    material.uniforms.uReveal.value = systemState.reveal
+    const u = material.uniforms
+    u.uReveal.value = systemState.reveal
+    u.uBoundaryGlow.value = systemState.boundary
+    u.uBoundaryAlert.value = systemState.boundaryAlert
+    u.uFence.value = 1 - systemState.quiet
   })
 
   return (

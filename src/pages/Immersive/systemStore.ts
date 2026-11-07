@@ -1,4 +1,4 @@
-import { EDGE_COUNT, NODE_COUNT, links, nodes, sectionFocus } from './systemGraph'
+import { EDGE_COUNT, NODE_COUNT, links, nodeIndex, nodes, sectionFocus } from './systemGraph'
 import { SECTION_IDS } from './scrollStore'
 
 // @group SystemStore : Frame-updated interaction state for the diorama — hover, outages, section focus and the live trace
@@ -28,10 +28,18 @@ export interface SystemState {
   edgeTraceGlow: Float32Array
   /** Journey index being traced, or -1 */
   trace: number
+  /** How strongly the trust boundary stands out, rising when the section is about it */
+  boundary: number
+  /** Flash on the boundary when the gateway refuses an action */
+  boundaryAlert: number
   /** 0 when nothing is focused, 1 when a hover should dim everything else */
   focus: number
   /** Intro reveal 0..1 */
   reveal: number
+  /** How far the system has stepped aside for the London skyline, 0..1 */
+  quiet: number
+  /** The reveal the system itself draws with, so it sinks away while the grid stays */
+  presence: number
 }
 
 export const systemState: SystemState = {
@@ -47,8 +55,12 @@ export const systemState: SystemState = {
   edgeTraceHead: new Float32Array(EDGE_COUNT),
   edgeTraceGlow: new Float32Array(EDGE_COUNT),
   trace: -1,
+  boundary: 0,
+  boundaryAlert: 0,
   focus: 0,
   reveal: 0,
+  quiet: 0,
+  presence: 0,
 }
 
 const focusSets = SECTION_IDS.map((id) => new Set(sectionFocus[id].map((nodeId) => nodes.findIndex((n) => n.id === nodeId))))
@@ -129,7 +141,9 @@ export function tickSystem(dt: number, progress: number, ready: boolean, now = p
   const kSlow = Math.min(1, dt * 2.4)
 
   s.reveal = approach(s.reveal, ready ? 1 : 0, Math.min(1, dt * 1.4))
+  s.presence = s.reveal * (1 - s.quiet)
   s.focus = approach(s.focus, hasHover ? 1 : 0, k)
+  s.boundary = approach(s.boundary, focusSet.has(nodeIndex.guard) ? 1 : 0, kSlow)
 
   for (let i = 0; i < NODE_COUNT; i += 1) {
     const alive = s.outages.has(i) ? 0 : 1

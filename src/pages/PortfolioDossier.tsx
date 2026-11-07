@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useRef, type CSSProperties } from 'react'
 import {
   proofPoints,
@@ -8,9 +9,8 @@ import {
   teachingEntries,
   educationEntries,
   profileLinks,
-  registryStats,
-  publishedArtifacts,
 } from '../data/profile'
+import { featuredSoftware, registryStats, software } from '../data/software'
 
 // @group Motion : Stagger delay helper for scroll-reveal sequencing
 const stagger = (index: number): CSSProperties =>
@@ -124,11 +124,11 @@ export default function PortfolioDossier() {
         </nav>
 
         <div className="dossier-hero-content">
-          <p className="dossier-kicker">London / Kent software engineer, cloud architect, trainer</p>
+          <p className="dossier-kicker">London / Kent AI architect, software architect, tech lead</p>
           <h1 id="dossier-title">Chandan Gupta Bhagat</h1>
-          <p className="dossier-manifesto">Cloud systems, AI products, calm delivery.</p>
+          <p className="dossier-manifesto">AI systems, cloud platforms, calm delivery.</p>
           <p className="dossier-hero-copy">
-            Senior engineer across C#, Azure, Node.js, React, and AI systems, with hands-on
+            AI architect and senior engineer across C#, Azure, Node.js, and React, with hands-on
             experience in web, desktop, cloud, data, DevOps, training, and mentorship.
           </p>
           <div className="dossier-actions" aria-label="Primary actions">
@@ -160,7 +160,7 @@ export default function PortfolioDossier() {
               </p>
             ))}
             <p className="dossier-console-ready">
-              <span>ok</span> available for senior engineering, cloud architecture, AI product work, and technical leadership
+              <span>ok</span> available for AI architecture, cloud architecture, senior engineering, and technical leadership
             </p>
           </div>
         </div>
@@ -241,7 +241,7 @@ export default function PortfolioDossier() {
       <section id="tools" className="dossier-section dossier-tools">
         <div className="dossier-section-heading compact reveal">
           <p>Published tools</p>
-          <h2>Packages, extensions, modules, and containers.</h2>
+          <h2>Apps, packages, extensions, and containers.</h2>
         </div>
         <div className="dossier-registry-grid">
           {registryStats.map((stat, index) => (
@@ -253,14 +253,17 @@ export default function PortfolioDossier() {
           ))}
         </div>
         <div className="dossier-artifact-grid">
-          {publishedArtifacts.map((artifact, index) => (
-            <a href={artifact.href} target="_blank" rel="noreferrer" className="dossier-artifact reveal" style={stagger(index)} key={`${artifact.ecosystem}-${artifact.name}`}>
-              <span>{artifact.ecosystem} | {artifact.version}</span>
-              <strong>{artifact.name}</strong>
-              <p>{artifact.description}</p>
+          {featuredSoftware.map((item, index) => (
+            <a href={item.links[0].href} target="_blank" rel="noreferrer" className="dossier-artifact reveal" style={stagger(index)} key={item.name}>
+              <span>{item.platforms} | v{item.version}</span>
+              <strong>{item.name}</strong>
+              <p>{item.summary}</p>
             </a>
           ))}
         </div>
+        <p className="dossier-more reveal">
+          <Link to="/software">All {software.length} tools, with install commands</Link>
+        </p>
       </section>
 
       <section className="dossier-section dossier-credentials">
@@ -322,7 +325,7 @@ export default function PortfolioDossier() {
       <section id="contact" className="dossier-contact">
         <div className="reveal">
           <p>Current signal</p>
-          <h2>Available for senior engineering, AI product, and cloud architecture roles.</h2>
+          <h2>Available for AI architecture, cloud architecture, and senior engineering roles.</h2>
         </div>
         <div className="dossier-contact-actions reveal" style={stagger(1)}>
           <a href="mailto:chandan.bhagat@outlook.com">

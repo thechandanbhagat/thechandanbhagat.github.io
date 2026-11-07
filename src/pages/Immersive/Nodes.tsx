@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
-import { NODE_COUNT, NODE_DEPTH, NODE_HEIGHT, NODE_KIND_INDEX, nodes } from './system'
+import { NODE_COUNT, NODE_DEPTH, NODE_HEIGHT, NODE_KIND_INDEX, nodes, trustBoundary } from './system'
 import { isDown, setHovered, systemState, toggleOutage } from './systemStore'
 import { decalFragment, decalVertex, nodeFragment, nodeVertex } from './shaders'
 import { scrollState } from './scrollStore'
@@ -42,6 +42,7 @@ export default function Nodes() {
   const meshRef = useRef<THREE.InstancedMesh>(null)
   const decalRef = useRef<THREE.InstancedMesh>(null)
   const labelsRef = useRef<THREE.Sprite[]>([])
+  const boundaryLabelRef = useRef<THREE.Sprite>(null)
   const { camera } = useThree()
   const raycaster = useMemo(() => new THREE.Raycaster(), [])
   const ndc = useMemo(() => new THREE.Vector2(), [])
@@ -115,6 +116,8 @@ export default function Nodes() {
     []
   )
 
+  const boundaryLabel = useMemo(() => makeLabel(trustBoundary.label, palette.accent), [])
+
   // Place every slab once; per-frame work only touches the instanced state attribute.
   useEffect(() => {
     const mesh = meshRef.current
@@ -155,7 +158,7 @@ export default function Nodes() {
     if (!mesh) return
     const s = systemState
     material.uniforms.uTime.value = state.clock.elapsedTime
-    material.uniforms.uReveal.value = s.reveal
+    material.uniforms.uReveal.value = s.presence
 
     // Hover: raycast with the shared pointer so the DOM overlay never has to forward events.
     let hovered = -1
@@ -166,7 +169,7 @@ export default function Nodes() {
     }
     setHovered(hovered)
     document.body.style.cursor = hovered >= 0 ? 'pointer' : ''
-    decalMaterial.uniforms.uReveal.value = s.reveal
+    decalMaterial.uniforms.uReveal.value = s.presence
 
     const attr = mesh.geometry.getAttribute('aState') as THREE.InstancedBufferAttribute
     const arr = attr.array as Float32Array
@@ -187,7 +190,7 @@ export default function Nodes() {
           ;(sprite.material as THREE.SpriteMaterial).map = down ? labels[i].down : labels[i].live
           ;(sprite.material as THREE.SpriteMaterial).needsUpdate = true
         }
-        ;(sprite.material as THREE.SpriteMaterial).opacity = s.nodeLabel[i] * s.reveal
+        ;(sprite.material as THREE.SpriteMaterial).opacity = s.nodeLabel[i] * s.presence
         // Keep labels roughly the same size on screen whatever the camera distance.
         const k = THREE.MathUtils.clamp(state.camera.position.distanceTo(sprite.position) / 20, 0.7, 2.4)
         sprite.scale.set(labelScale.x * k, labelScale.y * k, 1)
@@ -195,6 +198,13 @@ export default function Nodes() {
     }
     attr.needsUpdate = true
     decalAttr.needsUpdate = true
+
+    const boundarySprite = boundaryLabelRef.current
+    if (boundarySprite) {
+      ;(boundarySprite.material as THREE.SpriteMaterial).opacity = (0.4 + 0.5 * s.boundary) * s.presence
+      const k = THREE.MathUtils.clamp(state.camera.position.distanceTo(boundarySprite.position) / 20, 0.7, 2.4)
+      boundarySprite.scale.set(labelScale.x * k, labelScale.y * k, 1)
+    }
   })
 
   useEffect(() => {
@@ -204,8 +214,9 @@ export default function Nodes() {
         l.live.dispose()
         l.down.dispose()
       })
+      boundaryLabel.dispose()
     }
-  }, [labels])
+  }, [labels, boundaryLabel])
 
   return (
     <group>
@@ -223,6 +234,9 @@ export default function Nodes() {
           <spriteMaterial map={labels[i].live} transparent depthWrite={false} depthTest={false} opacity={0} toneMapped={false} />
         </sprite>
       ))}
+      <sprite ref={boundaryLabelRef} position={[trustBoundary.x - trustBoundary.halfWidth + 1.25, 0.08, trustBoundary.z + trustBoundary.halfDepth + 0.3]} scale={[2.2, 0.275, 1]}>
+        <spriteMaterial map={boundaryLabel} transparent depthWrite={false} depthTest={false} opacity={0} toneMapped={false} />
+      </sprite>
     </group>
   )
 }

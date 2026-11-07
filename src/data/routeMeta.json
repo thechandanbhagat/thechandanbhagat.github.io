@@ -1,6 +1,6 @@
 {
   "/": {
-    "title": "Chandan Bhagat | Software engineer in London"
+    "title": "Chandan Bhagat | AI and software architect in London"
   },
   "/dossier": {
     "title": "Dossier | Chandan Bhagat",
@@ -8,15 +8,19 @@
   },
   "/terminal": {
     "title": "Terminal | Chandan Bhagat",
-    "description": "Explore the portfolio of software engineer Chandan Bhagat from an interactive terminal."
+    "description": "Explore the portfolio of AI and software architect Chandan Bhagat from an interactive terminal."
   },
   "/classic": {
     "title": "Classic portfolio | Chandan Bhagat",
-    "description": "Experience, skills, services and contact details for software engineer Chandan Bhagat."
+    "description": "Experience, skills, services and contact details for AI and software architect Chandan Bhagat."
+  },
+  "/software": {
+    "title": "Software | Chandan Bhagat",
+    "description": "Desktop apps, servers, AI tools, extensions and libraries by Chandan Bhagat, with the install command or download for each."
   },
   "/portfolio": {
     "title": "Talks and links | Chandan Bhagat",
-    "description": "Talks, workshops and community work, with links to projects, packages, writing and training materials."
+    "description": "Talks, workshops and community work, with links to writing, training materials and demo code."
   },
   "/groupcode": {
     "title": "Group Code | Chandan Bhagat"

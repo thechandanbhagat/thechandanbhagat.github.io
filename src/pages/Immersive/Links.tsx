@@ -65,7 +65,7 @@ export default function Links({ pathTexture, stateTexture }: LinksProps) {
   )
 
   useFrame(() => {
-    material.uniforms.uReveal.value = systemState.reveal
+    material.uniforms.uReveal.value = systemState.presence
   })
 
   return <lineSegments geometry={geometry} material={material} frustumCulled={false} />

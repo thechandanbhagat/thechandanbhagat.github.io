@@ -1,0 +1,481 @@
+/* @group GalleryStyles : Talks timeline, photo viewer and link index, built on the landing page's tokens */
+
+.gal {
+  --rail: clamp(30px, 7vw, 112px);
+}
+
+/* ---------- Talks ---------- */
+
+.gal-timeline {
+  --trace: 0;
+  position: relative;
+  padding-left: var(--rail);
+}
+
+/* The timeline is an edge on the map: lit as far as the visitor has read, with a message running down the lit part */
+.gal-rail {
+  position: absolute;
+  top: 12px;
+  bottom: 0;
+  left: 4px;
+  width: 1px;
+  background: var(--line);
+}
+
+.gal-rail__lit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: calc(var(--trace) * 100%);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(156, 195, 255, 0.15), var(--accent));
+}
+
+.gal-rail__lit::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 110px;
+  background: linear-gradient(180deg, transparent, #ffffff);
+  animation: gal-message 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes gal-message {
+  from {
+    top: -110px;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+.gal-rail__head {
+  position: absolute;
+  top: calc(var(--trace) * 100%);
+  left: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+.gal-year + .gal-year {
+  margin-top: clamp(76px, 12vh, 128px);
+}
+
+.gal-year__label {
+  position: relative;
+  margin-bottom: clamp(20px, 3vh, 30px);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+/* A node on the rail, joined to the year by a short branch */
+.gal-year__label::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(4px - var(--rail));
+  width: calc(var(--rail) - 22px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.gal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 30px);
+}
+
+.gal-card__open {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  text-align: left;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.4s, transform 0.5s var(--ease);
+}
+
+.gal-card__open:hover,
+.gal-card__open:focus-visible {
+  border-color: rgba(156, 195, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+.gal-card__open:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.gal-card__frame {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #0d1018;
+}
+
+/* Photos sit back in the dark until they are looked at, so the page stays restrained */
+.gal-card__frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.78) saturate(0.82);
+  transition: transform 0.9s var(--ease), filter 0.6s var(--ease);
+}
+
+.gal-card__open:hover img,
+.gal-card__open:focus-visible img {
+  transform: scale(1.04);
+  filter: none;
+}
+
+.gal-card__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+  padding: 22px 24px 24px;
+}
+
+.gal-card__program {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.24rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.gal-card__title {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.gal-card__count {
+  margin-top: auto;
+  padding-top: 8px;
+  color: var(--accent);
+}
+
+/* A year with an odd number of talks leads with a wide card, so no row is left half empty */
+.gal-card:first-child:nth-last-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.gal-card:first-child:nth-last-child(odd) .gal-card__open {
+  flex-direction: row;
+}
+
+.gal-card:first-child:nth-last-child(odd) .gal-card__frame {
+  flex: 1.5 1 0;
+  min-width: 0;
+}
+
+.gal-card:first-child:nth-last-child(odd) .gal-card__text {
+  flex: 1 1 0;
+  justify-content: center;
+  padding: clamp(24px, 3vw, 40px);
+}
+
+.gal-card:first-child:nth-last-child(odd) .gal-card__program {
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+}
+
+.gal-card:first-child:nth-last-child(odd) .gal-card__count {
+  margin-top: 8px;
+}
+
+/* ---------- Viewer ---------- */
+
+.gal-viewer {
+  width: min(1180px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #0d1018;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.gal-viewer[open] {
+  animation: gal-viewer-in 0.5s var(--ease);
+}
+
+@keyframes gal-viewer-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+.gal-viewer::backdrop {
+  background: rgba(6, 8, 12, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.gal-viewer__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(280px, 1fr);
+  height: min(720px, calc(100dvh - 34px));
+}
+
+.gal-viewer__stage {
+  position: relative;
+  min-height: 0;
+  background: #06080c;
+}
+
+.gal-viewer__stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: gal-photo-in 0.5s var(--ease);
+}
+
+@keyframes gal-photo-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.gal-viewer__controls {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(10, 12, 18, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: translateX(-50%);
+}
+
+.gal-viewer__controls button,
+.gal-viewer__close {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.gal-viewer__controls button:hover,
+.gal-viewer__close:hover {
+  border-color: rgba(156, 195, 255, 0.55);
+  background: var(--accent-soft);
+}
+
+.gal-viewer__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 1.3rem;
+  background: rgba(10, 12, 18, 0.72);
+}
+
+.gal-viewer__text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 56px 32px 32px;
+  overflow-y: auto;
+}
+
+.gal-viewer__text h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.gal-viewer__title {
+  color: var(--ink);
+}
+
+.gal-viewer__description {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.gal-viewer__resources {
+  margin-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.gal-viewer__resources a {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 2px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.gal-viewer__resources a:hover {
+  color: var(--accent);
+}
+
+/* ---------- Links ---------- */
+
+.gal-talks {
+  padding-top: clamp(24px, 4vh, 40px);
+}
+
+.gal-links {
+  padding-top: clamp(112px, 17vh, 176px);
+}
+
+.gal-links .imm-filter {
+  margin-bottom: 26px;
+}
+
+.gal-links__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.gal-links__grid li {
+  animation: gal-tile-in 0.6s var(--ease) backwards;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+@keyframes gal-tile-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.gal-links__grid a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 22px 46px 24px 22px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  transition: border-color 0.4s, transform 0.5s var(--ease);
+}
+
+.gal-links__grid a:hover {
+  border-color: rgba(156, 195, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+.gal-link__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.08rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  transition: color 0.3s;
+}
+
+.gal-link__description {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.gal-link__arrow {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: var(--faint);
+  transition: color 0.3s, transform 0.4s var(--ease);
+}
+
+.gal-links__grid a:hover .gal-link__name,
+.gal-links__grid a:hover .gal-link__arrow {
+  color: var(--accent);
+}
+
+.gal-links__grid a:hover .gal-link__arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1080px) {
+  .gal-links__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Phone layout. Keep in step with the breakpoint in Immersive.css */
+@media (max-width: 900px), (max-aspect-ratio: 9/10) {
+  .gal-grid,
+  .gal-links__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gal-links__grid a {
+    padding: 18px 44px 20px 18px;
+  }
+
+  .gal-card:first-child:nth-last-child(odd) .gal-card__open {
+    flex-direction: column;
+  }
+
+  .gal-card:first-child:nth-last-child(odd) .gal-card__frame {
+    flex: none;
+  }
+
+  .gal-viewer__body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1.1fr) minmax(0, 1fr);
+    height: calc(100dvh - 34px);
+  }
+
+  .gal-viewer__text {
+    padding: 24px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gal-rail__lit::after {
+    display: none;
+  }
+
+  .gal-viewer[open],
+  .gal-viewer__stage img,
+  .gal-links__grid li {
+    animation: none;
+  }
+}

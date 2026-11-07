@@ -1,12 +1,12 @@
 // @group ScrollStore : Frame-synchronised scroll and pointer state shared between the DOM overlay and the WebGL scene
 
-export const SECTION_IDS = ['hero', 'about', 'experience', 'capabilities', 'registry', 'contact'] as const
+export const SECTION_IDS = ['hero', 'about', 'ai', 'experience', 'capabilities', 'registry', 'talks', 'contact'] as const
 export type SectionId = (typeof SECTION_IDS)[number]
 
 export const SECTION_COUNT = SECTION_IDS.length
 
 export interface ScrollState {
-  /** Continuous section index: 0 = top of hero, 5 = top of contact */
+  /** Continuous section index: 0 = top of hero, the last = top of contact */
   morph: number
   /** Camera progress: holds each section's keyframe while its copy is on screen, glides in the last 40% */
   progress: number
@@ -14,9 +14,13 @@ export interface ScrollState {
   pointer: { x: number; y: number }
   /** False until a real pointer event arrives, so nothing counts as hovered by default */
   pointerActive: boolean
+  /** performance.now() of the last pointer move or scroll, so the scene knows when the visitor is still */
+  lastInput: number
   reducedMotion: boolean
   /** Whether the intro fade has finished */
   ready: boolean
+  /** Whether the visitor has found the place name in the hero */
+  london: boolean
 }
 
 export const scrollState: ScrollState = {
@@ -24,8 +28,10 @@ export const scrollState: ScrollState = {
   progress: 0,
   pointer: { x: 0, y: 0 },
   pointerActive: false,
+  lastInput: 0,
   reducedMotion: false,
   ready: false,
+  london: false,
 }
 
 let sectionTops: number[] = []

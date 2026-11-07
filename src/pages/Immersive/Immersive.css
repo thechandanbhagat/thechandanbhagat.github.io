@@ -42,23 +42,21 @@ body.imm-body {
   text-decoration: none;
 }
 
-.imm button {
-  font: inherit;
-  color: inherit;
-}
 
-.imm ul,
-.imm ol {
+/* These resets beat the older pages' element styles but must lose to any class, or they cancel the margins set further down */
+body :where(.imm) :is(ul, ol) {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.imm h1,
-.imm h2,
-.imm h3,
-.imm p {
+body :where(.imm) :is(h1, h2, h3, p) {
   margin: 0;
+}
+
+body :where(.imm) button {
+  font: inherit;
+  color: inherit;
 }
 
 /* Neutralise global stylesheet rules that target bare <section> */
@@ -132,15 +130,113 @@ body.dark-theme .imm .imm-section {
   color: var(--muted);
 }
 
-.imm-topbar__nav a {
-  transition: color 0.3s;
+/*
+ * The menu is a path on the map: one slow message walks it, lighting each link in turn and
+ * arriving at Contact. Every stop shares one period and differs only by its delay, so they
+ * never drift apart. Hover changes --link-rest rather than the animation, because restarting
+ * an animation would put that link out of step with the others.
+ */
+@property --link-rest {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: rgba(244, 245, 247, 0.62);
 }
 
-.imm-topbar__nav a:hover {
-  color: var(--ink);
+.imm-topbar__nav > * {
+  --stop: 0;
+  --trip: 12s;
+  --relay-delay: calc(1.4s + var(--stop) * 2.6s);
+}
+
+.imm-topbar__nav > :nth-child(2) {
+  --stop: 1;
+}
+
+.imm-topbar__nav > :nth-child(3) {
+  --stop: 2;
+}
+
+.imm-topbar__nav > :nth-child(4) {
+  --stop: 3;
+}
+
+.imm-topbar__nav > a:not(.imm-topbar__cta) {
+  --link-rest: var(--muted);
+  position: relative;
+  color: var(--link-rest);
+  transition: --link-rest 0.3s;
+  animation: imm-relay-link var(--trip) ease-in-out var(--relay-delay) infinite;
+}
+
+.imm-topbar__nav > a:not(.imm-topbar__cta):hover,
+.imm-topbar__nav > [aria-current='page']:not(.imm-topbar__cta) {
+  --link-rest: var(--ink);
+}
+
+.imm-topbar__nav > a:not(.imm-topbar__cta)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent) 25%, var(--accent) 75%, transparent);
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+  animation: imm-relay-line var(--trip) ease-in-out var(--relay-delay) infinite;
+}
+
+/* Each stop finishes (20% of 12s) before the next one starts (2.6s later), so only one is ever lit */
+@keyframes imm-relay-link {
+  0%,
+  20%,
+  100% {
+    color: var(--link-rest);
+  }
+  10% {
+    color: var(--ink);
+  }
+}
+
+/* The line draws across its own word and leaves by the far end, so it never reaches a neighbour */
+@keyframes imm-relay-line {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  10% {
+    clip-path: inset(0 0 0 0);
+  }
+  20%,
+  100% {
+    clip-path: inset(0 0 0 100%);
+  }
+}
+
+/* A ring of its own, so the arrival never fights the button's hover */
+.imm-topbar__cta::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  animation: imm-relay-arrive var(--trip) ease-in-out var(--relay-delay) infinite;
+}
+
+@keyframes imm-relay-arrive {
+  0%,
+  28%,
+  100% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
 }
 
 .imm-topbar__cta {
+  position: relative;
   padding: 10px 18px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -245,9 +341,7 @@ body.dark-theme .imm .imm-section {
 /* ---------- Hero ---------- */
 
 .imm-hero__kicker,
-.imm-hero__line,
-.imm-hero__sub,
-.imm-hero__actions {
+.imm-hero__sub {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 1.1s var(--ease), transform 1.1s var(--ease);
@@ -255,9 +349,7 @@ body.dark-theme .imm .imm-section {
 }
 
 .imm.is-ready .imm-hero__kicker,
-.imm.is-ready .imm-hero__line,
-.imm.is-ready .imm-hero__sub,
-.imm.is-ready .imm-hero__actions {
+.imm.is-ready .imm-hero__sub {
   opacity: 1;
   transform: none;
 }
@@ -271,6 +363,49 @@ body.dark-theme .imm .imm-section {
   color: var(--muted);
 }
 
+/* Roles on the left, place on the right. A float, so when the roles wrap on a phone the place stays on their last line. */
+.imm-hero__kicker--split {
+  display: flow-root;
+}
+
+/* The skyline stands in the middle of the screen, so the copy steps back while it is up */
+.imm[data-london] .imm-hero__sub,
+.imm[data-london] .imm-hero__actions {
+  transition: opacity 0.6s var(--ease);
+}
+
+.imm[data-london='true'] .imm-hero__sub,
+.imm[data-london='true'] .imm-hero__actions {
+  opacity: 0.08;
+}
+
+/* Reads as plain text. Hovering it is the way into the easter egg, so the only hint is that it answers the pointer. */
+.imm-hero__kicker .imm-hero__place {
+  position: relative;
+  float: right;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: default;
+  transition: color 0.4s var(--ease);
+}
+
+.imm-hero__kicker .imm-hero__place::before {
+  content: '';
+  position: absolute;
+  inset: -12px -14px;
+}
+
+.imm-hero__kicker .imm-hero__place:hover,
+.imm-hero__kicker .imm-hero__place:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
 .imm-hero__title {
   font-family: var(--font-display);
   font-weight: 800;
@@ -281,14 +416,67 @@ body.dark-theme .imm .imm-section {
   margin-bottom: 32px;
 }
 
+/* Separate letters can break anywhere, so each word has to be held on its line */
 .imm-hero__line {
   display: block;
+  white-space: nowrap;
 }
 
 .imm-hero__line--muted {
   padding-left: clamp(0px, 6vw, 120px);
   color: #d8dee9;
-  opacity: 0.82;
+}
+
+/* Each letter sits in its own window: open at the sides for wide glyphs, closed above and below */
+.imm-name {
+  display: inline-block;
+  clip-path: inset(-0.02em -0.12em);
+}
+
+/* `translate` is the timed rise into place; `transform` is the exit, which follows the scroll with no delay */
+.imm-name__glyph {
+  --lift: clamp(0, var(--name-out, 0) * 1.7 - var(--i) * 0.054, 1);
+  display: inline-block;
+  translate: 0 112%;
+  transform: translateY(calc(var(--lift) * -112%));
+  transform-origin: 50% 100%;
+  transition: translate 1.2s var(--ease);
+  transition-delay: calc(0.35s + var(--i) * 0.05s);
+}
+
+.imm.is-ready .imm-hero__title .imm-name__glyph {
+  translate: none;
+}
+
+/*
+ * The London easter egg lands on the name. The letters flatten in the same right-to-left sweep as
+ * the falling city, the top line first, then spring back as it lifts off. `scale` leaves the intro's
+ * `translate` and the scroll exit's `transform` alone.
+ */
+.imm[data-london] .imm-hero__title .imm-name__glyph {
+  --from-right: calc(6 - var(--i));
+  --row: 0;
+  transition:
+    translate 1.2s var(--ease),
+    scale 0.75s cubic-bezier(0.2, 1.6, 0.4, 1),
+    opacity 0.15s linear;
+  transition-delay: 0s, calc(0.1s + (6 - var(--from-right)) * 0.05s), calc(0.1s + (6 - var(--from-right)) * 0.05s);
+}
+
+.imm[data-london] .imm-hero__line--muted .imm-name__glyph {
+  --from-right: calc(12 - var(--i));
+  --row: 1;
+}
+
+.imm[data-london='true'] .imm-hero__title .imm-name__glyph {
+  --crush-at: calc(0.38s + var(--from-right) * 0.12s + var(--row) * 0.1s);
+  scale: 1.16 0.03;
+  opacity: 0;
+  transition:
+    translate 1.2s var(--ease),
+    scale 0.24s cubic-bezier(0.7, 0, 1, 0.6),
+    opacity 0.2s linear;
+  transition-delay: 0s, var(--crush-at), calc(var(--crush-at) + 0.2s);
 }
 
 .imm-hero__sub {
@@ -302,6 +490,94 @@ body.dark-theme .imm .imm-section {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+}
+
+/*
+ * Same split as the name: a timed rise on the way in, and an exit that follows the scroll so it
+ * reverses when the visitor comes back. The rise is an animation rather than a transition so the
+ * exit's opacity stays instant.
+ */
+.imm-hero__actions > * {
+  --n: 0;
+  --lift: clamp(0, (var(--actions-out, 0) - 0.2 - var(--n) * 0.12) * 1.8, 1);
+  position: relative;
+  opacity: calc(1 - var(--lift));
+  transform: translateY(calc(var(--lift) * -34px));
+}
+
+.imm-hero__actions > :nth-child(2) {
+  --n: 1;
+}
+
+.imm:not(.is-ready) .imm-hero__actions > * {
+  opacity: 0;
+}
+
+.imm.is-ready .imm-hero__actions > * {
+  animation: imm-btn-rise 1.1s var(--ease) calc(0.3s + var(--d, 0.32s) * 2 + var(--n) * 0.16s) backwards;
+}
+
+@keyframes imm-btn-rise {
+  from {
+    opacity: 0;
+    translate: 0 30px;
+    scale: 0.96;
+  }
+}
+
+/* While the page is still, View work sends a signal and a message walks around Get the software */
+.imm-hero__actions .imm-btn--primary::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: imm-btn-ping 11s ease-out 2.4s infinite;
+}
+
+@keyframes imm-btn-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(156, 195, 255, 0.5);
+  }
+  20%,
+  100% {
+    box-shadow: 0 0 0 14px rgba(156, 195, 255, 0);
+  }
+}
+
+.imm-btn__trace {
+  position: absolute;
+  inset: -0.5px;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.imm-btn__trace rect {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 9 91;
+  opacity: 0;
+  animation: imm-btn-lap 11s linear 3.4s infinite;
+}
+
+@keyframes imm-btn-lap {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 0;
+  }
+  6%,
+  58% {
+    opacity: 1;
+  }
+  64%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: -100;
+  }
 }
 
 .imm-btn {
@@ -336,6 +612,61 @@ body.dark-theme .imm .imm-section {
 .imm-btn--ghost:hover {
   border-color: rgba(156, 195, 255, 0.55);
   background: var(--accent-soft);
+}
+
+/* ---------- Talks ---------- */
+
+.imm-talks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.imm-talks a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  padding-bottom: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.4s, transform 0.5s var(--ease);
+}
+
+.imm-talks a:hover {
+  border-color: rgba(156, 195, 255, 0.35);
+  transform: translateY(-3px);
+}
+
+.imm-talks img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  margin-bottom: 10px;
+  filter: brightness(0.8) saturate(0.82);
+  transition: filter 0.6s var(--ease);
+}
+
+.imm-talks a:hover img {
+  filter: none;
+}
+
+.imm-talks__program {
+  padding: 0 16px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.25;
+}
+
+.imm-talks .imm-mono {
+  margin-top: auto;
+  padding: 4px 16px 0;
 }
 
 /* ---------- Proof points ---------- */
@@ -425,6 +756,31 @@ body.dark-theme .imm .imm-section {
   margin-bottom: 16px;
 }
 
+.imm-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.imm-card__links a {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+  text-underline-offset: 3px;
+}
+
+.imm-card__links a:hover {
+  text-decoration: underline;
+}
+
+.imm-note {
+  margin-top: 22px;
+}
+
 .imm-card__metric {
   display: block;
   margin: 8px 0;
@@ -509,39 +865,185 @@ body.dark-theme .imm .imm-section {
   color: var(--accent);
 }
 
-/* Artifacts */
+/* Software */
 
-.imm-artifacts {
-  margin-top: 28px;
-  border-top: 1px solid var(--line);
+.imm-soft {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  transition: border-color 0.4s;
 }
 
-.imm-artifacts li a {
-  display: grid;
-  grid-template-columns: 220px 1fr auto;
+.imm-soft:hover {
+  border-color: rgba(156, 195, 255, 0.35);
+}
+
+/* The ones worth starting with carry a lit edge, like the path being traced on the map */
+.imm-soft--featured::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 22px;
+  right: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.imm-soft__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 14px;
+}
+
+.imm-soft__proof {
+  color: var(--accent);
+}
+
+.imm-soft__name {
+  display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 12px 24px;
-  padding: 16px 4px;
+  gap: 2px 10px;
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.28rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.imm-soft__version {
+  color: var(--faint);
+  letter-spacing: 0.02em;
+}
+
+.imm-soft__summary {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.imm-install {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 9px 8px 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.imm-install code {
+  flex: 1;
+  min-width: 0;
+  padding: 3px 0;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.imm-install button {
+  flex: none;
+  padding: 3px 9px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.imm-install button:hover {
+  color: var(--ink);
+  border-color: rgba(156, 195, 255, 0.45);
+}
+
+/* The links sit at the foot of the card so a row of cards lines up however long each summary runs */
+.imm-soft__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.imm-soft__links a {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--muted);
+  text-underline-offset: 3px;
+  transition: color 0.3s;
+}
+
+.imm-soft__links a:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* The way to get it is the one thing on the card that should look pressable */
+.imm-soft__links li:first-child a {
+  display: block;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(156, 195, 255, 0.42);
+  background: var(--accent-soft);
+  color: var(--ink);
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.imm-soft__links li:first-child a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.imm-registries {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 16px 0 28px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+}
+
+.imm-registries li:not(:nth-last-child(-n + 3)) {
   border-bottom: 1px solid var(--line);
+}
+
+.imm-registries a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 20px;
   transition: background 0.3s;
 }
 
-.imm-artifacts li a:hover {
+.imm-registries a:hover {
   background: linear-gradient(90deg, rgba(156, 195, 255, 0.07), transparent);
 }
 
-.imm-artifacts__name {
+.imm-registries strong {
   font-family: var(--font-display);
   font-weight: 700;
-}
-
-.imm-artifacts__desc {
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.imm-artifacts__meta {
-  white-space: nowrap;
+  font-size: 1.04rem;
+  letter-spacing: -0.015em;
 }
 
 /* ---------- Contact ---------- */
@@ -704,6 +1206,7 @@ body.dark-theme .imm .imm-section {
   transform: translateX(calc(100vw - 100% - 2 * var(--hud-inset)));
 }
 
+.imm[data-london='true'] .imm-hud:not(.imm-hud--alert),
 .imm[data-hud='hidden'] .imm-hud:not(.imm-hud--alert) {
   opacity: 0;
 }
@@ -810,6 +1313,19 @@ body.dark-theme .imm .imm-section {
     gap: 16px;
   }
 
+  /* Everything does not fit beside the name, and GitHub is also in the contact section */
+  .imm-topbar__optional {
+    display: none;
+  }
+
+  .imm-topbar__nav > .imm-topbar__cta {
+    --stop: 2;
+  }
+
+  .imm-talks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   /* Every section opens with a clear window onto the diorama, then the copy scrolls over it */
   .imm-section {
     padding: 42svh 0 80px;
@@ -866,9 +1382,12 @@ body.dark-theme .imm .imm-section {
     grid-template-columns: 1fr;
   }
 
-  .imm-artifacts li a {
-    grid-template-columns: 1fr;
-    gap: 4px;
+  .imm-registries {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .imm-registries li:nth-last-child(3) {
+    border-bottom: 1px solid var(--line);
   }
 
   .imm-footer__inner {
@@ -878,13 +1397,43 @@ body.dark-theme .imm .imm-section {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .imm-topbar__nav > a:not(.imm-topbar__cta),
+  .imm-topbar__nav > a:not(.imm-topbar__cta)::after,
+  .imm-topbar__cta::after,
+  .imm.is-ready .imm-hero__actions > *,
+  .imm-hero__actions .imm-btn--primary::after,
+  .imm-btn__trace rect {
+    animation: none;
+  }
+
+  .imm-hero__actions > * {
+    transform: none;
+  }
+
+  .imm.is-ready .imm-hero__actions > * {
+    opacity: 1;
+  }
+
   .rv,
   .imm-hero__kicker,
-  .imm-hero__line,
   .imm-hero__sub,
-  .imm-hero__actions {
+  .imm-name__glyph {
     transition-duration: 0.01s;
+    transition-delay: 0s;
     transform: none;
+  }
+
+  /* No falling city and no crush: the name just steps back with the rest of the copy */
+  .imm[data-london] .imm-hero__title .imm-name__glyph {
+    transition: opacity 0.3s linear;
+    transition-delay: 0s;
+  }
+
+  .imm[data-london='true'] .imm-hero__title .imm-name__glyph {
+    scale: none;
+    opacity: 0.08;
+    transition: opacity 0.3s linear;
+    transition-delay: 0s;
   }
 
   .imm-hud {
@@ -893,5 +1442,91 @@ body.dark-theme .imm .imm-section {
 
   .imm.is-ready .imm-hud {
     animation: none;
+  }
+}
+
+/* ---------- Pages outside the map ---------- */
+
+.imm-page-hero {
+  position: relative;
+  padding: clamp(150px, 24vh, 230px) 0 clamp(64px, 10vh, 104px);
+  overflow: clip;
+}
+
+/* The landing page's ground plane, kept as a backdrop so the pages read as one place */
+.imm-page-hero::before {
+  content: '';
+  position: absolute;
+  top: 34%;
+  left: -30%;
+  right: -30%;
+  height: 130%;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 76px 76px;
+  transform: perspective(900px) rotateX(64deg);
+  transform-origin: 50% 0;
+  -webkit-mask-image: radial-gradient(ellipse 58% 70% at 50% 14%, #000 15%, transparent 76%);
+  mask-image: radial-gradient(ellipse 58% 70% at 50% 14%, #000 15%, transparent 76%);
+  pointer-events: none;
+}
+
+.imm-page-hero .imm-container {
+  position: relative;
+}
+
+.imm-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: clamp(44px, 7vh, 72px);
+}
+
+.imm-filter button {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
+}
+
+.imm-filter button:hover {
+  color: var(--ink);
+}
+
+.imm-filter button[aria-pressed='true'] {
+  color: var(--ink);
+  border-color: rgba(156, 195, 255, 0.55);
+  background: var(--accent-soft);
+}
+
+.imm-page-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  padding: clamp(80px, 13vh, 136px) 20px 0;
+}
+
+/* Phone layout. Keep in step with the breakpoint above */
+@media (max-width: 900px), (max-aspect-ratio: 9/10) {
+  .imm-page-hero {
+    padding-top: 128px;
+  }
+}
+
+/* Narrow phones keep the name on one line. The gallery is still reached from the talks section and the footer. */
+@media (max-width: 430px) {
+  .imm-topbar__secondary {
+    display: none;
+  }
+
+  .imm-topbar__nav > .imm-topbar__cta {
+    --stop: 1;
   }
 }

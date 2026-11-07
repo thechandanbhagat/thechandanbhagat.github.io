@@ -83,7 +83,7 @@ export default function About() {
             </div>
 
             <div className="profile-content">
-              <h3 className="profile-title">Software Engineer, Trainer &amp; Cloud Consultant</h3>
+              <h3 className="profile-title">AI &amp; Software Architect, Tech Lead &amp; Trainer</h3>
 
               <div className="profile-info">
                 <div className="info-group">

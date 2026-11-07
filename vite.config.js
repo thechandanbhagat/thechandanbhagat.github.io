@@ -8,7 +8,7 @@ const SITE = 'https://me.chandanbhagat.com.np'
 // @group RoutePages : GitHub Pages only returns 200 for files that exist, so each client route gets a real page with its own metadata
 const ROUTE_META = JSON.parse(readFileSync(new URL('./src/data/routeMeta.json', import.meta.url), 'utf8'))
 // /groupcode ships its own page from public/, and / is index.html itself
-const ROUTE_PAGES = ['/dossier', '/terminal', '/classic', '/portfolio'].map((path) => ({ path: path.slice(1), ...ROUTE_META[path] }))
+const ROUTE_PAGES = ['/dossier', '/terminal', '/classic', '/portfolio', '/software'].map((path) => ({ path: path.slice(1), ...ROUTE_META[path] }))
 
 function pageFor(html, { path, title, description }) {
   const url = `${SITE}/${path}/`

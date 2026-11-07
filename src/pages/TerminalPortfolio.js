@@ -196,7 +196,7 @@ const TerminalPortfolio = () => {
         [h('g', 'Kernel'),   '6.8.0-arch1-1'],
         [h('g', 'Uptime'),   '10 years, 3 months'],
         [h('g', 'Shell'),    'bash 5.2.0'],
-        [h('g', 'Role'),     'Software Engineer · Cloud Architect'],
+        [h('g', 'Role'),     'AI Architect · Software Architect · Tech Lead'],
         [h('g', 'Location'), 'London, United Kingdom 🇬🇧'],
         [h('g', 'Stack'),    '.NET · Azure · Kubernetes · Docker'],
         [h('g', 'Status'),   h('g2 b', '✓ OPEN TO WORK')],
@@ -347,7 +347,7 @@ const TerminalPortfolio = () => {
       append(`${h('gr', '# contact.sh — get in touch with Chandan')}`);
       blank();
       append(`${h('p', 'NAME')}="${h('g2', 'Chandan Gupta Bhagat')}"`);
-      append(`${h('p', 'ROLE')}="${h('g2', 'Software Engineer · Cloud Architect')}"`);
+      append(`${h('p', 'ROLE')}="${h('g2', 'AI Architect · Software Architect · Tech Lead')}"`);
       append(`${h('p', 'LOCATION')}="${h('g2', 'London, United Kingdom')}"`);
       blank();
       append(`${h('p', 'EMAIL')}="${h('c', DATA.contact.email)}"`);
@@ -357,6 +357,7 @@ const TerminalPortfolio = () => {
       append(`${h('p', 'WEB')}="${h('c', DATA.contact.web)}"`);
       blank();
       append(`${h('gr', '# Reach out for:')}`);
+      append(`${h('gr', '#  - AI architecture and agent systems')}`);
       append(`${h('gr', '#  - Senior Software Engineering roles')}`);
       append(`${h('gr', '#  - Technical leadership positions')}`);
       append(`${h('gr', '#  - Cloud architecture consulting')}`);
@@ -390,9 +391,9 @@ const TerminalPortfolio = () => {
       blank();
       append(`${h('c', '## Links')}`);
       append(`  ${h('g', 'Marketplace:')} ${h('c', 'marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode')}`);
-      append(`  ${h('g', 'GitHub:     ')} ${h('c', 'github.com/thechandanbhagat/groupcode')}`);
-      append(`  ${h('g', 'Stars:      ')} ${h('y', '150+')}`);
-      append(`  ${h('g', 'Downloads:  ')} ${h('y', '1.2K+')}`);
+      append(`  ${h('g', 'GitHub:     ')} ${h('c', 'github.com/thechandanbhagat/group-code')}`);
+      append(`  ${h('g', 'Stars:      ')} ${h('y', '16')}`);
+      append(`  ${h('g', 'Downloads:  ')} ${h('y', '5K+')}`);
     };
 
     // @group Commands > PsAux : Skills as process list
@@ -538,7 +539,7 @@ const TerminalPortfolio = () => {
       append(`${h('c', 'CHANDAN(1)')}${' '.repeat(20)}User Commands${' '.repeat(20)}${h('c', 'CHANDAN(1)')}`);
       blank();
       append(`${h('c', 'NAME')}`);
-      append(`       chandan - senior software engineer and cloud architect`);
+      append(`       chandan - AI architect, software architect and tech lead`);
       blank();
       append(`${h('c', 'SYNOPSIS')}`);
       append(`       chandan [OPTION]... [PROJECT]...`);

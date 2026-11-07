@@ -1,7 +1,7 @@
 {
   "personal": {
     "name": "Chandan Gupta Bhagat",
-    "title": "Software Engineer",
+    "title": "AI and Software Architect",
     "tagline": "Crafting scalable solutions with .NET, Azure, and modern web technologies",
     "location": "London, United Kingdom",
     "email": "chandan.bhagat@outlook.com",
@@ -14,7 +14,9 @@
   },
   "hero": {
     "typedStrings": [
-      "Software Engineer",
+      "AI Architect",
+      "Software Architect",
+      "Tech Lead",
       "Cloud Architect", 
       "Technical Speaker",
       "ML.NET Enthusiast",
@@ -57,7 +59,7 @@
     { "label": "Contact", "href": "#contact", "icon": "bi bi-envelope" }
   ],
   "about": {
-    "introduction": "I am a passionate Software Engineer with extensive experience in cloud-native development, microservices architecture, and modern web technologies. My expertise spans across .NET ecosystem, Azure cloud services, and DevOps practices.",
+    "introduction": "I am an AI architect with extensive experience in AI agents, cloud-native development, microservices architecture, and modern web technologies. My expertise spans across .NET ecosystem, Azure cloud services, and DevOps practices.",
     "coreCompetencies": [
       "Cloud-native application development",
       "Microservices architecture design",
@@ -592,7 +594,7 @@
     "description": "Navigate Code by Functionality, Not Just Files. Group Code transforms how you organize and navigate your codebase using special comments to tag related code sections across multiple files and languages.",
     "logo": "/groupcode/compass-icon.svg",
     "installUrl": "https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode",
-    "githubUrl": "https://github.com/thechandanbhagat/groupcode",
+    "githubUrl": "https://github.com/thechandanbhagat/group-code",
     "features": [
       {
         "title": "Multi-Language Support",
@@ -698,173 +700,6 @@
       {
         "question": "Can I use custom group names?",
         "answer": "Yes! You can use any name after @group. For example: @group user-authentication, @group data-processing, etc."
-      }
-    ]
-  },
-  "importantLinks": {
-    "title": "Important Links",
-    "subtitle": "Explore my content, packages, and resources",
-    "categories": [
-      {
-        "category": "Videos",
-        "items": [
-          {
-            "title": "Event-Driven Architecture with Azure Service Bus",
-            "url": "https://youtube.com/watch?v=azure-service-bus",
-            "description": "Deep dive into Azure Service Bus patterns",
-            "platform": "YouTube",
-            "icon": "bx-video",
-            "date": "2024-05-07",
-            "tags": ["azure", "service-bus", "architecture"],
-            "duration": "45 min",
-            "views": "2.5K"
-          },
-          {
-            "title": "ML.NET for .NET Developers",
-            "url": "https://youtube.com/watch?v=mlnet-dotnet",
-            "description": "Getting started with ML.NET framework",
-            "platform": "YouTube",
-            "icon": "bx-video",
-            "date": "2021-01-16",
-            "tags": ["ml-net", "machine-learning", "dotnet"],
-            "duration": "1h 15min",
-            "views": "5.2K"
-          }
-        ]
-      },
-      {
-        "category": "GitHub Repositories",
-        "items": [
-          {
-            "title": "GroupCode VS Code Extension",
-            "url": "https://github.com/thechandanbhagat/groupcode",
-            "description": "Navigate code by functionality across files",
-            "platform": "GitHub",
-            "icon": "bx-code",
-            "date": "2024-01-10",
-            "tags": ["vscode", "extension", "productivity"],
-            "stars": "150",
-            "language": "TypeScript"
-          },
-          {
-            "title": "Azure Service Bus Samples",
-            "url": "https://github.com/thechandanbhagat/azure-servicebus-samples",
-            "description": "Event-driven architecture patterns with Azure Service Bus",
-            "platform": "GitHub",
-            "icon": "bx-cloud",
-            "date": "2024-05-07",
-            "tags": ["azure", "service-bus", "samples"],
-            "stars": "85",
-            "language": "C#"
-          },
-          {
-            "title": "ML.NET Workshop Materials",
-            "url": "https://github.com/thechandanbhagat/mlnet-workshop",
-            "description": "Complete workshop materials for ML.NET",
-            "platform": "GitHub",
-            "icon": "bx-brain",
-            "date": "2021-01-16",
-            "tags": ["ml-net", "workshop", "samples"],
-            "stars": "120",
-            "language": "C#"
-          }
-        ]
-      },
-      {
-        "category": "Packages",
-        "items": [
-          {
-            "title": "GroupCode Extension",
-            "url": "https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode",
-            "description": "VS Code extension for organizing code by functionality",
-            "platform": "VS Code Marketplace",
-            "icon": "bx-package",
-            "date": "2024-01-10",
-            "tags": ["vscode", "productivity", "organization"],
-            "downloads": "1.2K",
-            "version": "1.0.5"
-          }
-        ]
-      },
-      {
-        "category": "Blog Posts",
-        "items": [
-          {
-            "title": "Building Event-Driven Systems with Azure",
-            "url": "https://blog.chandanbhagat.com.np/event-driven-azure",
-            "description": "Comprehensive guide to event-driven architecture",
-            "platform": "Personal Blog",
-            "icon": "bx-book",
-            "date": "2024-05-15",
-            "tags": ["azure", "architecture", "events"],
-            "readTime": "15 min"
-          },
-          {
-            "title": "Getting Started with ML.NET",
-            "url": "https://blog.example.com/mlnet",
-            "description": "Beginner's guide to ML.NET",
-            "platform": "Personal Blog",
-            "icon": "bx-book",
-            "date": "2024-02-15",
-            "tags": ["ml-net", "machine-learning", "tutorial"],
-            "readTime": "12 min"
-          }
-        ]
-      },
-      {
-        "category": "Training Materials",
-        "items": [
-          {
-            "title": "ML.NET Training",
-            "url": "https://training.chandanbhagat.com.np/ml-net",
-            "description": "Complete ML.NET development course",
-            "platform": "Website",
-            "icon": "bx-book",
-            "tags": ["ml-net", "ai", "dotnet"],
-            "lastUpdated": "2024-03-01"
-          },
-          {
-            "title": "Azure Functions Masterclass",
-            "url": "https://training.chandanbhagat.com.np/azure-functions",
-            "description": "Complete guide to Azure Functions development",
-            "platform": "Training",
-            "icon": "bx-book",
-            "date": "2024-03-01",
-            "tags": ["azure", "serverless", "training"]
-          },
-          {
-            "title": "Container Orchestration with AKS",
-            "url": "https://training.chandanbhagat.com.np/aks",
-            "description": "Azure Kubernetes Service deep dive",
-            "platform": "Training",
-            "icon": "bx-book",
-            "date": "2024-02-15",
-            "tags": ["kubernetes", "aks", "containers"]
-          },
-          {
-            "title": "Power Platform Integration Guide",
-            "url": "https://training.chandanbhagat.com.np/power-platform",
-            "description": "Integrating Power Platform with ASP.NET",
-            "platform": "Training",
-            "icon": "bx-book",
-            "date": "2024-01-20",
-            "tags": ["power-platform", "integration", "aspnet"]
-          }
-        ]
-      },
-      {
-        "category": "Certifications",
-        "items": [
-          {
-            "title": "Azure Solutions Architect",
-            "url": "https://www.credly.com/your-badge",
-            "platform": "Microsoft",
-            "icon": "bx-certification",
-            "date": "2024-01-01",
-            "validUntil": "2025-01-01",
-            "tags": ["azure", "architecture"]
-          }
-        ]
       }
     ]
   }

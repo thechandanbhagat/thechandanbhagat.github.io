@@ -8,7 +8,9 @@ export default function Hero() {
   useEffect(() => {
     const introTyped = new Typed(introRef.current, {
       strings: [
-        "I'm a Software Engineer",
+        "I'm an AI Architect",
+        "I'm a Software Architect",
+        "I'm a Tech Lead",
         "I'm a Cloud Consultant",
         "I'm a Freelancer",
         "I'm a Trainer",

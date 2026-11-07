@@ -1,3 +1,4 @@
+import type { Vector3 } from 'three'
 import { EDGE_COUNT, EDGE_KIND_INDEX, NODE_COUNT, edges, journeys, links, nodeIndex, nodes, processingSeconds, sectionFocus, type EdgeKind } from './system'
 import { SECTION_IDS } from './scrollStore'
 import { isDown, setTrace, systemState } from './systemStore'
@@ -9,10 +10,18 @@ const HOP_STYLE: Record<EdgeKind, { speed: number; streak: number; width: number
   request: { speed: 2.4, streak: 0.62, width: 2.8, pulse: 0.16 },
   event: { speed: 2.8, streak: 0.26, width: 3.2, pulse: 0.22 },
   deploy: { speed: 1.6, streak: 1.7, width: 4.2, pulse: 0.7 },
+  token: { speed: 3.4, streak: 0.13, width: 2.2, pulse: 0.02 },
 }
 
+/** A model reply is not one message: it streams back as a run of tokens */
+const TOKENS_PER_REPLY = 7
+const TOKEN_SPACING_SECONDS = 0.075
+
+/** Colour index the shader reads as a refusal */
+const REFUSED_KIND = 3
+
 /** The traced message moves slower and larger than the traffic around it, so the eye can follow it */
-const LEAD_SPEED = 0.78
+const LEAD_SPEED = 0.9
 const LEAD_STREAK = 1.5
 const LEAD_WIDTH = 1.5
 
@@ -29,6 +38,7 @@ const TRACE_FADE_SECONDS = 1.1
 const FIRST_TRACE_SECONDS = 2.2
 const TRACE_GAP_SECONDS = 2.6
 const TRACE_RETRY_SECONDS = 1
+const BOUNDARY_ALERT_SECONDS = 0.5
 
 /** Load rises and falls slowly so the system never settles into a visible loop */
 const LOAD_WAVE_SECONDS = 26
@@ -38,8 +48,12 @@ const LOAD_WAVE_DEPTH = 0.25
 const START_AT_REVEAL = 0.35
 
 const KAFKA = nodeIndex.kafka
+const GATEWAY = nodeIndex.guard
+const AUDIT_ENTRY = journeys.findIndex((journey) => journey.id === 'audit')
+const TOKEN = journeys.findIndex((journey) => journey.id === 'token')
 
-const allJourneys = journeys.map((_, i) => i)
+/** Everything worth following; side trips like audit entries only happen because of another message */
+const allJourneys = journeys.flatMap((journey, i) => (journey.rate > 0 ? [i] : []))
 
 /** Journeys worth tracing in each section: those that run through what the camera is looking at */
 const sectionPools = SECTION_IDS.map((id) => {
@@ -63,6 +77,10 @@ interface Packet {
   arrived: boolean
   /** Took a sibling route around an outage, so the journey ends at the next node */
   rerouted: boolean
+  /** Its tokens have already gone ahead on this model reply */
+  replying: boolean
+  /** Coming back from the gateway with a no */
+  refused: boolean
   lead: boolean
 }
 
@@ -105,10 +123,12 @@ export class Traffic {
       wait: 0,
       arrived: false,
       rerouted: false,
+      replying: false,
+      refused: false,
       lead: false,
     }))
     this.idle = [...this.packets]
-    this.nextSpawn = Float32Array.from(journeys, (journey) => this.interval(journey.rate))
+    this.nextSpawn = Float32Array.from(journeys, (journey) => (journey.rate > 0 ? this.interval(journey.rate) : Infinity))
   }
 
   /** Random gaps rather than a fixed beat, the way independent users really arrive */
@@ -131,6 +151,7 @@ export class Traffic {
     const s = systemState
     const pulse = Math.exp(-dt / PULSE_SECONDS)
     for (let i = 0; i < NODE_COUNT; i += 1) s.nodePulse[i] *= pulse
+    s.boundaryAlert *= Math.exp(-dt / BOUNDARY_ALERT_SECONDS)
     // A trace stays lit for its whole journey, then the route lets go all at once.
     if (this.lead) return
     const glow = Math.exp(-dt / TRACE_FADE_SECONDS)
@@ -170,13 +191,37 @@ export class Traffic {
     return this.enterHop(packet, 0) ? packet : null
   }
 
+  /** A side trip caused by another message, starting after a delay */
+  private launchAfter(journey: number, delay: number) {
+    const packet = this.idle.pop()
+    if (!packet) return
+    packet.journey = journey
+    packet.edge = journeys[journey].route[0]
+    packet.hop = -1
+    packet.phase = 'processing'
+    packet.wait = delay
+  }
+
   private enterHop(packet: Packet, hop: number) {
-    const wanted = journeys[packet.journey].route[hop]
+    const journey = journeys[packet.journey]
+    const wanted = journey.route[hop]
     const edge = usableEdge(wanted)
     if (edge < 0) {
       this.retire(packet)
       return false
     }
+    // The tokens go first, and the message that carries the journey on follows the last of them.
+    if (links[edge].kind === 'token' && journey.rate > 0 && !packet.replying) {
+      for (let i = 0; i < TOKENS_PER_REPLY; i += 1) this.launchAfter(TOKEN, i * TOKEN_SPACING_SECONDS)
+      packet.replying = true
+      packet.hop = hop - 1
+      packet.phase = 'processing'
+      packet.wait = TOKENS_PER_REPLY * TOKEN_SPACING_SECONDS
+      return true
+    }
+    packet.replying = false
+    packet.refused = journey.refused && hop === journey.route.length - 1
+    if (packet.refused) systemState.boundaryAlert = 1
     const style = HOP_STYLE[links[edge].kind]
     packet.phase = 'moving'
     packet.hop = hop
@@ -187,7 +232,6 @@ export class Traffic {
     packet.speed = style.speed * (packet.lead ? LEAD_SPEED : 1)
     packet.streak = style.streak * (packet.lead ? LEAD_STREAK : 1)
     if (packet.lead) {
-      systemState.edgeTraceHead[edge] = 0
       systemState.edgeTraceGlow[edge] = 1
       systemState.nodeTrace[links[edge].from] = 1
     }
@@ -216,8 +260,11 @@ export class Traffic {
     }
     packet.travelled += packet.speed * (packet.arrived ? TAIL_CATCH_UP : 1) * dt
     const { length } = edges[packet.edge]
-    // Past 1 so the shader treats the far end of the edge as fully lit.
-    if (packet.lead) systemState.edgeTraceHead[packet.edge] = Math.min(packet.travelled / length, 1.02)
+    // Past 1 so the shader treats the far end of the edge as fully lit. A loop's second lap keeps what the first one lit.
+    if (packet.lead) {
+      const head = systemState.edgeTraceHead
+      head[packet.edge] = Math.max(head[packet.edge], Math.min(packet.travelled / length, 1.02))
+    }
     if (!packet.arrived && packet.travelled >= length) this.arrive(packet)
     if (packet.travelled >= length + packet.streak) this.leaveEdge(packet)
   }
@@ -228,6 +275,8 @@ export class Traffic {
     const { pulse } = HOP_STYLE[links[packet.edge].kind]
     systemState.nodePulse[node] = Math.min(1, systemState.nodePulse[node] + (packet.lead ? 1 : pulse))
     if (packet.lead) systemState.nodeTrace[node] = 1
+    // Audit before action: the record leaves the gateway before the decision is carried out.
+    if (node === GATEWAY && journeys[packet.journey].rate > 0) this.launchAfter(AUDIT_ENTRY, 0)
   }
 
   private leaveEdge(packet: Packet) {
@@ -250,6 +299,8 @@ export class Traffic {
     if (packet === this.lead) this.endTrace()
     packet.phase = 'idle'
     packet.lead = false
+    packet.replying = false
+    packet.refused = false
     this.idle.push(packet)
   }
 
@@ -304,7 +355,20 @@ export class Traffic {
     s.nodeTrace.fill(0)
     s.edgeTraceHead.fill(0)
     s.edgeTraceGlow.fill(0)
+    s.boundaryAlert = 0
     setTrace(-1)
+  }
+
+  /**
+   * Where the traced message is right now.
+   * @returns false when nothing is being traced
+   */
+  leadPoint(out: Vector3) {
+    const { lead } = this
+    if (!lead || lead.phase === 'idle') return false
+    const { curve, length } = edges[lead.edge]
+    curve.getPoint(Math.min(lead.travelled / length, 1), out)
+    return true
   }
 
   /**
@@ -321,9 +385,9 @@ export class Traffic {
       span[count * 3] = packet.edge
       span[count * 3 + 1] = Math.max(packet.travelled - packet.streak, 0) / length
       span[count * 3 + 2] = Math.min(packet.travelled / length, 1)
-      look[count * 4] = EDGE_KIND_INDEX[kind]
+      look[count * 4] = packet.refused ? REFUSED_KIND : EDGE_KIND_INDEX[kind]
       look[count * 4 + 1] = HOP_STYLE[kind].width * (packet.lead ? LEAD_WIDTH : 1)
-      look[count * 4 + 2] = packet.lead ? 1 : 0.8
+      look[count * 4 + 2] = packet.lead || packet.refused ? 1 : 0.8
       look[count * 4 + 3] = packet.lead ? 1 : 0
       count += 1
     })

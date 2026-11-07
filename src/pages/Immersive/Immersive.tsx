@@ -1,7 +1,8 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import Lenis from 'lenis'
+import { Link, useLocation } from 'react-router-dom'
+import type Lenis from 'lenis'
 import Overlay from './Overlay'
+import { prefersReducedMotion, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
 import SystemHud from './SystemHud'
 import { measureSections, scrollState, sectionAt, updateScroll, type SectionId } from './scrollStore'
 import { detectQuality } from './theme'
@@ -15,42 +16,37 @@ const Scene = lazy(() => import('./Scene'))
 const HUD_SIDE: Record<SectionId, 'left' | 'right' | 'hidden'> = {
   hero: 'right',
   about: 'right',
+  ai: 'left',
   experience: 'left',
   capabilities: 'right',
   registry: 'left',
+  talks: 'right',
   contact: 'hidden',
 }
 
 /** Distance from the bottom of the viewport to the top of the status box */
 const HUD_CLEARANCE = 110
 
-/** Keeps the fixed chrome in step with the page: the top bar's backing and the side the status box sits on. */
+/** Keeps the page's chrome in step with the scroll: the top bar's backing, the side the status box sits on and how far the hero has lifted out. */
 function syncChrome(root: HTMLElement | null, scrollY: number) {
   if (!root) return
   root.dataset.scrolled = String(scrollY > 24)
   root.dataset.hud = HUD_SIDE[sectionAt(scrollY + window.innerHeight - HUD_CLEARANCE)]
+  syncHeroExit(root, scrollY)
 }
 
 function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
   const lenisRef = useRef<Lenis | null>(null)
 
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    scrollState.reducedMotion = reduced
+    scrollState.reducedMotion = prefersReducedMotion()
 
-    const lenis = new Lenis({ lerp: reduced ? 1 : 0.085, smoothWheel: !reduced })
-    lenisRef.current = lenis
-    lenis.on('scroll', ({ scroll }: { scroll: number }) => {
-      updateScroll(scroll)
-      syncChrome(rootRef.current, scroll)
+    const scroll = startSmoothScroll((scrollY) => {
+      scrollState.lastInput = performance.now()
+      updateScroll(scrollY)
+      syncChrome(rootRef.current, scrollY)
     })
-
-    let frame = 0
-    const raf = (time: number) => {
-      lenis.raf(time)
-      frame = requestAnimationFrame(raf)
-    }
-    frame = requestAnimationFrame(raf)
+    lenisRef.current = scroll.lenis
 
     const measure = () => {
       measureSections(rootRef.current)
@@ -63,10 +59,9 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
     window.addEventListener('resize', measure)
 
     return () => {
-      cancelAnimationFrame(frame)
       observer.disconnect()
       window.removeEventListener('resize', measure)
-      lenis.destroy()
+      scroll.stop()
       lenisRef.current = null
     }
   }, [rootRef])
@@ -77,6 +72,7 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
 function usePointer() {
   useEffect(() => {
     const onMove = (event: PointerEvent) => {
+      scrollState.lastInput = performance.now()
       scrollState.pointer.x = (event.clientX / window.innerWidth) * 2 - 1
       scrollState.pointer.y = -(event.clientY / window.innerHeight) * 2 + 1
       scrollState.pointerActive = event.pointerType !== 'touch'
@@ -95,38 +91,22 @@ function usePointer() {
   }, [])
 }
 
-function useReveal(rootRef: React.RefObject<HTMLDivElement | null>) {
-  useEffect(() => {
-    const root = rootRef.current
-    if (!root) return
-    const nodes = Array.from(root.querySelectorAll<HTMLElement>('.rv'))
-    if (scrollState.reducedMotion) {
-      nodes.forEach((node) => node.classList.add('in'))
-      return
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          entry.target.classList.add('in')
-          observer.unobserve(entry.target)
-        })
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
-    )
-    nodes.forEach((node) => observer.observe(node))
-    return () => observer.disconnect()
-  }, [rootRef])
-}
-
 export default function Immersive() {
   const rootRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
   const quality = useMemo(() => detectQuality(), [])
   const lenisRef = useLenis(rootRef)
 
+  const { hash } = useLocation()
+
   usePointer()
   useReveal(rootRef)
+
+  // Other pages link straight to a section, for example the gallery's way back to the talks.
+  useEffect(() => {
+    const section = hash && document.getElementById(`imm-${hash.slice(1)}`)
+    if (section) lenisRef.current?.scrollTo(section, { immediate: true, force: true })
+  }, [hash, lenisRef])
 
   useEffect(() => {
     document.body.classList.add('imm-body')
@@ -158,8 +138,11 @@ export default function Immersive() {
           Chandan Bhagat
         </button>
         <nav className="imm-topbar__nav">
-          <Link to="/dossier">Dossier</Link>
-          <a href="https://github.com/thechandanbhagat" target="_blank" rel="noreferrer">
+          <Link to="/software">Software</Link>
+          <Link className="imm-topbar__secondary" to="/portfolio">
+            Gallery
+          </Link>
+          <a className="imm-topbar__optional" href="https://github.com/thechandanbhagat" target="_blank" rel="noreferrer">
             GitHub
           </a>
           <button type="button" className="imm-topbar__cta" onClick={() => navigate('contact')}>

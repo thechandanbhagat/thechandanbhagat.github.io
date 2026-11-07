@@ -59,6 +59,7 @@ export default function Packets({ traffic, capacity, pathTexture, stateTexture }
           uRequest: { value: new THREE.Color(palette.request) },
           uEvent: { value: new THREE.Color(palette.event) },
           uDeploy: { value: new THREE.Color(palette.deploy) },
+          uAlert: { value: new THREE.Color(palette.alert) },
         },
       }),
     [pathTexture, stateTexture]
@@ -68,7 +69,7 @@ export default function Packets({ traffic, capacity, pathTexture, stateTexture }
     const u = material.uniforms
     state.gl.getDrawingBufferSize(u.uResolution.value)
     u.uPixelRatio.value = state.gl.getPixelRatio()
-    u.uReveal.value = systemState.reveal
+    u.uReveal.value = systemState.presence
 
     const span = geometry.getAttribute('aSpan') as THREE.InstancedBufferAttribute
     const look = geometry.getAttribute('aLook') as THREE.InstancedBufferAttribute

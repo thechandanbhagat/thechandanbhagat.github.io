@@ -20,7 +20,8 @@ function describe(): HudModel {
     const [index] = Array.from(outages.keys()).slice(-1)
     const node = nodes[index]
     const target = rerouteTargetFor(index)
-    const body = target ? `Traffic rerouted to ${target} · self-heals in a few seconds` : 'Traffic held upstream · self-heals in a few seconds'
+    const reroute = target ? `Traffic rerouted to ${target} · self-heals in a few seconds` : 'Traffic held upstream · self-heals in a few seconds'
+    const body = node.outage ?? reroute
     return { title: `${node.label} offline`, body, tone: 'alert' }
   }
   if (hovered >= 0) {
