@@ -1,148 +1,6 @@
 {
   "links": [
     {
-      "category": "GitHub Repositories",
-      "items": [
-        {
-          "title": "ezpm2gui",
-          "url": "https://github.com/thechandanbhagat/ezpm2gui",
-          "description": "Unofficial GUI for PM2 process management",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "pm2",
-            "typescript",
-            "devtools"
-          ]
-        },
-        {
-          "title": "cv-forge",
-          "url": "https://github.com/thechandanbhagat/cv-forge",
-          "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "mcp",
-            "cv",
-            "resume",
-            "ats",
-            "typescript",
-            "ai"
-          ]
-        },
-        {
-          "title": "Group Code",
-          "url": "https://github.com/thechandanbhagat/group-code",
-          "description": "Navigate large codebases by functionality instead of files",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "vscode",
-            "typescript",
-            "devtools"
-          ]
-        },
-        {
-          "title": "PR Hub",
-          "url": "https://github.com/thechandanbhagat/pr-hub",
-          "description": "AI-powered pull request reviews across GitHub, Azure DevOps, GitLab and Bitbucket",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "vscode",
-            "ai",
-            "code-review"
-          ]
-        },
-        {
-          "title": "Khukuri",
-          "url": "https://github.com/thechandanbhagat/khukuri",
-          "description": "A Nepali slang programming language",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "rust",
-            "language"
-          ]
-        },
-        {
-          "title": "Service Bus Demo",
-          "url": "https://github.com/Demo-by-Chandan/Service-Bus-Demo",
-          "description": "Azure Service Bus demo in C#",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "azure",
-            "service-bus",
-            "c-sharp"
-          ]
-        },
-        {
-          "title": "gRPC Sample",
-          "url": "https://github.com/Demo-by-Chandan/SampleGrpc.Server",
-          "description": "gRPC server sample in C#",
-          "platform": "GitHub",
-          "icon": "bxl-github",
-          "tags": [
-            "grpc",
-            "c-sharp"
-          ]
-        }
-      ]
-    },
-    {
-      "category": "Packages",
-      "items": [
-        {
-          "title": "dotnet-essential",
-          "url": "https://www.nuget.org/packages/dotnet-essential",
-          "description": ".NET Essential utilities library",
-          "platform": "NuGet",
-          "icon": "bx-package",
-          "tags": [
-            "dotnet",
-            "utilities"
-          ]
-        },
-        {
-          "title": "cv-forge",
-          "url": "https://www.npmjs.com/package/cv-forge",
-          "description": "Forge powerful, ATS-friendly CVs tailored to any job - an MCP server for intelligent CV generation",
-          "platform": "NPM",
-          "icon": "bx-package",
-          "tags": [
-            "mcp",
-            "cv",
-            "resume",
-            "ats",
-            "ai"
-          ]
-        },
-        {
-          "title": "ezpm2gui",
-          "url": "https://www.npmjs.com/package/ezpm2gui",
-          "description": "Modern web-based GUI for the PM2 process manager",
-          "platform": "NPM",
-          "icon": "bx-package",
-          "tags": [
-            "pm2",
-            "devtools"
-          ]
-        },
-        {
-          "title": "gitignr",
-          "url": "https://www.npmjs.com/package/gitignr",
-          "description": "Command-line tool that generates .gitignore files",
-          "platform": "NPM",
-          "icon": "bx-package",
-          "tags": [
-            "cli",
-            "git"
-          ]
-        }
-      ]
-    },
-    {
       "category": "Blog Posts",
       "items": [
         {
@@ -244,6 +102,45 @@
           "tags": [
             "demos",
             "github"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "Demo code",
+      "items": [
+        {
+          "title": "Service Bus Demo",
+          "url": "https://github.com/Demo-by-Chandan/Service-Bus-Demo",
+          "description": "Azure Service Bus demo in C#",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "azure",
+            "service-bus",
+            "c-sharp"
+          ]
+        },
+        {
+          "title": "gRPC Sample",
+          "url": "https://github.com/Demo-by-Chandan/SampleGrpc.Server",
+          "description": "gRPC server sample in C#",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "grpc",
+            "c-sharp"
+          ]
+        },
+        {
+          "title": "Demo MCP server",
+          "url": "https://github.com/thechandanbhagat/mcp-demo",
+          "description": "MCP server showing tools, resources and prompts, built for presentations",
+          "platform": "GitHub",
+          "icon": "bxl-github",
+          "tags": [
+            "mcp",
+            "python"
           ]
         }
       ]
