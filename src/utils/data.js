@@ -225,20 +225,6 @@ export class PortfolioDataManager {
     return this.data.groupcode?.faq || [];
   }
 
-  // Important Links
-  getImportantLinksData() {
-    return this.data.importantLinks || {};
-  }
-
-  getImportantLinksCategories() {
-    return this.data.importantLinks?.categories || [];
-  }
-
-  getImportantLinksByCategory(categoryName) {
-    const category = this.data.importantLinks?.categories?.find(cat => cat.category === categoryName);
-    return category?.items || [];
-  }
-
   // Utility Methods
   addExperience(experienceData) {
     if (!this.data.experience) this.data.experience = [];
@@ -359,8 +345,6 @@ export const getPortfolioData = () => portfolioDataManager.getPortfolioData();
 export const getPortfolioItems = () => portfolioDataManager.getPortfolioItems();
 export const getPortfolioCategories = () => portfolioDataManager.getPortfolioCategories();
 export const getGroupCodeData = () => portfolioDataManager.getGroupCodeData();
-export const getImportantLinksData = () => portfolioDataManager.getImportantLinksData();
-export const getImportantLinksCategories = () => portfolioDataManager.getImportantLinksCategories();
 
 // Export the manager instance for advanced usage
 export default portfolioDataManager;

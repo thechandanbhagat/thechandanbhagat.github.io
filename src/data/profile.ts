@@ -46,19 +46,10 @@ export interface ProfileLink {
   icon: string
 }
 
-export interface RegistryStat {
-  ecosystem: string
-  metric: string
+export interface AiPractice {
+  title: string
   detail: string
-  href: string
-}
-
-export interface PublishedArtifact {
-  name: string
-  ecosystem: string
-  version: string
-  description: string
-  href: string
+  links: { label: string; href: string }[]
 }
 
 // @group Content : Curated content for the redesigned portfolio
@@ -85,12 +76,44 @@ export const proofPoints: ProofPoint[] = [
   },
 ]
 
+/** How the AI work is designed, each area backed by something shipped or published */
+export const aiPractices: AiPractice[] = [
+  {
+    title: 'Retrieval and language interfaces',
+    detail: 'Azure OpenAI and RAG services at Turboline AI and Sesio AI, from Document Intelligence to natural-language queries across five databases.',
+    links: [{ label: 'Turboline.NLQ2SQL on NuGet', href: 'https://www.nuget.org/packages/Turboline.NLQ2SQL.PostgresSQL' }],
+  },
+  {
+    title: 'Agents and tools',
+    detail: 'Dynamic agents configured through YAML on Azure OpenAI and Azure Functions at Sesio AI, and MCP servers published for other agents to use.',
+    links: [{ label: 'cv-forge MCP server', href: 'https://www.npmjs.com/package/cv-forge' }],
+  },
+  {
+    title: 'Guardrails',
+    detail: 'One gateway for every tool call: policy as data, human approval, budgets, a kill switch and an append-only audit log.',
+    links: [
+      {
+        label: 'Bounded Autonomy, 10 parts',
+        href: 'https://chandanbhagat.com.np/bounded-autonomy-ai-agents-python-part-1-threat-model-gateway/',
+      },
+    ],
+  },
+  {
+    title: 'Cost and reliability',
+    detail: 'An LLM gateway with failover, token accounting and tenant quotas, and cost attribution for every agent run.',
+    links: [
+      { label: 'LLM gateway, 10 parts', href: 'https://chandanbhagat.com.np/llm-inference-gateway-from-scratch-part-1-the-layer-every-team-writes/' },
+      { label: 'FinOps for agents', href: 'https://chandanbhagat.com.np/finops-ai-agents-nodejs-postgres-part-1-what-the-invoice-cannot-tell-you/' },
+    ],
+  },
+]
+
 export const caseStudies: CaseStudy[] = [
   {
     title: 'Tech Lead at Outernet London',
     period: 'April 2025 - Present',
     context: 'Building dynamic selection and media integration systems across Node.js, React, Linux, Postgres, Kafka, Redis, SSP, GAM, VAST, and Ventuz.',
-    impact: 'Solo developer delivering application work and DevOps automation through GitHub Actions and Azure.',
+    impact: 'Delivering application work and DevOps automation through GitHub Actions and Azure.',
     stack: ['Node.js', 'React', 'Postgres', 'Kafka', 'Redis', 'Microservices', 'Azure'],
   },
   {
@@ -135,6 +158,13 @@ export const fieldNotes: FieldNote[] = [
     image: '/assets/img/portfolio/Ideathon2021.jpg',
     category: 'Community',
   },
+]
+
+/** The newest talks, shown on the landing page as a way into the gallery */
+export const talkHighlights = [
+  { program: 'Reactor Meetup, London', date: 'May 2024', image: '/assets/img/portfolio/LondonReactorMeetup (1).JPG' },
+  { program: 'Nepal Cloud Summit', date: 'April 2022', image: '/assets/img/portfolio/NCS2022.jpg' },
+  { program: 'Global Azure Bootcamp', date: 'April 2021', image: '/assets/img/portfolio/GBAC2021.jpg' },
 ]
 
 export const capabilityGroups: CapabilityGroup[] = [
@@ -225,108 +255,10 @@ export const profileLinks: ProfileLink[] = [
   { label: 'Open VSX', href: 'https://open-vsx.org/namespace/thechandanbhagat', icon: 'bi bi-puzzle' },
   { label: 'VS Marketplace', href: 'https://marketplace.visualstudio.com/publishers/thechandanbhagat', icon: 'bi bi-shop' },
   { label: 'npm', href: 'https://www.npmjs.com/~chandan.bhagat', icon: 'bi bi-box' },
-  { label: 'Docker Hub', href: 'https://hub.docker.com/repository/docker/chandanbhagat/ezkafka-visualizer/general', icon: 'bi bi-boxes' },
+  { label: 'Docker Hub', href: 'https://hub.docker.com/u/chandanbhagat', icon: 'bi bi-boxes' },
   { label: 'PowerShell', href: 'https://www.powershellgallery.com/profiles/thechandanbhagat', icon: 'bi bi-terminal' },
   { label: 'GitHub', href: 'https://github.com/thechandanbhagat', icon: 'bi bi-github' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/guptac', icon: 'bi bi-linkedin' },
   { label: 'Utility tools', href: 'https://util.chandanbhagat.com.np', icon: 'bi bi-tools' },
   { label: 'Math tools', href: 'https://math-tools.chandanbhagat.com.np', icon: 'bi bi-calculator' },
-]
-
-export const registryStats: RegistryStat[] = [
-  {
-    ecosystem: 'NuGet',
-    metric: '12 packages',
-    detail: '83K+ downloads across dotnet-essential and Turboline NLQ packages.',
-    href: 'https://www.nuget.org/profiles/chandan.bhagat',
-  },
-  {
-    ecosystem: 'npm',
-    metric: '10 packages',
-    detail: 'CLI tools, MCP servers, SDKs, Kafka tooling, and AI-focused packages.',
-    href: 'https://www.npmjs.com/~chandan.bhagat',
-  },
-  {
-    ecosystem: 'VS Code Marketplace',
-    metric: '5 extensions',
-    detail: 'Group Code, PR Hub, Repo Rig, Overture, and Khukuri Language Support.',
-    href: 'https://marketplace.visualstudio.com/publishers/thechandanbhagat',
-  },
-  {
-    ecosystem: 'Open VSX',
-    metric: '3K+ downloads',
-    detail: 'Group Code and PR Hub published for Open VSX-compatible editors.',
-    href: 'https://open-vsx.org/namespace/thechandanbhagat',
-  },
-  {
-    ecosystem: 'Docker Hub',
-    metric: '20K+ pulls',
-    detail: 'ezkafka-visualizer image for managing and visualizing Kafka clusters.',
-    href: 'https://hub.docker.com/repository/docker/chandanbhagat/ezkafka-visualizer/general',
-  },
-  {
-    ecosystem: 'PowerShell Gallery',
-    metric: '2 modules',
-    detail: '15K+ downloads across UtilModule and SesioWorker modules.',
-    href: 'https://www.powershellgallery.com/profiles/thechandanbhagat',
-  },
-]
-
-export const publishedArtifacts: PublishedArtifact[] = [
-  {
-    name: 'dotnet-essential',
-    ecosystem: 'NuGet',
-    version: '7.1.0',
-    description: 'Essential package for .NET projects.',
-    href: 'https://www.nuget.org/packages/dotnet-essential',
-  },
-  {
-    name: 'Turboline.NLQ2SQL.PostgresSQL',
-    ecosystem: 'NuGet',
-    version: '6.2.9',
-    description: 'Natural-language query connector for Turboline AI applications.',
-    href: 'https://www.nuget.org/packages/Turboline.NLQ2SQL.PostgresSQL',
-  },
-  {
-    name: 'ezpm2gui',
-    ecosystem: 'npm',
-    version: '1.11.1',
-    description: 'Modern web-based GUI for the PM2 process manager.',
-    href: 'https://www.npmjs.com/package/ezpm2gui',
-  },
-  {
-    name: 'cv-forge',
-    ecosystem: 'npm',
-    version: '1.0.3',
-    description: 'MCP server for generating ATS-friendly CVs tailored to job descriptions.',
-    href: 'https://www.npmjs.com/package/cv-forge',
-  },
-  {
-    name: 'ezkafka-visualizer',
-    ecosystem: 'Docker Hub',
-    version: '20K+ pulls',
-    description: 'Web app and container image for managing Kafka clusters.',
-    href: 'https://hub.docker.com/repository/docker/chandanbhagat/ezkafka-visualizer/general',
-  },
-  {
-    name: 'Group Code',
-    ecosystem: 'VS Code / Open VSX',
-    version: '1.8.0',
-    description: 'Navigate and organize codebases by functionality across file types.',
-    href: 'https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.groupcode',
-  },
-  {
-    name: 'PR Hub',
-    ecosystem: 'VS Code / Open VSX',
-    version: '1.1.0',
-    description: 'AI-powered pull request reviews across GitHub, Azure DevOps, GitLab, and Bitbucket.',
-    href: 'https://marketplace.visualstudio.com/items?itemName=thechandanbhagat.pr-hub',
-  },
-  {
-    name: 'UtilModule',
-    ecosystem: 'PowerShell Gallery',
-    version: '2.0.1',
-    description: 'PowerShell utility module with many functions.',
-    href: 'https://www.powershellgallery.com/packages/UtilModule/2.0.1',
-  },
 ]

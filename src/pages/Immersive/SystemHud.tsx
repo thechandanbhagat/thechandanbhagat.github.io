@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { nodes } from './systemGraph'
+import { journeys, nodes } from './systemGraph'
 import { rerouteTargetFor, subscribeSystem, systemState } from './systemStore'
 
 // @group SystemHud : Small status line that explains what the diorama is doing and how to poke it
@@ -8,17 +8,20 @@ interface HudModel {
   title: string
   body: string
   tone: 'idle' | 'hover' | 'alert'
+  /** Journey being traced right now */
+  trace?: string
 }
 
 function describe(): HudModel {
-  const { hovered, outages } = systemState
+  const { hovered, outages, trace } = systemState
   const coarse = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 
   if (outages.size > 0) {
     const [index] = Array.from(outages.keys()).slice(-1)
     const node = nodes[index]
     const target = rerouteTargetFor(index)
-    const body = target ? `Traffic rerouted to ${target} · self-heals in a few seconds` : 'Traffic held upstream · self-heals in a few seconds'
+    const reroute = target ? `Traffic rerouted to ${target} · self-heals in a few seconds` : 'Traffic held upstream · self-heals in a few seconds'
+    const body = node.outage ?? reroute
     return { title: `${node.label} offline`, body, tone: 'alert' }
   }
   if (hovered >= 0) {
@@ -29,6 +32,7 @@ function describe(): HudModel {
     title: 'Live system',
     body: coarse ? 'Tap a node to take it offline and watch traffic reroute' : 'Hover a node to trace its traffic · click to take it offline',
     tone: 'idle',
+    trace: journeys[trace]?.label,
   }
 }
 
@@ -44,7 +48,16 @@ export default function SystemHud() {
   return (
     <aside className={`imm-hud imm-hud--${model.tone}`} aria-live="polite">
       <span className="imm-hud__dot" />
-      <span className="imm-hud__title">{model.title}</span>
+      <span className="imm-hud__title">
+        {model.title}
+        {/* Hidden from assistive tech: this changes every few seconds and would flood the live region */}
+        {model.trace && (
+          <span key={model.trace} className="imm-hud__trace" aria-hidden="true">
+            {' · '}
+            {model.trace}
+          </span>
+        )}
+      </span>
       <span className="imm-hud__body">{model.body}</span>
     </aside>
   )

@@ -1,7 +1,7 @@
-import { EDGE_COUNT, NODE_COUNT, links, nodes, sectionFocus } from './systemGraph'
+import { EDGE_COUNT, NODE_COUNT, links, nodeIndex, nodes, sectionFocus } from './systemGraph'
 import { SECTION_IDS } from './scrollStore'
 
-// @group SystemStore : Frame-updated interaction state for the diorama — hover, outages, section focus
+// @group SystemStore : Frame-updated interaction state for the diorama — hover, outages, section focus and the live trace
 
 /** How long a node stays offline after a click before it heals itself */
 export const OUTAGE_MS = 7000
@@ -15,13 +15,31 @@ export interface SystemState {
   nodeAlive: Float32Array
   nodeHighlight: Float32Array
   nodeLabel: Float32Array
+  /** Flash from messages landing on a node; decays within a fraction of a second */
+  nodePulse: Float32Array
+  /** 1 once the traced message has reached a node, fading after the trace ends */
+  nodeTrace: Float32Array
   /** Smoothed per-edge values written every frame */
   edgeAlive: Float32Array
   edgeHighlight: Float32Array
+  /** How far along each edge the traced message has lit it (0..1, past 1 when fully lit) */
+  edgeTraceHead: Float32Array
+  /** Brightness of that lit stretch, fading after the trace ends */
+  edgeTraceGlow: Float32Array
+  /** Journey index being traced, or -1 */
+  trace: number
+  /** How strongly the trust boundary stands out, rising when the section is about it */
+  boundary: number
+  /** Flash on the boundary when the gateway refuses an action */
+  boundaryAlert: number
   /** 0 when nothing is focused, 1 when a hover should dim everything else */
   focus: number
   /** Intro reveal 0..1 */
   reveal: number
+  /** How far the system has stepped aside for the London skyline, 0..1 */
+  quiet: number
+  /** The reveal the system itself draws with, so it sinks away while the grid stays */
+  presence: number
 }
 
 export const systemState: SystemState = {
@@ -30,10 +48,19 @@ export const systemState: SystemState = {
   nodeAlive: new Float32Array(NODE_COUNT).fill(1),
   nodeHighlight: new Float32Array(NODE_COUNT),
   nodeLabel: new Float32Array(NODE_COUNT),
+  nodePulse: new Float32Array(NODE_COUNT),
+  nodeTrace: new Float32Array(NODE_COUNT),
   edgeAlive: new Float32Array(EDGE_COUNT).fill(1),
   edgeHighlight: new Float32Array(EDGE_COUNT),
+  edgeTraceHead: new Float32Array(EDGE_COUNT),
+  edgeTraceGlow: new Float32Array(EDGE_COUNT),
+  trace: -1,
+  boundary: 0,
+  boundaryAlert: 0,
   focus: 0,
   reveal: 0,
+  quiet: 0,
+  presence: 0,
 }
 
 const focusSets = SECTION_IDS.map((id) => new Set(sectionFocus[id].map((nodeId) => nodes.findIndex((n) => n.id === nodeId))))
@@ -55,6 +82,12 @@ function notify() {
 export function setHovered(index: number) {
   if (systemState.hovered === index) return
   systemState.hovered = index
+  notify()
+}
+
+export function setTrace(journey: number) {
+  if (systemState.trace === journey) return
+  systemState.trace = journey
   notify()
 }
 
@@ -108,7 +141,9 @@ export function tickSystem(dt: number, progress: number, ready: boolean, now = p
   const kSlow = Math.min(1, dt * 2.4)
 
   s.reveal = approach(s.reveal, ready ? 1 : 0, Math.min(1, dt * 1.4))
+  s.presence = s.reveal * (1 - s.quiet)
   s.focus = approach(s.focus, hasHover ? 1 : 0, k)
+  s.boundary = approach(s.boundary, focusSet.has(nodeIndex.guard) ? 1 : 0, kSlow)
 
   for (let i = 0; i < NODE_COUNT; i += 1) {
     const alive = s.outages.has(i) ? 0 : 1
@@ -116,9 +151,9 @@ export function tickSystem(dt: number, progress: number, ready: boolean, now = p
     const inFocus = focusSet.has(i)
     let highlight = inFocus ? 0.45 : 0
     if (hasHover) highlight = i === hovered ? 1 : highlight * 0.5
-    s.nodeHighlight[i] = approach(s.nodeHighlight[i], highlight, kSlow)
+    s.nodeHighlight[i] = approach(s.nodeHighlight[i], Math.max(highlight, s.nodeTrace[i] * 0.5), kSlow)
     const label = i === hovered || s.outages.has(i) ? 1 : inFocus ? 0.85 : hasSectionFocus ? 0.18 : 0.3
-    s.nodeLabel[i] = approach(s.nodeLabel[i], label, kSlow)
+    s.nodeLabel[i] = approach(s.nodeLabel[i], Math.max(label, s.nodeTrace[i] * 0.85), kSlow)
   }
 
   for (let i = 0; i < EDGE_COUNT; i += 1) {

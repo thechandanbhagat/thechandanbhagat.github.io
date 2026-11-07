@@ -17,8 +17,9 @@ function legacyRoute(load: () => Promise<{ default: ComponentType }>) {
 const PortfolioDossier = legacyRoute(() => import('./pages/PortfolioDossier'))
 const TerminalPortfolio = legacyRoute(() => import('./pages/TerminalPortfolio'))
 const HomePage = legacyRoute(() => import('./pages/HomePage'))
-const PortfolioPage = legacyRoute(() => import('./pages/PortfolioPage'))
 const GroupCode = legacyRoute(() => import('./pages/GroupCode'))
+const Gallery = lazy(() => import('./pages/Gallery/Gallery'))
+const Software = lazy(() => import('./pages/Software/Software'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 /** Each route's HTML sets the title on a full load, this keeps it right when moving between routes in the app. */
@@ -42,7 +43,8 @@ export default function App() {
         <Route path="/dossier" element={<PortfolioDossier />} />
         <Route path="/terminal" element={<TerminalPortfolio />} />
         <Route path="/classic" element={<HomePage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/portfolio" element={<Gallery />} />
+        <Route path="/software" element={<Software />} />
         <Route path="/groupcode" element={<GroupCode />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
