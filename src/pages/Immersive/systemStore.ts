@@ -3,6 +3,9 @@ import { SECTION_IDS } from './scrollStore'
 
 // @group SystemStore : Frame-updated interaction state for the diorama — hover, outages, section focus and the live trace
 
+// The whole running scene shares this state and only sets it up once, so a hot reload that swapped it would leave the page blank. Start over instead.
+if (import.meta.hot) import.meta.hot.accept(() => window.location.reload())
+
 /** How long a node stays offline after a click before it heals itself */
 export const OUTAGE_MS = 7000
 

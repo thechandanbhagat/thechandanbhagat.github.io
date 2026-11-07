@@ -5,6 +5,9 @@ export type SectionId = (typeof SECTION_IDS)[number]
 
 export const SECTION_COUNT = SECTION_IDS.length
 
+// The whole running scene shares this state and only sets it up once, so a hot reload that swapped it would leave the page blank. Start over instead.
+if (import.meta.hot) import.meta.hot.accept(() => window.location.reload())
+
 export interface ScrollState {
   /** Continuous section index: 0 = top of hero, the last = top of contact */
   morph: number
