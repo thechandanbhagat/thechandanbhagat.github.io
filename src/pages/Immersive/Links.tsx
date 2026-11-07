@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { EDGE_COUNT, PATH_SAMPLES } from './system'
+import { EDGE_COUNT, EDGE_KIND_INDEX, PATH_SAMPLES, edges } from './system'
 import { systemState } from './systemStore'
 import { linkFragment, linkVertex } from './shaders'
 import { palette } from './theme'
@@ -20,14 +20,17 @@ export default function Links({ pathTexture, stateTexture }: LinksProps) {
     const vertexCount = EDGE_COUNT * SEGMENTS * 2
     const edge = new Float32Array(vertexCount)
     const t = new Float32Array(vertexCount)
+    const kind = new Float32Array(vertexCount)
     let v = 0
     for (let e = 0; e < EDGE_COUNT; e += 1) {
       for (let s = 0; s < SEGMENTS; s += 1) {
         edge[v] = e
         t[v] = s / SEGMENTS
+        kind[v] = EDGE_KIND_INDEX[edges[e].kind]
         v += 1
         edge[v] = e
         t[v] = (s + 1) / SEGMENTS
+        kind[v] = EDGE_KIND_INDEX[edges[e].kind]
         v += 1
       }
     }
@@ -35,6 +38,7 @@ export default function Links({ pathTexture, stateTexture }: LinksProps) {
     geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vertexCount * 3), 3))
     geo.setAttribute('aEdge', new THREE.BufferAttribute(edge, 1))
     geo.setAttribute('aT', new THREE.BufferAttribute(t, 1))
+    geo.setAttribute('aKind', new THREE.BufferAttribute(kind, 1))
     geo.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 0.5, -1.5), 14)
     return geo
   }, [])

@@ -724,6 +724,17 @@ body.dark-theme .imm .imm-section {
   font-size: 0.68rem;
 }
 
+.imm-hud__trace {
+  color: var(--accent);
+  animation: imm-hud-trace 0.5s var(--ease);
+}
+
+@keyframes imm-hud-trace {
+  from {
+    opacity: 0;
+  }
+}
+
 .imm-hud__body {
   grid-column: 2;
 }

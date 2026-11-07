@@ -64,6 +64,7 @@ export function detectQuality(): Quality {
   return 'high'
 }
 
-export function particleCountFor(quality: Quality) {
-  return quality === 'high' ? 9000 : 3600
+/** Most messages in flight at once, and how busy the system is relative to its normal load */
+export function trafficFor(quality: Quality) {
+  return quality === 'high' ? { capacity: 200, load: 1.4 } : { capacity: 120, load: 0.9 }
 }

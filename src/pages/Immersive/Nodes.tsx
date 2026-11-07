@@ -50,16 +50,15 @@ export default function Nodes() {
 
   const geometry = useMemo(() => {
     const geo = new THREE.BoxGeometry(1, NODE_HEIGHT, NODE_DEPTH)
-    const state = new Float32Array(NODE_COUNT * 3)
+    const state = new Float32Array(NODE_COUNT * 4)
     const stagger = new Float32Array(NODE_COUNT)
     nodes.forEach((node, i) => {
-      state[i * 3] = 1
-      state[i * 3 + 1] = 0
-      state[i * 3 + 2] = NODE_KIND_INDEX[node.kind]
+      state[i * 4] = 1
+      state[i * 4 + 2] = NODE_KIND_INDEX[node.kind]
       // Reveal from the gateway outward, roughly left to right.
       stagger[i] = ((node.x + 8) / 16) * 0.5
     })
-    geo.setAttribute('aState', new THREE.InstancedBufferAttribute(state, 3))
+    geo.setAttribute('aState', new THREE.InstancedBufferAttribute(state, 4))
     geo.setAttribute('aStagger', new THREE.InstancedBufferAttribute(stagger, 1))
     return geo
   }, [])
@@ -87,7 +86,7 @@ export default function Nodes() {
   const decalGeometry = useMemo(() => {
     const geo = new THREE.PlaneGeometry(1, 1)
     geo.rotateX(-Math.PI / 2)
-    geo.setAttribute('aState', new THREE.InstancedBufferAttribute(new Float32Array(NODE_COUNT * 3).fill(1), 3))
+    geo.setAttribute('aState', new THREE.InstancedBufferAttribute(new Float32Array(NODE_COUNT * 4), 4))
     return geo
   }, [])
 
@@ -174,10 +173,12 @@ export default function Nodes() {
     const decalAttr = decalGeometry.getAttribute('aState') as THREE.InstancedBufferAttribute
     const decalArr = decalAttr.array as Float32Array
     for (let i = 0; i < NODE_COUNT; i += 1) {
-      arr[i * 3] = s.nodeAlive[i]
-      arr[i * 3 + 1] = s.nodeHighlight[i]
-      decalArr[i * 3] = s.nodeAlive[i]
-      decalArr[i * 3 + 1] = s.nodeHighlight[i]
+      arr[i * 4] = s.nodeAlive[i]
+      arr[i * 4 + 1] = s.nodeHighlight[i]
+      arr[i * 4 + 3] = s.nodePulse[i]
+      decalArr[i * 4] = s.nodeAlive[i]
+      decalArr[i * 4 + 1] = s.nodeHighlight[i]
+      decalArr[i * 4 + 3] = s.nodePulse[i]
       const sprite = labelsRef.current[i]
       if (sprite) {
         const down = isDown(i)

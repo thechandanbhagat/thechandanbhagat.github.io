@@ -1,6 +1,6 @@
 import type { SectionId } from './scrollStore'
 
-// @group SystemGraph : The system as plain data — nodes, links and section focus. Kept free of Three.js so the page chrome can use it without pulling the renderer into the first download
+// @group SystemGraph : The system as plain data — nodes, links, journeys and section focus. Kept free of Three.js so the page chrome can use it without pulling the renderer into the first download
 
 export type NodeKind = 'gateway' | 'service' | 'broker' | 'store' | 'ai' | 'sink' | 'delivery'
 export type EdgeKind = 'request' | 'event' | 'deploy'
@@ -21,8 +21,6 @@ export interface SystemLink {
   from: number
   to: number
   kind: EdgeKind
-  /** Relative particle density */
-  weight: number
   /** Edge index traffic slides to when this edge is down (self if nothing sensible exists) */
   alt: number
 }
@@ -59,32 +57,32 @@ const WIDTH_BY_KIND: Record<NodeKind, number> = {
 export const nodes: SystemNode[] = NODE_DEFS.map((n) => ({ ...n, width: WIDTH_BY_KIND[n.kind] }))
 export const nodeIndex = Object.fromEntries(nodes.map((n, i) => [n.id, i])) as Record<string, number>
 
-const EDGE_DEFS: [string, string, EdgeKind, number][] = [
-  ['edge', 'gateway', 'request', 1.4],
-  ['gateway', 'media', 'request', 1.1],
-  ['gateway', 'query', 'request', 0.9],
-  ['media', 'redis', 'request', 0.9],
-  ['media', 'postgres', 'request', 0.8],
-  ['query', 'redis', 'request', 0.5],
-  ['query', 'postgres', 'request', 0.7],
-  ['query', 'openai', 'request', 0.8],
-  ['openai', 'vectors', 'request', 0.7],
-  ['vectors', 'postgres', 'request', 0.4],
-  ['media', 'kafka', 'event', 1.3],
-  ['kafka', 'workers', 'event', 1.4],
-  ['workers', 'postgres', 'event', 0.6],
-  ['workers', 'blob', 'event', 0.9],
-  ['blob', 'playout', 'event', 0.8],
-  ['workers', 'playout', 'event', 1.0],
-  ['github', 'actions', 'deploy', 0.8],
-  ['actions', 'registry', 'deploy', 0.8],
-  ['registry', 'k8s', 'deploy', 0.7],
-  ['k8s', 'media', 'deploy', 0.45],
-  ['k8s', 'workers', 'deploy', 0.45],
-  ['k8s', 'query', 'deploy', 0.35],
+const EDGE_DEFS: [string, string, EdgeKind][] = [
+  ['edge', 'gateway', 'request'],
+  ['gateway', 'media', 'request'],
+  ['gateway', 'query', 'request'],
+  ['media', 'redis', 'request'],
+  ['media', 'postgres', 'request'],
+  ['query', 'redis', 'request'],
+  ['query', 'postgres', 'request'],
+  ['query', 'openai', 'request'],
+  ['openai', 'vectors', 'request'],
+  ['vectors', 'postgres', 'request'],
+  ['media', 'kafka', 'event'],
+  ['kafka', 'workers', 'event'],
+  ['workers', 'postgres', 'event'],
+  ['workers', 'blob', 'event'],
+  ['blob', 'playout', 'event'],
+  ['workers', 'playout', 'event'],
+  ['github', 'actions', 'deploy'],
+  ['actions', 'registry', 'deploy'],
+  ['registry', 'k8s', 'deploy'],
+  ['k8s', 'media', 'deploy'],
+  ['k8s', 'workers', 'deploy'],
+  ['k8s', 'query', 'deploy'],
 ]
 
-const partial = EDGE_DEFS.map(([from, to, kind, weight]) => ({ from: nodeIndex[from], to: nodeIndex[to], kind, weight }))
+const partial = EDGE_DEFS.map(([from, to, kind]) => ({ from: nodeIndex[from], to: nodeIndex[to], kind }))
 
 /** Traffic on a broken edge slides onto a sibling leaving the same source, else another route into the same target. */
 function findAlternate(index: number) {
@@ -111,6 +109,60 @@ export const NODE_KIND_INDEX: Record<NodeKind, number> = {
   ai: 1,
   sink: 2,
   delivery: 0,
+}
+
+export interface Journey {
+  id: string
+  /** Short name shown in the status box while this journey is being traced */
+  label: string
+  /** Messages per second at normal load */
+  rate: number
+  /** Node indices in travel order */
+  stops: number[]
+  /** Edge indices in travel order */
+  route: number[]
+}
+
+/** Real paths through the system, in the order the page traces them, so the first one crosses the whole map */
+const JOURNEY_DEFS: [string, string, number, string[]][] = [
+  ['publish', 'Publish to screen', 0.95, ['edge', 'gateway', 'media', 'kafka', 'workers', 'playout']],
+  ['ask', 'Ask in English', 0.5, ['edge', 'gateway', 'query', 'openai', 'vectors', 'postgres']],
+  ['ship-media', 'Ship Media API', 0.05, ['github', 'actions', 'registry', 'k8s', 'media']],
+  ['render', 'Render and store', 0.7, ['edge', 'gateway', 'media', 'kafka', 'workers', 'blob', 'playout']],
+  ['cached-read', 'Cached read', 1.3, ['edge', 'gateway', 'media', 'redis']],
+  ['ship-workers', 'Ship Workers', 0.05, ['github', 'actions', 'registry', 'k8s', 'workers']],
+  ['sql', 'Run generated SQL', 0.35, ['edge', 'gateway', 'query', 'postgres']],
+  ['schedule', 'Update a schedule', 0.45, ['edge', 'gateway', 'media', 'kafka', 'workers', 'postgres']],
+  ['ship-query', 'Ship Query Studio', 0.05, ['github', 'actions', 'registry', 'k8s', 'query']],
+  ['read', 'Database read', 0.55, ['edge', 'gateway', 'media', 'postgres']],
+  ['cached-answer', 'Cached answer', 0.3, ['edge', 'gateway', 'query', 'redis']],
+]
+
+function routeThrough(stops: number[]) {
+  return stops.slice(1).map((to, i) => {
+    const edge = links.findIndex((link) => link.from === stops[i] && link.to === to)
+    if (edge < 0) throw new Error(`No link from ${nodes[stops[i]].id} to ${nodes[to].id}`)
+    return edge
+  })
+}
+
+export const journeys: Journey[] = JOURNEY_DEFS.map(([id, label, rate, path]) => {
+  const stops = path.map((nodeId) => nodeIndex[nodeId])
+  return { id, label, rate, stops, route: routeThrough(stops) }
+})
+
+/** Seconds a message spends inside a service before it moves on. Model calls and builds are slow, caches are not */
+export const processingSeconds: Record<string, number> = {
+  gateway: 0.04,
+  media: 0.12,
+  query: 0.16,
+  workers: 0.4,
+  openai: 0.95,
+  vectors: 0.14,
+  blob: 0.2,
+  actions: 1,
+  registry: 0.4,
+  k8s: 0.6,
 }
 
 /** Which nodes each section of the page draws attention to */

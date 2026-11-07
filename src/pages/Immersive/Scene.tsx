@@ -1,13 +1,14 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import Flow from './Flow'
 import Ground from './Ground'
 import Links from './Links'
 import Nodes from './Nodes'
+import Packets from './Packets'
 import { buildPathTexture, buildStateTexture, EDGE_COUNT } from './system'
 import { systemState, tickSystem } from './systemStore'
 import { scrollState } from './scrollStore'
+import { Traffic } from './traffic'
 import {
   cameraKeyframes,
   COMPACT_ASPECT,
@@ -16,21 +17,26 @@ import {
   FOV_PORTRAIT,
   mobileCameraKeyframes,
   palette,
-  particleCountFor,
+  trafficFor,
   type Quality,
 } from './theme'
 
 // @group Scene : R3F canvas, the scroll-driven camera path and the per-frame system tick
 
 /** Advances the simulation and pushes edge state into the shared texture before anything draws. */
-function SystemTicker({ stateTexture }: { stateTexture: THREE.DataTexture }) {
+function SystemTicker({ stateTexture, traffic }: { stateTexture: THREE.DataTexture; traffic: Traffic }) {
+  useEffect(() => () => traffic.reset(), [traffic])
+
   useFrame((_, delta) => {
     const dt = Math.min(delta, 0.05)
     tickSystem(dt, scrollState.progress, scrollState.ready)
+    traffic.tick(dt * (scrollState.reducedMotion ? 0.3 : 1), scrollState.progress)
     const data = stateTexture.image.data as Float32Array
     for (let i = 0; i < EDGE_COUNT; i += 1) {
       data[i * 4] = systemState.edgeAlive[i]
       data[i * 4 + 1] = systemState.edgeHighlight[i]
+      data[i * 4 + 2] = systemState.edgeTraceHead[i]
+      data[i * 4 + 3] = systemState.edgeTraceGlow[i]
     }
     stateTexture.needsUpdate = true
   })
@@ -89,6 +95,8 @@ function CameraRig() {
 export default function Scene({ quality }: { quality: Quality }) {
   const pathTexture = useMemo(() => buildPathTexture(), [])
   const stateTexture = useMemo(() => buildStateTexture(), [])
+  const { capacity, load } = trafficFor(quality)
+  const traffic = useMemo(() => new Traffic(capacity, load), [capacity, load])
 
   return (
     <Canvas
@@ -99,11 +107,11 @@ export default function Scene({ quality }: { quality: Quality }) {
     >
       <color attach="background" args={[palette.background]} />
       <fog attach="fog" args={[palette.background, 24, 60]} />
-      <SystemTicker stateTexture={stateTexture} />
+      <SystemTicker stateTexture={stateTexture} traffic={traffic} />
       <CameraRig />
       <Ground />
       <Links pathTexture={pathTexture} stateTexture={stateTexture} />
-      <Flow count={particleCountFor(quality)} pathTexture={pathTexture} stateTexture={stateTexture} />
+      <Packets traffic={traffic} capacity={capacity} pathTexture={pathTexture} stateTexture={stateTexture} />
       <Nodes />
     </Canvas>
   )
