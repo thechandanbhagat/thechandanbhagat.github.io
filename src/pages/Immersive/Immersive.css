@@ -383,6 +383,7 @@ body.dark-theme .imm .imm-section {
 .imm-hero__kicker .imm-hero__place {
   position: relative;
   float: right;
+  margin-left: 24px;
   padding: 0;
   border: 0;
   background: none;

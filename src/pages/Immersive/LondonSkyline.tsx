@@ -21,8 +21,9 @@ const WHEEL_SPEED = 0.09
 
 /** Always centred across the screen: how far down it stands (-1..1) and the most of the screen it may take up */
 const FRAMING = {
-  wide: { y: -0.55, width: 0.74, height: 0.6, tilt: 0 },
-  compact: { y: -0.52, width: 0.94, height: 0.36, tilt: 0.4 },
+  wide: { y: -0.55, width: 0.7, height: 0.6, tilt: 0 },
+  // The phone camera looks steeply down, so the city leans back towards it to stand upright on screen.
+  compact: { y: -0.22, width: 1, height: 0.6, tilt: -0.72 },
 }
 
 const LONDON_TIME = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
