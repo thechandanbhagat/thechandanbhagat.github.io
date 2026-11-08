@@ -112,14 +112,25 @@ body.dark-theme .imm .imm-section {
   opacity: 1;
 }
 
+.imm-held,
+.imm-held body {
+  overflow: hidden;
+}
+
+/* The hero's wordmark at the size of the bar, so the name lands in it as itself (nameFlight.ts) */
 .imm-topbar__brand {
   background: none;
   border: 0;
   padding: 0;
   cursor: pointer;
+  color: var(--ink);
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 800;
+  font-size: 0.82rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* Hidden at the top of the landing page; each letter comes in as the hero letter for it lands */
@@ -127,8 +138,260 @@ body.dark-theme .imm .imm-section {
   opacity: var(--lit, 0);
 }
 
+/* The surname is the hero's muted second line */
+.imm-topbar__brand--lands .imm-topbar__letter:nth-child(n + 9) {
+  color: #d8dee9;
+}
+
 .imm:not([data-brand='shown']) .imm-topbar__brand--lands {
   visibility: hidden;
+}
+
+/* The menu sheet hides the hero, so the name shows in the bar while it is open */
+.imm[data-menu='open'] .imm-topbar__brand--lands {
+  visibility: visible;
+}
+
+.imm[data-menu='open'] .imm-topbar__brand--lands .imm-topbar__letter {
+  opacity: 1;
+  transition: opacity 0.4s var(--ease);
+}
+
+/* ---------- Phone menu ---------- */
+
+.imm-menu-toggle,
+.imm-menu {
+  display: none;
+}
+
+/* A round button like Contact; its two lines turn into a cross while the sheet is open */
+.imm-menu-toggle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.imm-menu-toggle:hover,
+.imm-menu-toggle[aria-expanded='true'] {
+  background: var(--accent-soft);
+  border-color: rgba(156, 195, 255, 0.5);
+}
+
+.imm-menu-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.imm-menu-toggle__bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  height: 1.5px;
+  margin: -0.75px 0 0 -8px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.55s var(--ease), width 0.55s var(--ease);
+}
+
+.imm-menu-toggle__bar:first-child {
+  transform: translateY(-3.5px);
+}
+
+.imm-menu-toggle__bar:last-child {
+  width: 10px;
+  transform: translateY(3.5px);
+}
+
+.imm-menu-toggle[aria-expanded='true'] .imm-menu-toggle__bar:first-child {
+  transform: rotate(45deg);
+}
+
+.imm-menu-toggle[aria-expanded='true'] .imm-menu-toggle__bar:last-child {
+  width: 16px;
+  transform: rotate(-45deg);
+}
+
+/* The menu's slow message still arrives here on a phone, where the button stands in for the links */
+.imm-menu-toggle::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 1px solid var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  animation: imm-relay-arrive 12s ease-in-out 1.4s infinite;
+}
+
+.imm-menu-toggle[aria-expanded='true']::after {
+  animation: none;
+}
+
+/* Fills the screen under the bar, so the name and the button stay on top of it */
+.imm-menu {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  flex-direction: column;
+  padding: 108px 20px max(28px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(10, 12, 18, 0.92);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease), visibility 0s linear 0.45s;
+}
+
+.imm-menu[data-open='true'] {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.45s var(--ease);
+}
+
+.imm-menu__nav {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each line rises in after the one above, and its rule draws across from the left just ahead of it */
+.imm-menu__item {
+  --n: 0;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  width: 100%;
+  padding: 20px 0 18px;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 9vw, 2.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  opacity: 0;
+  translate: 0 22px;
+  transition: opacity 0.3s var(--ease), translate 0.3s var(--ease);
+}
+
+.imm-menu__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--line);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.3s var(--ease);
+}
+
+.imm-menu__item:nth-child(2) {
+  --n: 1;
+}
+
+.imm-menu__item:nth-child(3) {
+  --n: 2;
+}
+
+.imm-menu__item:nth-child(4) {
+  --n: 3;
+}
+
+.imm-menu__item:nth-child(5) {
+  --n: 4;
+}
+
+.imm-menu[data-open='true'] .imm-menu__item {
+  opacity: 1;
+  translate: none;
+  transition: opacity 0.7s var(--ease), translate 0.9s var(--ease), color 0.3s;
+  transition-delay: calc(0.14s + var(--n) * 0.07s);
+}
+
+.imm-menu[data-open='true'] .imm-menu__item::before {
+  transform: none;
+  transition: transform 1s var(--ease);
+  transition-delay: calc(0.08s + var(--n) * 0.07s);
+}
+
+.imm-menu__index {
+  min-width: 2ch;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+.imm-menu__label--external::after {
+  content: '↗';
+  margin-left: 0.3em;
+  font-family: var(--font-body);
+  font-size: 0.45em;
+  vertical-align: 0.9em;
+  color: var(--muted);
+}
+
+.imm-menu__item:hover,
+.imm-menu__item:focus-visible,
+.imm-menu__item[aria-current='page'] {
+  color: var(--accent);
+}
+
+.imm-menu__item:hover .imm-menu__index,
+.imm-menu__item:focus-visible .imm-menu__index,
+.imm-menu__item[aria-current='page'] .imm-menu__index {
+  color: var(--accent);
+}
+
+.imm-menu__item:focus-visible {
+  outline: none;
+}
+
+.imm-menu__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 20px;
+  margin-top: auto;
+  padding-top: 40px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.imm-menu__foot span {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.imm-menu__foot a {
+  color: var(--ink);
+}
+
+.imm-menu[data-open='true'] .imm-menu__foot {
+  opacity: 1;
+  transition: opacity 0.8s var(--ease) 0.5s;
 }
 
 .imm-topbar__nav {
@@ -370,6 +633,16 @@ body.dark-theme .imm .imm-section {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/*
+ * Leaves as the page scrolls, gone before it would reach the top bar. A filter rather than opacity, which the
+ * intro transitions, so the exit follows the scroll with no delay.
+ */
+.imm.is-ready .imm-hero__kicker {
+  --lift: clamp(0, var(--kicker-out, 0) * 1.2, 1);
+  translate: 0 calc(var(--lift) * -14px);
+  filter: opacity(calc(1 - var(--lift)));
 }
 
 /* Roles on the left, place on the right. A float, so when the roles wrap on a phone the place stays on their last line. */
@@ -1333,17 +1606,17 @@ body.dark-theme .imm .imm-section {
     padding: 16px 20px;
   }
 
+  /* The links fold away behind the menu button */
   .imm-topbar__nav {
-    gap: 16px;
-  }
-
-  /* Everything does not fit beside the name, and GitHub is also in the contact section */
-  .imm-topbar__optional {
     display: none;
   }
 
-  .imm-topbar__nav > .imm-topbar__cta {
-    --stop: 2;
+  .imm-menu-toggle {
+    display: block;
+  }
+
+  .imm-menu {
+    display: flex;
   }
 
   .imm-talks {
@@ -1447,6 +1720,20 @@ body.dark-theme .imm .imm-section {
     transform: none;
   }
 
+  .imm-menu-toggle::after {
+    animation: none;
+  }
+
+  .imm-menu__item,
+  .imm-menu[data-open='true'] .imm-menu__item {
+    translate: none;
+    transition-delay: 0s;
+  }
+
+  .imm-menu__item::before {
+    transform: none;
+  }
+
   /* The name does not fly: the brand fades in once the hero is on its way out */
   .imm-topbar__brand--lands .imm-topbar__letter {
     transition: opacity 0.4s linear;
@@ -1542,20 +1829,41 @@ body.dark-theme .imm .imm-section {
   padding: clamp(80px, 13vh, 136px) 20px 0;
 }
 
+/*
+ * On a phone the roles and the place do not fit on one line, so they stack on the name's left edge: the
+ * roles sized to span the width on one line (45 characters of a 0.6em monospace, plus spacing), the place under them.
+ */
+@media (max-width: 600px) {
+  .imm-hero__kicker--split {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: min(0.74rem, calc((100vw - 40px) / 31));
+    letter-spacing: 0.06em;
+  }
+
+  .imm-hero__kicker .imm-hero__place {
+    float: none;
+    margin-left: 0;
+  }
+}
+
+/* The narrowest phones keep the two hero buttons side by side */
+@media (max-width: 380px) {
+  .imm-hero__actions {
+    gap: 10px;
+  }
+
+  .imm-hero__actions .imm-btn {
+    padding: 14px 20px;
+    font-size: 0.92rem;
+  }
+}
+
 /* Phone layout. Keep in step with the breakpoint above */
 @media (max-width: 900px), (max-aspect-ratio: 9/10) {
   .imm-page-hero {
     padding-top: 128px;
-  }
-}
-
-/* Narrow phones keep the name on one line. The gallery is still reached from the talks section and the footer. */
-@media (max-width: 430px) {
-  .imm-topbar__secondary {
-    display: none;
-  }
-
-  .imm-topbar__nav > .imm-topbar__cta {
-    --stop: 1;
   }
 }
