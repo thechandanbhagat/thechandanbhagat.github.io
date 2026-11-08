@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import type Lenis from 'lenis'
+import { NameFlight } from './nameFlight'
 import Overlay from './Overlay'
 import { prefersReducedMotion, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
 import SystemHud from './SystemHud'
@@ -27,12 +28,14 @@ const HUD_SIDE: Record<SectionId, 'left' | 'right' | 'hidden'> = {
 /** Distance from the bottom of the viewport to the top of the status box */
 const HUD_CLEARANCE = 110
 
-/** Keeps the page's chrome in step with the scroll: the top bar's backing, the side the status box sits on and how far the hero has lifted out. */
-function syncChrome(root: HTMLElement | null, scrollY: number) {
+/** Keeps the page's chrome in step with the scroll: the top bar's backing, the side the status box sits on, how far the hero has lifted out and where the name is on its way to the bar. */
+function syncChrome(root: HTMLElement | null, scrollY: number, flight: NameFlight) {
   if (!root) return
-  root.dataset.scrolled = String(scrollY > 24)
+  // The bar only takes its backing once the name has landed in it, so nothing blurs the letters on the way up.
+  root.dataset.scrolled = String(scrollY > flight.landedBy)
   root.dataset.hud = HUD_SIDE[sectionAt(scrollY + window.innerHeight - HUD_CLEARANCE)]
   syncHeroExit(root, scrollY)
+  flight.update(scrollY)
 }
 
 function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
@@ -40,25 +43,34 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
 
   useEffect(() => {
     scrollState.reducedMotion = prefersReducedMotion()
+    const root = rootRef.current
+    if (!root) return
+    const flight = new NameFlight(root)
+    let live = true
 
     const scroll = startSmoothScroll((scrollY) => {
       scrollState.lastInput = performance.now()
       updateScroll(scrollY)
-      syncChrome(rootRef.current, scrollY)
+      syncChrome(root, scrollY, flight)
     })
     lenisRef.current = scroll.lenis
 
     const measure = () => {
-      measureSections(rootRef.current)
+      if (!live) return
+      measureSections(root)
+      flight.measure()
       updateScroll(window.scrollY)
-      syncChrome(rootRef.current, window.scrollY)
+      syncChrome(root, window.scrollY, flight)
     }
     measure()
+    // The name's letters change size when the display font arrives.
+    document.fonts?.ready.then(measure)
     const observer = new ResizeObserver(measure)
-    if (rootRef.current) observer.observe(rootRef.current)
+    observer.observe(root)
     window.addEventListener('resize', measure)
 
     return () => {
+      live = false
       observer.disconnect()
       window.removeEventListener('resize', measure)
       scroll.stop()
@@ -134,8 +146,13 @@ export default function Immersive() {
       </Suspense>
 
       <header className="imm-topbar">
-        <button type="button" className="imm-topbar__brand" onClick={() => navigate('hero')}>
-          Chandan Bhagat
+        {/* Spelt out letter by letter: each one takes over from the hero letter that flies up onto it */}
+        <button type="button" className="imm-topbar__brand imm-topbar__brand--lands" aria-label="Chandan Bhagat" onClick={() => navigate('hero')}>
+          {[...'Chandan Bhagat'].map((letter, i) => (
+            <span className="imm-topbar__letter" aria-hidden="true" key={i}>
+              {letter}
+            </span>
+          ))}
         </button>
         <nav className="imm-topbar__nav">
           <Link to="/software">Software</Link>
