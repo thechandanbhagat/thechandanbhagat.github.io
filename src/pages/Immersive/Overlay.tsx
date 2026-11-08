@@ -26,7 +26,7 @@ export default function Overlay({ onNavigate }: { onNavigate: (id: string) => vo
             <span>AI architect · Software architect · Tech lead</span>
             <LondonTrigger />
           </p>
-          <h1 className="imm-hero__title" aria-label="Chandan Bhagat">
+          <h1 className="imm-hero__title imm-hero__title--flies" aria-label="Chandan Bhagat">
             <span className="imm-hero__line">
               <NameLetters text="Chandan" />
             </span>

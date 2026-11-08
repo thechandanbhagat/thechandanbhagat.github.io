@@ -122,6 +122,15 @@ body.dark-theme .imm .imm-section {
   font-size: 0.95rem;
 }
 
+/* Hidden at the top of the landing page; each letter comes in as the hero letter for it lands */
+.imm-topbar__brand--lands .imm-topbar__letter {
+  opacity: var(--lit, 0);
+}
+
+.imm:not([data-brand='shown']) .imm-topbar__brand--lands {
+  visibility: hidden;
+}
+
 .imm-topbar__nav {
   display: flex;
   align-items: center;
@@ -447,6 +456,20 @@ body.dark-theme .imm .imm-section {
 
 .imm.is-ready .imm-hero__title .imm-name__glyph {
   translate: none;
+}
+
+/*
+ * On the landing page the name leaves by flying up into the top bar, letter by letter, as the page
+ * scrolls (nameFlight.ts), and each letter leaves its window once it sets off. The handover fade is a
+ * filter so it never picks up the delayed opacity transition the London crush puts on the letters.
+ */
+.imm-hero__title--flies .imm-name__glyph {
+  transform: translate(var(--fly-x, 0px), var(--fly-y, 0px)) scale(var(--fly-s, 1));
+  filter: opacity(calc(1 - var(--fly-fade, 0)));
+}
+
+.imm[data-flight='on'] .imm-hero__title--flies .imm-name {
+  clip-path: none;
 }
 
 /*
@@ -1422,6 +1445,11 @@ body.dark-theme .imm .imm-section {
     transition-duration: 0.01s;
     transition-delay: 0s;
     transform: none;
+  }
+
+  /* The name does not fly: the brand fades in once the hero is on its way out */
+  .imm-topbar__brand--lands .imm-topbar__letter {
+    transition: opacity 0.4s linear;
   }
 
   /* No falling city and no crush: the name just steps back with the rest of the copy */
