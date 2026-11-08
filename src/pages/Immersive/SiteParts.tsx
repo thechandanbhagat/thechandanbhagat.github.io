@@ -1,10 +1,15 @@
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { registryStats, type Software } from '../../data/software'
+import { holdScroll } from './pageMotion'
 
 // @group SiteParts : Pieces the landing page, the gallery and the software page share, so they read as one site
 
 const COPIED_FOR_MS = 1800
+const CONTACT_EMAIL = 'chandan.bhagat@outlook.com'
+const GITHUB_URL = 'https://github.com/thechandanbhagat'
+/** The phone layout. Keep in step with the media query in Immersive.css and isCompact in theme.ts */
+const COMPACT_QUERY = '(max-width: 900px), (max-aspect-ratio: 9/10)'
 
 export function Eyebrow({ index, label }: { index: string; label: string }) {
   return (
@@ -40,6 +45,108 @@ export function TraceRing() {
   )
 }
 
+/** One line of the phone menu: a small index, then the name in the display face */
+export function MenuLabel({ index, external, children }: { index: string; external?: boolean; children: ReactNode }) {
+  return (
+    <>
+      <span className="imm-menu__index" aria-hidden="true">
+        {index}
+      </span>
+      <span className={`imm-menu__label${external ? ' imm-menu__label--external' : ''}`}>{children}</span>
+    </>
+  )
+}
+
+/**
+ * On phones the links fold away behind a menu button and open as a sheet over the whole page.
+ * The page supplies the links and gets a close() to call before it scrolls anywhere; links close it themselves.
+ */
+export function MenuSheet({ children }: { children: (close: () => void) => ReactNode }) {
+  const [open, setOpen] = useState(false)
+  const toggleRef = useRef<HTMLButtonElement>(null)
+  const sheetRef = useRef<HTMLDivElement>(null)
+
+  // Lets the page go straight away, so a scroll the caller starts next is not swallowed
+  const close = useCallback(() => {
+    holdScroll(false)
+    setOpen(false)
+  }, [])
+
+  useEffect(() => {
+    const root = toggleRef.current?.closest<HTMLElement>('.imm')
+    if (root) root.dataset.menu = open ? 'open' : 'closed'
+    if (!open) return
+
+    holdScroll(true)
+    sheetRef.current?.querySelector<HTMLElement>('.imm-menu__item')?.focus({ preventScroll: true })
+    const header = toggleRef.current?.closest('header')
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        close()
+        toggleRef.current?.focus()
+        return
+      }
+      if (event.key !== 'Tab' || !header) return
+      // The sheet covers the page, so the keyboard stays within the bar and the sheet
+      const stops = Array.from(header.querySelectorAll<HTMLElement>('a, button')).filter(
+        (el) => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden'
+      )
+      const first = stops[0]
+      const last = stops[stops.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last?.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first?.focus()
+      }
+    }
+    const compact = window.matchMedia(COMPACT_QUERY)
+    const onLayout = () => !compact.matches && close()
+
+    document.addEventListener('keydown', onKey)
+    compact.addEventListener('change', onLayout)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      compact.removeEventListener('change', onLayout)
+      holdScroll(false)
+    }
+  }, [open, close])
+
+  return (
+    <>
+      <button
+        ref={toggleRef}
+        type="button"
+        className="imm-menu-toggle"
+        aria-expanded={open}
+        aria-controls="imm-menu"
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        onClick={() => (open ? close() : setOpen(true))}
+      >
+        <span className="imm-menu-toggle__bar" />
+        <span className="imm-menu-toggle__bar" />
+      </button>
+      <div
+        ref={sheetRef}
+        id="imm-menu"
+        className="imm-menu"
+        data-open={open}
+        onClick={(event) => (event.target as Element).closest('a') && close()}
+      >
+        <nav className="imm-menu__nav" aria-label="Menu">
+          {children(close)}
+        </nav>
+        <div className="imm-menu__foot">
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          <span>London, UK</span>
+        </div>
+      </div>
+    </>
+  )
+}
+
 /** Top bar for the pages outside the map, where the brand goes home instead of scrolling */
 export function PageTopBar({ current }: { current: 'software' | 'gallery' }) {
   const here = (page: typeof current) => (page === current ? ('page' as const) : undefined)
@@ -52,16 +159,39 @@ export function PageTopBar({ current }: { current: 'software' | 'gallery' }) {
         <Link to="/software" aria-current={here('software')}>
           Software
         </Link>
-        <Link className="imm-topbar__secondary" to="/portfolio" aria-current={here('gallery')}>
+        <Link to="/portfolio" aria-current={here('gallery')}>
           Gallery
         </Link>
-        <a className="imm-topbar__optional" href="https://github.com/thechandanbhagat" target="_blank" rel="noreferrer">
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer">
           GitHub
         </a>
         <Link className="imm-topbar__cta" to="/#contact">
           Contact
         </Link>
       </nav>
+      <MenuSheet>
+        {() => (
+          <>
+            <Link className="imm-menu__item" to="/">
+              <MenuLabel index="01">Home</MenuLabel>
+            </Link>
+            <Link className="imm-menu__item" to="/software" aria-current={here('software')}>
+              <MenuLabel index="02">Software</MenuLabel>
+            </Link>
+            <Link className="imm-menu__item" to="/portfolio" aria-current={here('gallery')}>
+              <MenuLabel index="03">Gallery</MenuLabel>
+            </Link>
+            <a className="imm-menu__item" href={GITHUB_URL} target="_blank" rel="noreferrer">
+              <MenuLabel index="04" external>
+                GitHub
+              </MenuLabel>
+            </a>
+            <Link className="imm-menu__item" to="/#contact">
+              <MenuLabel index="05">Contact</MenuLabel>
+            </Link>
+          </>
+        )}
+      </MenuSheet>
     </header>
   )
 }

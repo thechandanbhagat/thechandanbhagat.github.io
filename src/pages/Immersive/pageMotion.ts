@@ -10,11 +10,15 @@ export function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+/** The page's smooth scroll, so a menu can hold the page still while it covers it */
+let activeScroll: Lenis | null = null
+
 /** Starts the smooth scroll and reports every position. Call the returned stop() when the page goes away. */
 export function startSmoothScroll(onScroll: (scrollY: number) => void) {
   const reduced = prefersReducedMotion()
   const lenis = new Lenis({ lerp: reduced ? 1 : 0.085, smoothWheel: !reduced })
   lenis.on('scroll', ({ scroll }: { scroll: number }) => onScroll(scroll))
+  activeScroll = lenis
 
   let frame = 0
   const raf = (time: number) => {
@@ -27,18 +31,27 @@ export function startSmoothScroll(onScroll: (scrollY: number) => void) {
     lenis,
     stop() {
       cancelAnimationFrame(frame)
+      if (activeScroll === lenis) activeScroll = null
       lenis.destroy()
     },
   }
 }
 
+/** Holds the page still behind a full-screen menu, or lets it go again. Release it before scrolling anywhere. */
+export function holdScroll(held: boolean) {
+  if (held) activeScroll?.stop()
+  else activeScroll?.start()
+  document.documentElement.classList.toggle('imm-held', held)
+}
+
 /** Hero parts that leave as the page scrolls, and the property each one's CSS follows */
 const HERO_EXITS = [
+  ['.imm-hero__kicker', '--kicker-out'],
   ['.imm-hero__title', '--name-out'],
   ['.imm-hero__actions', '--actions-out'],
 ] as const
 
-/** Lifts the title and the buttons out, timed so each has gone by the time it would reach the top bar. */
+/** Lifts the kicker, the title and the buttons out, timed so each has gone by the time it would reach the top bar. */
 export function syncHeroExit(root: HTMLElement, scrollY: number) {
   HERO_EXITS.forEach(([selector, property]) => {
     const part = root.querySelector<HTMLElement>(selector)

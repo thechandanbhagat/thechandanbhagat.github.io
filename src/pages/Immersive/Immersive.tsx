@@ -4,6 +4,7 @@ import type Lenis from 'lenis'
 import { NameFlight } from './nameFlight'
 import Overlay from './Overlay'
 import { prefersReducedMotion, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
+import { MenuLabel, MenuSheet } from './SiteParts'
 import SystemHud from './SystemHud'
 import { measureSections, scrollState, sectionAt, updateScroll, type SectionId } from './scrollStore'
 import { detectQuality } from './theme'
@@ -155,16 +156,41 @@ export default function Immersive() {
         </button>
         <nav className="imm-topbar__nav">
           <Link to="/software">Software</Link>
-          <Link className="imm-topbar__secondary" to="/portfolio">
-            Gallery
-          </Link>
-          <a className="imm-topbar__optional" href="https://github.com/thechandanbhagat" target="_blank" rel="noreferrer">
+          <Link to="/portfolio">Gallery</Link>
+          <a href="https://github.com/thechandanbhagat" target="_blank" rel="noreferrer">
             GitHub
           </a>
           <button type="button" className="imm-topbar__cta" onClick={() => navigate('contact')}>
             Contact
           </button>
         </nav>
+        <MenuSheet>
+          {(close) => (
+            <>
+              <Link className="imm-menu__item" to="/software">
+                <MenuLabel index="01">Software</MenuLabel>
+              </Link>
+              <Link className="imm-menu__item" to="/portfolio">
+                <MenuLabel index="02">Gallery</MenuLabel>
+              </Link>
+              <a className="imm-menu__item" href="https://github.com/thechandanbhagat" target="_blank" rel="noreferrer">
+                <MenuLabel index="03" external>
+                  GitHub
+                </MenuLabel>
+              </a>
+              <button
+                type="button"
+                className="imm-menu__item"
+                onClick={() => {
+                  close()
+                  navigate('contact')
+                }}
+              >
+                <MenuLabel index="04">Contact</MenuLabel>
+              </button>
+            </>
+          )}
+        </MenuSheet>
       </header>
 
       <Overlay onNavigate={navigate} />
