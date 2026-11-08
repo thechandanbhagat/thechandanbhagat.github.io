@@ -28,11 +28,9 @@ const HUD_SIDE: Record<SectionId, 'left' | 'right' | 'hidden'> = {
 /** Distance from the bottom of the viewport to the top of the status box */
 const HUD_CLEARANCE = 110
 
-/** Keeps the page's chrome in step with the scroll: the top bar's backing, the side the status box sits on, how far the hero has lifted out and where the name is on its way to the bar. */
+/** Keeps the page's chrome in step with the scroll: the side the status box sits on, how far the hero has lifted out, and the name on its way up to the bar, which also decides when the bar takes its backing. */
 function syncChrome(root: HTMLElement | null, scrollY: number, flight: NameFlight) {
   if (!root) return
-  // The bar only takes its backing once the name has landed in it, so nothing blurs the letters on the way up.
-  root.dataset.scrolled = String(scrollY > flight.landedBy)
   root.dataset.hud = HUD_SIDE[sectionAt(scrollY + window.innerHeight - HUD_CLEARANCE)]
   syncHeroExit(root, scrollY)
   flight.update(scrollY)
@@ -71,6 +69,7 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
 
     return () => {
       live = false
+      flight.stop()
       observer.disconnect()
       window.removeEventListener('resize', measure)
       scroll.stop()
