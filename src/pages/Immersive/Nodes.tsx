@@ -168,7 +168,9 @@ export default function Nodes() {
       hovered = raycaster.intersectObject(mesh, false)[0]?.instanceId ?? -1
     }
     setHovered(hovered)
-    document.body.style.cursor = hovered >= 0 ? 'pointer' : ''
+    // Only when it changes: a style write every frame keeps the browser recalculating styles
+    const cursor = hovered >= 0 ? 'pointer' : ''
+    if (document.body.style.cursor !== cursor) document.body.style.cursor = cursor
     decalMaterial.uniforms.uReveal.value = s.presence
 
     const attr = mesh.geometry.getAttribute('aState') as THREE.InstancedBufferAttribute

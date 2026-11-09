@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import { CameraMotion } from './cameraMotion'
 import Ground from './Ground'
@@ -123,6 +123,39 @@ function CameraRig({ traffic }: { traffic: Traffic }) {
   return null
 }
 
+/** A frame counts as late once it takes this much longer than the quickest recent one, and never under this many seconds */
+const LATE_FACTOR = 1.6
+const LATE_FLOOR = 0.022
+/** Frames per check, and the share of them that may be late before the resolution steps down */
+const PACE_SAMPLE = 90
+const LATE_SHARE = 0.25
+const DPR_STEP = 0.25
+
+/**
+ * Steps the resolution down while frames keep coming late, so a phone that cannot keep up stays smooth rather than
+ * sharp. Late means slower than the device has shown it can go, so a browser that holds every page to 30 frames a
+ * second (Low Power Mode) is not mistaken for one that is struggling. It never steps back up, which would only flicker.
+ */
+function AdaptiveResolution() {
+  const setDpr = useThree((state) => state.setDpr)
+  const pace = useRef({ frames: 0, late: 0, quickest: Infinity })
+
+  useFrame((state, delta) => {
+    // A longer gap is a tab coming back into view, not a slow frame
+    if (delta <= 0 || delta > 0.25) return
+    const p = pace.current
+    p.quickest = Math.min(p.quickest, delta)
+    p.frames += 1
+    if (delta > Math.max(p.quickest * LATE_FACTOR, LATE_FLOOR)) p.late += 1
+    if (p.frames < PACE_SAMPLE) return
+    const dpr = state.viewport.dpr
+    if (p.late / p.frames > LATE_SHARE && dpr > 1) setDpr(Math.max(1, dpr - DPR_STEP))
+    p.frames = p.late = 0
+    p.quickest = Infinity
+  })
+  return null
+}
+
 export default function Scene({ quality }: { quality: Quality }) {
   const pathTexture = useMemo(() => buildPathTexture(), [])
   const stateTexture = useMemo(() => buildStateTexture(), [])
@@ -134,8 +167,13 @@ export default function Scene({ quality }: { quality: Quality }) {
       dpr={[1, quality === 'high' ? 1.75 : 1.25]}
       camera={{ fov: FOV_LANDSCAPE, near: 0.5, far: 90, position: cameraKeyframes[0].position }}
       gl={{ antialias: true, powerPreference: 'high-performance', alpha: false, stencil: false }}
-      style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}
+      // As tall as the screen gets once a phone's address bar has gone, so the canvas is never resized (and cleared)
+      // as the bar comes and goes mid-scroll. The canvas is fixed, so there is nothing to measure on scroll either.
+      // `bottom` only counts in a browser without lvh, which drops the height and fills the window instead.
+      style={{ position: 'fixed', top: 0, bottom: 0, left: 0, width: '100%', height: '100lvh', zIndex: 0, pointerEvents: 'none' }}
+      resize={{ scroll: false }}
     >
+      <AdaptiveResolution />
       <color attach="background" args={[palette.background]} />
       <fog attach="fog" args={[palette.background, 24, 60]} />
       <SystemTicker stateTexture={stateTexture} traffic={traffic} />
