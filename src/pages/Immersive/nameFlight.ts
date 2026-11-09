@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from './pageMotion'
+import { layoutBox, prefersReducedMotion, setData } from './pageMotion'
 
 // @group NameFlight : The hero name leaves by flying up into the top bar, where it becomes the brand
 
@@ -94,17 +94,6 @@ function fontMetrics(el: Element) {
   }
 }
 
-/** Page position of an element as laid out. Offsets ignore transforms, so this holds mid-flight and mid-intro. */
-function layoutBox(el: HTMLElement) {
-  let left = 0
-  let top = 0
-  for (let node: HTMLElement | null = el; node; node = node.offsetParent as HTMLElement | null) {
-    left += node.offsetLeft
-    top += node.offsetTop
-  }
-  return { left, top, width: el.offsetWidth, height: el.offsetHeight }
-}
-
 export class NameFlight {
   private flights: Flight[] = []
   private readonly still = prefersReducedMotion()
@@ -198,9 +187,9 @@ export class NameFlight {
     // Without motion, or until the letters can be measured, the name stays put and the brand fades in once it has gone by.
     if (this.still || this.flights.length === 0) {
       const gone = scrollY > (this.flights[0]?.travel ?? window.innerHeight * 0.3) * 0.6
-      this.root.dataset.scrolled = String(scrollY > BAR_BACKED_FROM)
-      this.root.dataset.flight = 'off'
-      this.root.dataset.brand = gone ? 'shown' : 'hidden'
+      setData(this.root, 'scrolled', String(scrollY > BAR_BACKED_FROM))
+      setData(this.root, 'flight', 'off')
+      setData(this.root, 'brand', gone ? 'shown' : 'hidden')
       this.root.querySelectorAll<HTMLElement>('.imm-topbar__brand--lands .imm-topbar__letter').forEach((letter) => letter.style.setProperty('--lit', gone ? '1' : '0'))
       return
     }
@@ -258,17 +247,17 @@ export class NameFlight {
       this.pose(flight, scrollY, { along: across, close: across ** 3, shrink: across, baseline: from + (flight.toY - from) * up, handover })
     }
 
-    this.root.dataset.flight = this.glide > 0 ? 'on' : 'off'
-    this.root.dataset.brand = lit ? 'shown' : 'hidden'
+    setData(this.root, 'flight', this.glide > 0 ? 'on' : 'off')
+    setData(this.root, 'brand', lit ? 'shown' : 'hidden')
     // The bar takes its backing once the name is in it, or sooner if the copy below would otherwise reach it first
-    this.root.dataset.scrolled = String(this.glide >= this.glideEnd || scrollY > this.clearance)
+    setData(this.root, 'scrolled', String(this.glide >= this.glideEnd || scrollY > this.clearance))
   }
 
   /** Mouse and trackpad: the flight follows the scroll */
   private drawScrub(scrollY: number) {
-    this.root.dataset.flight = scrollY > 0 ? 'on' : 'off'
+    setData(this.root, 'flight', scrollY > 0 ? 'on' : 'off')
     // The bar only takes its backing once the name has landed in it, so nothing blurs the letters on the way up.
-    this.root.dataset.scrolled = String(scrollY > this.landedBy)
+    setData(this.root, 'scrolled', String(scrollY > this.landedBy))
 
     const landed = scrollY >= this.landedBy
     if (landed && this.landed) return
@@ -290,7 +279,7 @@ export class NameFlight {
         handover,
       })
     }
-    this.root.dataset.brand = lit ? 'shown' : 'hidden'
+    setData(this.root, 'brand', lit ? 'shown' : 'hidden')
   }
 
   private pose(flight: Flight, scrollY: number, pose: Pose) {

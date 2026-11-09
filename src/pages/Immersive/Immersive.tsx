@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import type Lenis from 'lenis'
 import { NameFlight } from './nameFlight'
 import Overlay from './Overlay'
-import { prefersReducedMotion, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
+import { measureHeroExit, prefersReducedMotion, setData, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
 import { MenuLabel, MenuSheet } from './SiteParts'
 import SystemHud from './SystemHud'
 import { measureSections, scrollState, sectionAt, updateScroll, type SectionId } from './scrollStore'
@@ -32,7 +32,7 @@ const HUD_CLEARANCE = 110
 /** Keeps the page's chrome in step with the scroll: the side the status box sits on, how far the hero has lifted out, and the name on its way up to the bar, which also decides when the bar takes its backing. */
 function syncChrome(root: HTMLElement | null, scrollY: number, flight: NameFlight) {
   if (!root) return
-  root.dataset.hud = HUD_SIDE[sectionAt(scrollY + window.innerHeight - HUD_CLEARANCE)]
+  setData(root, 'hud', HUD_SIDE[sectionAt(scrollY + window.innerHeight - HUD_CLEARANCE)])
   syncHeroExit(root, scrollY)
   flight.update(scrollY)
 }
@@ -57,6 +57,7 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
     const measure = () => {
       if (!live) return
       measureSections(root)
+      measureHeroExit(root)
       flight.measure()
       updateScroll(window.scrollY)
       syncChrome(root, window.scrollY, flight)
@@ -64,15 +65,15 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
     measure()
     // The name's letters change size when the display font arrives.
     document.fonts?.ready.then(measure)
+    // Anything that moves the sections changes the page's size. Not the window's: a phone's address bar changes its
+    // height as the page scrolls, and the layout (in svh) never follows it, so measuring then would only stall the scroll.
     const observer = new ResizeObserver(measure)
     observer.observe(root)
-    window.addEventListener('resize', measure)
 
     return () => {
       live = false
       flight.stop()
       observer.disconnect()
-      window.removeEventListener('resize', measure)
       scroll.stop()
       lenisRef.current = null
     }

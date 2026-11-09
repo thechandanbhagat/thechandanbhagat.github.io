@@ -725,6 +725,8 @@ body.dark-theme .imm .imm-section {
   transform-origin: 50% 100%;
   transition: translate 1.2s var(--ease);
   transition-delay: calc(0.35s + var(--i) * 0.05s);
+  /* Each letter moves on every scroll frame, so it gets a layer of its own and the browser only has to move it, not redraw it */
+  will-change: transform;
 }
 
 .imm.is-ready .imm-hero__title .imm-name__glyph {
@@ -1647,6 +1649,23 @@ body.dark-theme .imm .imm-section {
 
   .imm-hero__title {
     font-size: clamp(2.2rem, 10.5vw, 6rem);
+  }
+
+  /*
+   * A backdrop blur is worked out again every frame the scene behind it moves, which is every frame, for every card on
+   * screen, and a phone's graphics chip cannot keep up. Here the copy already sits on the section's own dark backing,
+   * so the cards and the menu sheet go without and the scroll stays smooth.
+   */
+  .imm-talks a,
+  .imm-proof__item,
+  .imm-card,
+  .imm-soft,
+  .imm-registries,
+  .imm-contact__email,
+  .imm-footer,
+  .imm-menu {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   /* The status line only appears on phones when something has been taken offline */
