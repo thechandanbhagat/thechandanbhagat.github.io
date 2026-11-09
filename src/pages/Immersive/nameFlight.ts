@@ -116,6 +116,11 @@ export class NameFlight {
 
   constructor(private readonly root: HTMLElement) {}
 
+  /** Scroll distance within which the letters move with the page. Past it every one of them is in the bar. */
+  get reach() {
+    return this.still ? 0 : this.landedBy
+  }
+
   /** Call whenever the layout may have changed: on load, once the fonts are in, and on resize. */
   measure() {
     const title = this.root.querySelector<HTMLElement>('.imm-hero__title--flies')

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import type Lenis from 'lenis'
 import { NameFlight } from './nameFlight'
 import Overlay from './Overlay'
-import { measureHeroExit, prefersReducedMotion, setData, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
+import { heroExitReach, measureHeroExit, prefersReducedMotion, setData, startSmoothScroll, syncHeroExit, useReveal } from './pageMotion'
 import { MenuLabel, MenuSheet } from './SiteParts'
 import SystemHud from './SystemHud'
 import { measureSections, scrollState, sectionAt, updateScroll, type SectionId } from './scrollStore'
@@ -47,11 +47,15 @@ function useLenis(rootRef: React.RefObject<HTMLDivElement | null>) {
     const flight = new NameFlight(root)
     let live = true
 
-    const scroll = startSmoothScroll((scrollY) => {
-      scrollState.lastInput = performance.now()
-      updateScroll(scrollY)
-      syncChrome(root, scrollY, flight)
-    })
+    // The name flies and the hero lifts out with the scroll, so the wheel stays smooth until both are done
+    const scroll = startSmoothScroll(
+      (scrollY) => {
+        scrollState.lastInput = performance.now()
+        updateScroll(scrollY)
+        syncChrome(root, scrollY, flight)
+      },
+      () => Math.max(flight.reach, heroExitReach(root)),
+    )
     lenisRef.current = scroll.lenis
 
     const measure = () => {

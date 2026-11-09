@@ -33,6 +33,10 @@ let activeScroll: Lenis | null = null
  * The smooth wheel moves the page from animation frames, so when the browser hands those out slowly (Low Power Mode
  * and battery savers hold them to 30 a second, a busy machine drops them) the page itself would scroll that slowly.
  * Native scrolling keeps the display's own rate, so the wheel goes back to it until frames come at full speed again.
+ *
+ * Not where something moves with the scroll, though. Native scrolling moves the page ahead of the animation frames,
+ * so anything placed from the scroll on each frame, like the hero name on its way into the bar, would trail the
+ * page and shake against it. There the smooth wheel keeps both on the same frame, even at 30 a second.
  */
 const SLOW_FRAME_MS = 24
 /** Frames per check, about half a second */
@@ -42,8 +46,12 @@ const RECOVER_CHECKS = 4
 /** A machine that keeps slowing down, often only while it scrolls, keeps the native wheel after this many slowdowns */
 const SLOWDOWNS_TO_STAY = 2
 
-/** Starts the smooth scroll and reports every position. Call the returned stop() when the page goes away. */
-export function startSmoothScroll(onScroll: (scrollY: number) => void) {
+/**
+ * Starts the smooth scroll and reports every position. Call the returned stop() when the page goes away.
+ * `movingUntil` gives the scroll distance within which something on the page moves with the scroll, so the wheel
+ * stays smooth there however slowly frames come.
+ */
+export function startSmoothScroll(onScroll: (scrollY: number) => void, movingUntil: () => number = () => 0) {
   const reduced = prefersReducedMotion()
   const lenis = new Lenis({ lerp: reduced ? 1 : 0.085, smoothWheel: !reduced })
   lenis.on('scroll', ({ scroll }: { scroll: number }) => onScroll(scroll))
@@ -51,6 +59,7 @@ export function startSmoothScroll(onScroll: (scrollY: number) => void) {
 
   const gaps: number[] = []
   let last = 0
+  let fast = true
   let healthy = 0
   let slowdowns = 0
   const pace = (time: number) => {
@@ -63,17 +72,26 @@ export function startSmoothScroll(onScroll: (scrollY: number) => void) {
     const slow = gaps[FRAME_SAMPLE >> 1] > SLOW_FRAME_MS
     gaps.length = 0
     healthy = slow ? 0 : healthy + 1
-    const smooth = !slow && (lenis.options.smoothWheel || (healthy >= RECOVER_CHECKS && slowdowns < SLOWDOWNS_TO_STAY))
+    if (slow && fast) slowdowns += 1
+    fast = !slow && (fast || (healthy >= RECOVER_CHECKS && slowdowns < SLOWDOWNS_TO_STAY))
+  }
+
+  const chooseWheel = () => {
+    // Half a screen early, so the wheel is smooth before anything starts to move
+    const smooth = fast || window.scrollY < movingUntil() + window.innerHeight / 2
+    if (smooth === lenis.options.smoothWheel) return
     // Never mid-glide: the glide would carry on and pull against the native scroll
-    if (smooth === lenis.options.smoothWheel || lenis.isScrolling === 'smooth') return
-    if (!smooth) slowdowns += 1
+    if (!smooth && lenis.isScrolling === 'smooth') return
     lenis.options.smoothWheel = smooth
   }
 
   let frame = 0
   const raf = (time: number) => {
     lenis.raf(time)
-    if (!reduced) pace(time)
+    if (!reduced) {
+      pace(time)
+      chooseWheel()
+    }
     frame = requestAnimationFrame(raf)
   }
   frame = requestAnimationFrame(raf)
@@ -127,6 +145,11 @@ export function measureHeroExit(root: HTMLElement) {
   heroExits.set(root, parts)
 }
 
+/** Scroll distance by which the last of the hero's parts has gone */
+export function heroExitReach(root: HTMLElement) {
+  return Math.max(0, ...(heroExits.get(root) ?? []).map((exit) => exit.exit))
+}
+
 /** Lifts the kicker, the title and the buttons out, timed so each has gone by the time it would reach the top bar. */
 export function syncHeroExit(root: HTMLElement, scrollY: number) {
   if (!heroExits.has(root)) measureHeroExit(root)
@@ -159,7 +182,7 @@ export function useSitePage(rootRef: RefObject<HTMLElement | null>, onScroll?: (
       onScroll?.(scrollY)
     }
 
-    const scroll = startSmoothScroll(sync)
+    const scroll = startSmoothScroll(sync, () => (rootRef.current ? heroExitReach(rootRef.current) : 0))
     scrollRef.current = scroll
     sync(window.scrollY)
     const id = window.setTimeout(() => setReady(true), 80)
